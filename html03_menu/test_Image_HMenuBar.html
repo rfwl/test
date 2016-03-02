@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+<title>Image .GIF Horizontal Menu Bar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="all" />
+	
+<style type="text/css">
+	
+	body {
+		color: #000;
+		background: #fff;
+	}
+	
+	.nav {
+		width: 401px;
+		height: 48px;
+		background: url(blue-nav.gif) no-repeat;
+		position: absolute;
+		top: 100px;
+		left: 100px;
+	}
+	.nav li {
+		display: inline;
+	}
+	.nav li a:link, .nav li a:visited {
+		position: absolute;
+		top: 0;
+		height: 48px;
+		text-indent: -9000px;
+		overflow: hidden;
+	}
+		.nav .home a:link, .nav .home a:visited {
+			left: 23px;
+			width: 76px;
+		}
+		.nav .home a:hover, .nav .home a:focus {
+			background: url(blue-nav.gif) no-repeat -23px -49px;
+		}
+		.nav .home a:active {
+			background: url(blue-nav.gif) no-repeat -23px -98px;
+		}
+		.current-home .home a:link, .current-home .home a:visited {
+			background: url(blue-nav.gif) no-repeat -23px -147px;
+			cursor: default;
+		}
+	
+	
+	
+		.nav .about a:link, .nav .about a:visited {
+			left: 100px;
+			width: 82px;
+		}
+		.nav .about a:hover, .nav .about a:focus {
+			background: url(blue-nav.gif) no-repeat -100px -49px;
+		}
+		.nav .about a:active {
+			background: url(blue-nav.gif) no-repeat -100px -98px;
+		}
+		.current-about .about a:link, .current-about .about a:visited {
+			background: url(blue-nav.gif) no-repeat -100px -147px;
+			cursor: default;
+		}
+		
+	
+	
+		.nav .services a:link, .nav .services a:visited {
+			left: 183px;
+			width: 97px;
+		}
+		.nav .services a:hover, .nav .services a:focus {
+			background: url(blue-nav.gif) no-repeat -183px -49px;
+		}
+		.nav .services a:active {
+			background: url(blue-nav.gif) no-repeat -183px -98px;
+		}
+		.current-services .services a:link, .current-services .services a:visited {
+			background: url(blue-nav.gif) no-repeat -183px -147px;
+			cursor: default;
+		}
+				
+		.nav .contact a:link, .nav .contact a:visited {
+			left: 281px;
+			width: 97px;
+		}
+		.nav .contact a:hover, .nav .contact a:focus {
+			background: url(blue-nav.gif) no-repeat -281px -49px;
+		}
+		.nav .contact a:active {
+			background: url(blue-nav.gif) no-repeat -281px -98px;
+		}
+		.current-contact .contact a:link, .current-contact .contact a:visited {
+			background: url(blue-nav.gif) no-repeat -281px -147px;
+			cursor: default;
+		}
+	</style>	
+
+</head>
+
+<body>
+
+<div id="container">
+
+
+	<ul class="nav current-about">
+		<li class="home"><a href="#">Home</a></li>
+		<li class="about"><a href="#">About</a></li>
+		<li class="services"><a href="#">Services</a></li>
+		<li class="contact"><a href="#">Contact</a></li>
+	</ul>
+
+
+</div><!-- /container -->
+
+</body>
+</html>

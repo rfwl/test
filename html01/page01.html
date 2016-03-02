@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Page with Border of the same size as window</title>
+	<script type="text/javascript">
+	<!--
+	
+	function page_onload()
+	{
+		page_resize();
+		window.addEventListener("resize", "page_resize()");
+	}
+	
+	function page_resize()
+	{
+		var divEle=document.getElementById("divTop");		
+		divEle.style.width=window.innerWidth-40 + 'px';
+		divEle.style.height=window.innerHeight-40 + 'px';		
+		var msg=""
+		msg+="<br/>window.screen.height=" + window.screen.height;
+		msg+="<br/>window.innerHeight=" + window.innerHeight;
+		msg+="<br/>window.screenTop=" + window.screenTop;
+		msg+="<br/>window.top.screenTop=" + window.top.screenTop;
+		msg+="<br/>divEle.style.height=" + divEle.style.height;
+		divTop.innerHTML="<p>" + msg + "</p>"; 		
+	}
+	
+	//-->
+	</script>
+</head>
+<body>
+	<div id="divTop" style="margin:0px;border:3px solid #98bf21;display:inline"  >
+		<h5 style="text-align:center;resize:both;overflow:scroll">H5h5h5h5h5h5h5h5h5</h5>
+	</div>
+	<p style="text-align:center;resize:both;overflow:scroll;display:block">
+	tells of brutal beating that helped set off the current crisis.
+
+
+let's get the negatives out of the way first
+this padding does not come into play.
+Yes, use jQuery. Put the hammer and chisel away... we have a jackhammer to make that stone wheel.
+ have raised fears that foul play could be behind 
+ 
+ The cruel reality is that every one of the 239 people on board is both a possible victim and a possible suspect -- until proven otherwise.
+ On the shoulders of giants
+ can start peeling the onion by eliminating some 
+ look through the whole category of people...
+	
+	</p>
+	
+	<!--
+	<body onresize="page_resize()" >
+	<div id="divTop" style="position:relative;margin-top:0px;margin-bottom:0px;border:10px solid #98bf21;"  >
+		<h5 style="text-align:center">H5h5h5h5h5h5h5h5h5</h5>
+	</div>
+	
+	<script type="text/javascript">page_onload()</script>
+	-->
+</body>
+
+</html>

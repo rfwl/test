@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Tryit Editor v3.0</title>
+<script>
+function w3showit() 
+{
+  var ifr = document.getElementById("iframeResult");
+  ifr.contentWindow.document.open('text/html','replace');
+  var text = document.getElementById("textareaCode").value;
+  ifr.contentWindow.document.write(text);
+  ifr.contentWindow.document.close();
+}    
+</script>
+</head>
+<body>
+
+<div style="width:100%;height:30px;text-align:center;border:3px solid silver; background-color:gray;">
+	<input class="submit" style="height:26px;margin-top:2px;margin-bottom:2px;" type="button" value="Submit Codes" onclick="w3showit()">
+</div>
+
+<div style="width:100%;height:800px">
+
+<div style="float:left;width:600px;height:100%;border:3px solid silver; background-color:gray;">
+<textarea style="width:100%;height:100%;" id="textareaCode" wrap="logical" text-align:left>
+
+<!DOCTYPE html>
+<html>
+<body>
+<p>The slice() method extract a part of a string and returns the extracted parts in a new string:</p>
+<p id="demo"></p>
+<script>
+var str = "Apple, Banana, Kiwi,sappppppppppp";
+document.getElementById("demo").innerHTML = str.slice(-7,-2);
+</script>
+</body>
+</html>
+
+</textarea>
+</div>
+
+<div class="iframecontainer" 
+style="float:left;margin-left:0px;
+width:800px;height:100%;
+border:3px solid silver; 
+background-color:white;">
+  <iframe id="iframeResult" class="result_output" frameborder="0" name="view" ></iframe>
+</div> 
+
+</div>
+
+</body>
+</html>
