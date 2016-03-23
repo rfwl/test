@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS Position Test</title>
+<style>
+#page 
+{
+  display:block; width:100%; height:5vh !important; overflow:hidden;
+}
+#tdcontent 
+{
+  float:left; width:100%;height:200px; display:block;
+}
+#content 
+{      
+float:left; width:100%; height:100%; display:block; overflow:scroll;
+}
+.border1r{border: red solid 1px}
+.border1g{border: green solid 1px}
+.border1b{border: blue solid 1px}
+.border1y{border: yellow solid 1px}
+.border1p{border: purple solid 1px}				
+
+</style>
+</head>
+<body>
+<div style='width:500px;height:500px;resize:both;overflow:none' class='border1y' >
+	<div id="page" class='border1p'>
+	   <div id="tdcontent" class='border1r'>
+	   </div>
+	   <div id="content" class='border1g'>
+	   </div>
+	</div>
+</div>
+<br/>
+<ul>
+<li><p>css length value: vh/vw = 1/100 of view port height/width. supported well in browsers but in css3. </p></li>
+<li><p>
+.left300px_full_right_end {
+  padding-left: 300px;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: wheat;
+}
+Why are "-moz-box-sizing: border-box; & box-sizing: border-box;" needed?  	 	
+The default box-model uses box-sizing-content-box which means that padding will increase the element outside its width setting. 
+With box-sizing:border-box the padding is an inner padding and the width of the element remains while padding is changing.
+
+<li><p> Other ways:
+.content
+{
+	width: 98%; /* fallback for browsers without support for calc() */
+	width: calc(100% - 1em);
+}
+
+.content
+{
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-right: 500px;
+    margin-right: -500px;
+}
+
+
+</p></li>
+<li><p>
+
+</p></li>
+</ul>
+</body>
+</html>

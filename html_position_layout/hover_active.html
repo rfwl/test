@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hover Active Styles</title>
+<script>
+function RunTest(){
+
+}
+</script>
+<style>
+
+#testDiv1:hover { background: silver;}
+#testDiv1:active { background: pink;}
+
+
+.Inscription_Text {
+text-shadow: rgb(255, 255, 255) 0px 1px 1px;
+text-transform: uppercase;
+width: auto;
+color: rgb(68, 68, 68);
+cursor: auto;
+display: inline;
+font-family: 'Trebuchet MS', sans-serif;
+font-size: 9.60000038146973px;
+height: auto;
+}
+</style>
+</head>
+<body>
+
+<button onclick='RunTest()'>RunTest</button> 
+<div id='div1' style='position:absolute;left:0px;top:100px;right:0px;bottom:0px;padding:15px,margin:18px;border:grey solid 1px' >
+	
+	<div id='div2' style='position:absolute;left:0px;top:70px;right:0px;bottom:30px;padding:15px,margin:18px;border:green solid 1px' >
+		
+		<div id='div3' class='Inscription_Text' style='display:block;position:absolute;left:0px;top:0px;right:0px;bottom:0px;padding:50px,margin:8px;border:blue solid 1px'' >
+		<br/>*Absolute positioned children div's border ignore parent div's Padding and their own margin.
+		<br/>*&lt:textarea/&gt; can not be absolutely positioned as &lt;div&gt; or &lt;p&gt; can be.		
+		<br/>*style='position:absolute;left:0px;top:0px;right:0px;bottom:0px;padding:50px,margin:8px;' didn't work for textarea. 
+		<br/>*With position:absolute p and div have different behaviour as div ignore parent div' padding and its own margin but P does respect it.
+		<br/>*The above observations are different from other previous tests.   
+		</div>
+	
+	</div>
+
+</div>
+
+<div id="testDiv1" style="width:40em; height:10em;border:azure 2px dotted">
+In the div, hover and default can have different background color.
+</div>
+
+
+</body>
+</html>
