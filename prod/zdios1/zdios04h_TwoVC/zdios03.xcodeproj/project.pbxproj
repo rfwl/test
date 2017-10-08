@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F066EBE1DCB34FD00FF537F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EBD1DCB34FD00FF537F /* AppDelegate.swift */; };
+		0F066EC01DCB34FD00FF537F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EBF1DCB34FD00FF537F /* ViewController.swift */; };
+		0F066EC31DCB34FD00FF537F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F066EC11DCB34FD00FF537F /* Main.storyboard */; };
+		0F066EC51DCB34FD00FF537F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F066EC41DCB34FD00FF537F /* Assets.xcassets */; };
+		0F066EC81DCB34FD00FF537F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F066EC61DCB34FD00FF537F /* LaunchScreen.storyboard */; };
+		0F066ED31DCB34FD00FF537F /* zdios03Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066ED21DCB34FD00FF537F /* zdios03Tests.swift */; };
+		0F066EDE1DCB34FD00FF537F /* zdios03UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EDD1DCB34FD00FF537F /* zdios03UITests.swift */; };
+		0F066EEE1DCB3A8200FF537F /* KeyLevelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EEB1DCB3A8200FF537F /* KeyLevelButton.swift */; };
+		0F066EEF1DCB3A8200FF537F /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EEC1DCB3A8200FF537F /* ToolbarButton.swift */; };
+		0F066EF01DCB3A8200FF537F /* ToolbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EED1DCB3A8200FF537F /* ToolbarMenuButton.swift */; };
+		0F066EF41DCB3AA000FF537F /* KeyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EF11DCB3AA000FF537F /* KeyLevel.swift */; };
+		0F066EF51DCB3AA000FF537F /* ZDHanziDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EF21DCB3AA000FF537F /* ZDHanziDictionary.swift */; };
+		0F066EF61DCB3AA000FF537F /* ZDHanziDictionaryDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EF31DCB3AA000FF537F /* ZDHanziDictionaryDefinition.swift */; };
+		0F066EFD1DCB3AC300FF537F /* KeyLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F066EF71DCB3AC300FF537F /* KeyLevelViewController.swift */; };
+		0FA6ADB41DCC9A5700F769CB /* Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA6ADB31DCC9A5700F769CB /* Commander.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0F066ECF1DCB34FD00FF537F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F066EB21DCB34FC00FF537F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F066EB91DCB34FD00FF537F;
+			remoteInfo = zdios03;
+		};
+		0F066EDA1DCB34FD00FF537F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F066EB21DCB34FC00FF537F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F066EB91DCB34FD00FF537F;
+			remoteInfo = zdios03;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0F066EBA1DCB34FD00FF537F /* zdios03.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zdios03.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F066EBD1DCB34FD00FF537F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0F066EBF1DCB34FD00FF537F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0F066EC21DCB34FD00FF537F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0F066EC41DCB34FD00FF537F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0F066EC71DCB34FD00FF537F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0F066EC91DCB34FD00FF537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F066ECE1DCB34FD00FF537F /* zdios03Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zdios03Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F066ED21DCB34FD00FF537F /* zdios03Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zdios03Tests.swift; sourceTree = "<group>"; };
+		0F066ED41DCB34FD00FF537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F066ED91DCB34FD00FF537F /* zdios03UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zdios03UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F066EDD1DCB34FD00FF537F /* zdios03UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zdios03UITests.swift; sourceTree = "<group>"; };
+		0F066EDF1DCB34FD00FF537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F066EEB1DCB3A8200FF537F /* KeyLevelButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyLevelButton.swift; sourceTree = "<group>"; };
+		0F066EEC1DCB3A8200FF537F /* ToolbarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		0F066EED1DCB3A8200FF537F /* ToolbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarMenuButton.swift; sourceTree = "<group>"; };
+		0F066EF11DCB3AA000FF537F /* KeyLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyLevel.swift; sourceTree = "<group>"; };
+		0F066EF21DCB3AA000FF537F /* ZDHanziDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDHanziDictionary.swift; sourceTree = "<group>"; };
+		0F066EF31DCB3AA000FF537F /* ZDHanziDictionaryDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZDHanziDictionaryDefinition.swift; sourceTree = "<group>"; };
+		0F066EF71DCB3AC300FF537F /* KeyLevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyLevelViewController.swift; sourceTree = "<group>"; };
+		0FA6ADB31DCC9A5700F769CB /* Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commander.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0F066EB71DCB34FD00FF537F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ECB1DCB34FD00FF537F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ED61DCB34FD00FF537F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F066EB11DCB34FC00FF537F = {
+			isa = PBXGroup;
+			children = (
+				0F066EBC1DCB34FD00FF537F /* zdios03 */,
+				0F066ED11DCB34FD00FF537F /* zdios03Tests */,
+				0F066EDC1DCB34FD00FF537F /* zdios03UITests */,
+				0F066EBB1DCB34FD00FF537F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0F066EBB1DCB34FD00FF537F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F066EBA1DCB34FD00FF537F /* zdios03.app */,
+				0F066ECE1DCB34FD00FF537F /* zdios03Tests.xctest */,
+				0F066ED91DCB34FD00FF537F /* zdios03UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0F066EBC1DCB34FD00FF537F /* zdios03 */ = {
+			isa = PBXGroup;
+			children = (
+				0FA6ADB31DCC9A5700F769CB /* Commander.swift */,
+				0F066EF71DCB3AC300FF537F /* KeyLevelViewController.swift */,
+				0F066EF11DCB3AA000FF537F /* KeyLevel.swift */,
+				0F066EF21DCB3AA000FF537F /* ZDHanziDictionary.swift */,
+				0F066EF31DCB3AA000FF537F /* ZDHanziDictionaryDefinition.swift */,
+				0F066EEB1DCB3A8200FF537F /* KeyLevelButton.swift */,
+				0F066EEC1DCB3A8200FF537F /* ToolbarButton.swift */,
+				0F066EED1DCB3A8200FF537F /* ToolbarMenuButton.swift */,
+				0F066EBD1DCB34FD00FF537F /* AppDelegate.swift */,
+				0F066EBF1DCB34FD00FF537F /* ViewController.swift */,
+				0F066EC11DCB34FD00FF537F /* Main.storyboard */,
+				0F066EC41DCB34FD00FF537F /* Assets.xcassets */,
+				0F066EC61DCB34FD00FF537F /* LaunchScreen.storyboard */,
+				0F066EC91DCB34FD00FF537F /* Info.plist */,
+			);
+			path = zdios03;
+			sourceTree = "<group>";
+		};
+		0F066ED11DCB34FD00FF537F /* zdios03Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0F066ED21DCB34FD00FF537F /* zdios03Tests.swift */,
+				0F066ED41DCB34FD00FF537F /* Info.plist */,
+			);
+			path = zdios03Tests;
+			sourceTree = "<group>";
+		};
+		0F066EDC1DCB34FD00FF537F /* zdios03UITests */ = {
+			isa = PBXGroup;
+			children = (
+				0F066EDD1DCB34FD00FF537F /* zdios03UITests.swift */,
+				0F066EDF1DCB34FD00FF537F /* Info.plist */,
+			);
+			path = zdios03UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0F066EB91DCB34FD00FF537F /* zdios03 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F066EE21DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03" */;
+			buildPhases = (
+				0F066EB61DCB34FD00FF537F /* Sources */,
+				0F066EB71DCB34FD00FF537F /* Frameworks */,
+				0F066EB81DCB34FD00FF537F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = zdios03;
+			productName = zdios03;
+			productReference = 0F066EBA1DCB34FD00FF537F /* zdios03.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0F066ECD1DCB34FD00FF537F /* zdios03Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F066EE51DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03Tests" */;
+			buildPhases = (
+				0F066ECA1DCB34FD00FF537F /* Sources */,
+				0F066ECB1DCB34FD00FF537F /* Frameworks */,
+				0F066ECC1DCB34FD00FF537F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F066ED01DCB34FD00FF537F /* PBXTargetDependency */,
+			);
+			name = zdios03Tests;
+			productName = zdios03Tests;
+			productReference = 0F066ECE1DCB34FD00FF537F /* zdios03Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0F066ED81DCB34FD00FF537F /* zdios03UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F066EE81DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03UITests" */;
+			buildPhases = (
+				0F066ED51DCB34FD00FF537F /* Sources */,
+				0F066ED61DCB34FD00FF537F /* Frameworks */,
+				0F066ED71DCB34FD00FF537F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F066EDB1DCB34FD00FF537F /* PBXTargetDependency */,
+			);
+			name = zdios03UITests;
+			productName = zdios03UITests;
+			productReference = 0F066ED91DCB34FD00FF537F /* zdios03UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0F066EB21DCB34FC00FF537F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Wanlou Feng";
+				TargetAttributes = {
+					0F066EB91DCB34FD00FF537F = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					0F066ECD1DCB34FD00FF537F = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0F066EB91DCB34FD00FF537F;
+					};
+					0F066ED81DCB34FD00FF537F = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0F066EB91DCB34FD00FF537F;
+					};
+				};
+			};
+			buildConfigurationList = 0F066EB51DCB34FC00FF537F /* Build configuration list for PBXProject "zdios03" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0F066EB11DCB34FC00FF537F;
+			productRefGroup = 0F066EBB1DCB34FD00FF537F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0F066EB91DCB34FD00FF537F /* zdios03 */,
+				0F066ECD1DCB34FD00FF537F /* zdios03Tests */,
+				0F066ED81DCB34FD00FF537F /* zdios03UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F066EB81DCB34FD00FF537F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F066EC81DCB34FD00FF537F /* LaunchScreen.storyboard in Resources */,
+				0F066EC51DCB34FD00FF537F /* Assets.xcassets in Resources */,
+				0F066EC31DCB34FD00FF537F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ECC1DCB34FD00FF537F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ED71DCB34FD00FF537F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F066EB61DCB34FD00FF537F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F066EF51DCB3AA000FF537F /* ZDHanziDictionary.swift in Sources */,
+				0F066EF61DCB3AA000FF537F /* ZDHanziDictionaryDefinition.swift in Sources */,
+				0F066EFD1DCB3AC300FF537F /* KeyLevelViewController.swift in Sources */,
+				0F066EF01DCB3A8200FF537F /* ToolbarMenuButton.swift in Sources */,
+				0F066EC01DCB34FD00FF537F /* ViewController.swift in Sources */,
+				0F066EF41DCB3AA000FF537F /* KeyLevel.swift in Sources */,
+				0FA6ADB41DCC9A5700F769CB /* Commander.swift in Sources */,
+				0F066EEF1DCB3A8200FF537F /* ToolbarButton.swift in Sources */,
+				0F066EEE1DCB3A8200FF537F /* KeyLevelButton.swift in Sources */,
+				0F066EBE1DCB34FD00FF537F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ECA1DCB34FD00FF537F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F066ED31DCB34FD00FF537F /* zdios03Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F066ED51DCB34FD00FF537F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F066EDE1DCB34FD00FF537F /* zdios03UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F066ED01DCB34FD00FF537F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F066EB91DCB34FD00FF537F /* zdios03 */;
+			targetProxy = 0F066ECF1DCB34FD00FF537F /* PBXContainerItemProxy */;
+		};
+		0F066EDB1DCB34FD00FF537F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F066EB91DCB34FD00FF537F /* zdios03 */;
+			targetProxy = 0F066EDA1DCB34FD00FF537F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0F066EC11DCB34FD00FF537F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F066EC21DCB34FD00FF537F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0F066EC61DCB34FD00FF537F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F066EC71DCB34FD00FF537F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0F066EE01DCB34FD00FF537F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0F066EE11DCB34FD00FF537F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0F066EE31DCB34FD00FF537F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = zdios03/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0F066EE41DCB34FD00FF537F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = zdios03/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		0F066EE61DCB34FD00FF537F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = zdios03Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zdios03.app/zdios03";
+			};
+			name = Debug;
+		};
+		0F066EE71DCB34FD00FF537F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = zdios03Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/zdios03.app/zdios03";
+			};
+			name = Release;
+		};
+		0F066EE91DCB34FD00FF537F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = zdios03UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = zdios03;
+			};
+			name = Debug;
+		};
+		0F066EEA1DCB34FD00FF537F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = zdios03UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ime.zidian.ios.zdios03UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = zdios03;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F066EB51DCB34FC00FF537F /* Build configuration list for PBXProject "zdios03" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F066EE01DCB34FD00FF537F /* Debug */,
+				0F066EE11DCB34FD00FF537F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F066EE21DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F066EE31DCB34FD00FF537F /* Debug */,
+				0F066EE41DCB34FD00FF537F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F066EE51DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F066EE61DCB34FD00FF537F /* Debug */,
+				0F066EE71DCB34FD00FF537F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F066EE81DCB34FD00FF537F /* Build configuration list for PBXNativeTarget "zdios03UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F066EE91DCB34FD00FF537F /* Debug */,
+				0F066EEA1DCB34FD00FF537F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0F066EB21DCB34FC00FF537F /* Project object */;
+}

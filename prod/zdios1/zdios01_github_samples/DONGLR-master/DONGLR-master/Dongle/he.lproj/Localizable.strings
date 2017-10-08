@@ -1,0 +1,14 @@
+/* text for vk, fb and tw share posts */
+"DNGR - keyboard for iOS! (ノಠ益ಠ)ノ Wow!" = "(ノಠ益ಠ)ノ iOS9 !מגניב DNGR מקלדת";
+
+/* empty tableView placeholder */
+"Go, tap on compass to create your own dngrs! They will be avaliable on keyboard if Open Access is enabled." = "לחץ על הכפתור עם המצפן כדי ליצור סמלי החדשות";
+
+/* fb alert text: not logged in */
+"You should be logged in to Facebook to share knowledge" = "הבל iSפייסבוק שלך לא מחובר ל";
+
+/* tw alert text: not logged in */
+"You should be logged in to Twitter to share knowledge" = "הבל ,טויטר שלך לא מחובר";
+
+/* gif file on how to add screen */
+"settingsGifEn" = "settingsGifHe";

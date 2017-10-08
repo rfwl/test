@@ -1,0 +1,952 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C18F16E1BCD59E7000C09FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18F16D1BCD59E7000C09FC /* AppDelegate.swift */; };
+		4C18F1701BCD59E7000C09FC /* SwitchingOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18F16F1BCD59E7000C09FC /* SwitchingOnViewController.swift */; };
+		4C18F1751BCD59E7000C09FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C18F1741BCD59E7000C09FC /* Assets.xcassets */; };
+		4C18F1861BCD59FB000C09FC /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18F1851BCD59FB000C09FC /* KeyboardViewController.swift */; };
+		4C18F18A1BCD59FB000C09FC /* DongleKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4C18F1831BCD59FB000C09FC /* DongleKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4C18F1921BCD84ED000C09FC /* KeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18F1911BCD84ED000C09FC /* KeyCollectionViewCell.swift */; };
+		4C18F19C1BCEF1E2000C09FC /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C18F19B1BCEF1E2000C09FC /* HeaderCollectionReusableView.swift */; };
+		4C18F19E1BD19AC7000C09FC /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C18F19D1BD19AC7000C09FC /* Icons.xcassets */; };
+		4C3BA43D1BEE391400D2F701 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3BA4391BEE391400D2F701 /* DZNEmptyDataSet.framework */; };
+		4C3BA43E1BEE391400D2F701 /* iRate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3BA43A1BEE391400D2F701 /* iRate.framework */; };
+		4C3BA43F1BEE391400D2F701 /* MSDynamicsDrawerViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3BA43B1BEE391400D2F701 /* MSDynamicsDrawerViewController.framework */; };
+		4C3BA4401BEE391400D2F701 /* VK_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3BA43C1BEE391400D2F701 /* VK_ios_sdk.framework */; };
+		4C6275421BE407E000B48B0C /* StickyHeaderCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6275411BE407E000B48B0C /* StickyHeaderCollectionFlowLayout.swift */; };
+		4C6275471BE653DB00B48B0C /* DngrsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6275461BE653DB00B48B0C /* DngrsList.swift */; };
+		4C62754A1BE6993700B48B0C /* DonglesWithSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C18F1971BCD93AE000C09FC /* DonglesWithSections.plist */; };
+		4C62754B1BE6993D00B48B0C /* Sections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A6E1BD6440500C35DEF /* Sections.plist */; };
+		4C62754C1BE6998700B48B0C /* Sections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A6E1BD6440500C35DEF /* Sections.plist */; };
+		4C62754D1BE6998800B48B0C /* Sections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A6E1BD6440500C35DEF /* Sections.plist */; };
+		4C62754E1BE6998C00B48B0C /* DonglesWithSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C18F1971BCD93AE000C09FC /* DonglesWithSections.plist */; };
+		4C62754F1BE6998C00B48B0C /* DonglesWithSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C18F1971BCD93AE000C09FC /* DonglesWithSections.plist */; };
+		4C7A90D31BFB75230029B5D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A90D51BFB75230029B5D2 /* InfoPlist.strings */; };
+		4C7A90D81BFB75270029B5D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A90DA1BFB75270029B5D2 /* InfoPlist.strings */; };
+		4C7D62411BDE9044001C04C0 /* ConstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D62401BDE9044001C04C0 /* ConstructorViewController.swift */; };
+		4C7D62431BDEA2AB001C04C0 /* BodyParts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C7D62421BDEA2AB001C04C0 /* BodyParts.plist */; };
+		4C7D62471BDEA482001C04C0 /* BodyPartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D62461BDEA482001C04C0 /* BodyPartCollectionViewCell.swift */; };
+		4C7D625D1BDF7BBF001C04C0 /* UserDefinedDongersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D625C1BDF7BBF001C04C0 /* UserDefinedDongersTableViewController.swift */; };
+		4C7D625F1BDF7C32001C04C0 /* UserDefinedDonglerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D625E1BDF7C32001C04C0 /* UserDefinedDonglerTableViewCell.swift */; };
+		4C99CEFD1BF4C3DB0047AAF4 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99CEFC1BF4C3DB0047AAF4 /* ShareViewController.swift */; };
+		4C9B618C1BDF8FB200592CCE /* DnrgFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9B618B1BDF8FB200592CCE /* DnrgFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C9B61901BDF8FB200592CCE /* DnrgFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C9B61891BDF8FB200592CCE /* DnrgFramework.framework */; };
+		4C9B61911BDF8FB200592CCE /* DnrgFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C9B61891BDF8FB200592CCE /* DnrgFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C9B61961BDF905D00592CCE /* FrameworkCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B61951BDF905D00592CCE /* FrameworkCode.swift */; };
+		4CA32A681BD6438D00C35DEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A671BD6438D00C35DEF /* LaunchScreen.storyboard */; };
+		4CA32A691BD643EB00C35DEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A6B1BD643EB00C35DEF /* Main.storyboard */; };
+		4CA32A951BD64B3300C35DEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A971BD64B3300C35DEF /* Localizable.strings */; };
+		4CA32A9D1BD64D8A00C35DEF /* Keyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA32A9F1BD64D8A00C35DEF /* Keyboard.storyboard */; };
+		DDECDB4E670360A7101573C2 /* Pods_Dongle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CA10DA86C34A48B31D527 /* Pods_Dongle.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C18F1881BCD59FB000C09FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C18F1621BCD59E7000C09FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C18F1821BCD59FB000C09FC;
+			remoteInfo = DongleKeyboard;
+		};
+		4C9B618E1BDF8FB200592CCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C18F1621BCD59E7000C09FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C9B61881BDF8FB200592CCE;
+			remoteInfo = DnrgFramework;
+		};
+		4C9B61971BE0009700592CCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C18F1621BCD59E7000C09FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C9B61881BDF8FB200592CCE;
+			remoteInfo = DnrgFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4C18F18E1BCD59FB000C09FC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4C18F18A1BCD59FB000C09FC /* DongleKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C7D625B1BDEC5A7001C04C0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C9B61911BDF8FB200592CCE /* DnrgFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4C18F16A1BCD59E7000C09FC /* Dongle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dongle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C18F16D1BCD59E7000C09FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C18F16F1BCD59E7000C09FC /* SwitchingOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchingOnViewController.swift; sourceTree = "<group>"; };
+		4C18F1741BCD59E7000C09FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C18F1791BCD59E7000C09FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C18F1831BCD59FB000C09FC /* DongleKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DongleKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C18F1851BCD59FB000C09FC /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		4C18F1871BCD59FB000C09FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C18F1911BCD84ED000C09FC /* KeyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C18F1971BCD93AE000C09FC /* DonglesWithSections.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DonglesWithSections.plist; path = ../DongleKeyboard/DonglesWithSections.plist; sourceTree = "<group>"; };
+		4C18F19B1BCEF1E2000C09FC /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		4C18F19D1BD19AC7000C09FC /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		4C23A2E81BEE370100AFC4EE /* libDZNEmptyDataSet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDZNEmptyDataSet.a; path = "Pods/../build/Release-iphoneos/libDZNEmptyDataSet.a"; sourceTree = "<group>"; };
+		4C23A2E91BEE370100AFC4EE /* libiRate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiRate.a; path = "Pods/../build/Release-iphoneos/libiRate.a"; sourceTree = "<group>"; };
+		4C23A2EA1BEE370100AFC4EE /* libMSDynamicsDrawerViewController.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMSDynamicsDrawerViewController.a; path = "Pods/../build/Release-iphoneos/libMSDynamicsDrawerViewController.a"; sourceTree = "<group>"; };
+		4C23A2EB1BEE370100AFC4EE /* libVK-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libVK-ios-sdk.a"; path = "Pods/../build/Release-iphoneos/libVK-ios-sdk.a"; sourceTree = "<group>"; };
+		4C3BA4391BEE391400D2F701 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = "Pods/../build/Debug-iphoneos/DZNEmptyDataSet.framework"; sourceTree = "<group>"; };
+		4C3BA43A1BEE391400D2F701 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = "Pods/../build/Debug-iphoneos/iRate.framework"; sourceTree = "<group>"; };
+		4C3BA43B1BEE391400D2F701 /* MSDynamicsDrawerViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSDynamicsDrawerViewController.framework; path = "Pods/../build/Debug-iphoneos/MSDynamicsDrawerViewController.framework"; sourceTree = "<group>"; };
+		4C3BA43C1BEE391400D2F701 /* VK_ios_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VK_ios_sdk.framework; path = "Pods/../build/Debug-iphoneos/VK_ios_sdk.framework"; sourceTree = "<group>"; };
+		4C6275411BE407E000B48B0C /* StickyHeaderCollectionFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyHeaderCollectionFlowLayout.swift; sourceTree = "<group>"; };
+		4C6275461BE653DB00B48B0C /* DngrsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DngrsList.swift; sourceTree = "<group>"; };
+		4C6275481BE65FF300B48B0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Sections.plist; sourceTree = "<group>"; };
+		4C7A90D41BFB75230029B5D2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C7A90D91BFB75270029B5D2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C7D62401BDE9044001C04C0 /* ConstructorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstructorViewController.swift; sourceTree = "<group>"; };
+		4C7D62421BDEA2AB001C04C0 /* BodyParts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BodyParts.plist; sourceTree = "<group>"; };
+		4C7D62461BDEA482001C04C0 /* BodyPartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyPartCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C7D62481BDEAFEA001C04C0 /* Dongle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Dongle.entitlements; sourceTree = "<group>"; };
+		4C7D62491BDEB5F4001C04C0 /* DongleKeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DongleKeyboard.entitlements; sourceTree = "<group>"; };
+		4C7D625C1BDF7BBF001C04C0 /* UserDefinedDongersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedDongersTableViewController.swift; sourceTree = "<group>"; };
+		4C7D625E1BDF7C32001C04C0 /* UserDefinedDonglerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefinedDonglerTableViewCell.swift; sourceTree = "<group>"; };
+		4C951EDF1BD69F0C00B2FDCE /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4C99CEFC1BF4C3DB0047AAF4 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		4C9B61891BDF8FB200592CCE /* DnrgFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DnrgFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C9B618B1BDF8FB200592CCE /* DnrgFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DnrgFramework.h; sourceTree = "<group>"; };
+		4C9B618D1BDF8FB200592CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C9B61951BDF905D00592CCE /* FrameworkCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkCode.swift; sourceTree = "<group>"; };
+		4CA32A671BD6438D00C35DEF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4CA32A751BD6447F00C35DEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4CA32A961BD64B3300C35DEF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4CA32A9E1BD64D8A00C35DEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Keyboard.storyboard; sourceTree = "<group>"; };
+		4CA32AA11BD64DAA00C35DEF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Keyboard.strings; sourceTree = "<group>"; };
+		4CA32AA31BD64DAF00C35DEF /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Keyboard.strings; sourceTree = "<group>"; };
+		4CC149B21BFB5190007A619A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		4CC149B41BFB51AF007A619A /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Main.strings; sourceTree = "<group>"; };
+		52288EAEBB5473235FEDDA44 /* Pods-Dongle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dongle.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dongle/Pods-Dongle.release.xcconfig"; sourceTree = "<group>"; };
+		603CA10DA86C34A48B31D527 /* Pods_Dongle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dongle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCEEC517C9D4BA592B9F238C /* Pods-Dongle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dongle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dongle/Pods-Dongle.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C18F1671BCD59E7000C09FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3BA43D1BEE391400D2F701 /* DZNEmptyDataSet.framework in Frameworks */,
+				4C3BA43E1BEE391400D2F701 /* iRate.framework in Frameworks */,
+				4C3BA43F1BEE391400D2F701 /* MSDynamicsDrawerViewController.framework in Frameworks */,
+				4C3BA4401BEE391400D2F701 /* VK_ios_sdk.framework in Frameworks */,
+				4C9B61901BDF8FB200592CCE /* DnrgFramework.framework in Frameworks */,
+				DDECDB4E670360A7101573C2 /* Pods_Dongle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18F1801BCD59FB000C09FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C9B61851BDF8FB200592CCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		189F48CF710D3C146A5690A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FCEEC517C9D4BA592B9F238C /* Pods-Dongle.debug.xcconfig */,
+				52288EAEBB5473235FEDDA44 /* Pods-Dongle.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4C18F1611BCD59E7000C09FC = {
+			isa = PBXGroup;
+			children = (
+				4C18F16C1BCD59E7000C09FC /* Dongle */,
+				4C18F1841BCD59FB000C09FC /* DongleKeyboard */,
+				4C9B618A1BDF8FB200592CCE /* DnrgFramework */,
+				4C18F16B1BCD59E7000C09FC /* Products */,
+				189F48CF710D3C146A5690A0 /* Pods */,
+				E0B847973590448DA185C220 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4C18F16B1BCD59E7000C09FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C18F16A1BCD59E7000C09FC /* Dongle.app */,
+				4C18F1831BCD59FB000C09FC /* DongleKeyboard.appex */,
+				4C9B61891BDF8FB200592CCE /* DnrgFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C18F16C1BCD59E7000C09FC /* Dongle */ = {
+			isa = PBXGroup;
+			children = (
+				4C6275501BE6B45E00B48B0C /* help */,
+				4C7D62451BDEA446001C04C0 /* constructors */,
+				4C99CEFE1BF4C4150047AAF4 /* share */,
+				4CA32A6B1BD643EB00C35DEF /* Main.storyboard */,
+				4C7D62441BDEA42D001C04C0 /* other */,
+			);
+			path = Dongle;
+			sourceTree = "<group>";
+		};
+		4C18F1841BCD59FB000C09FC /* DongleKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				4C18F1851BCD59FB000C09FC /* KeyboardViewController.swift */,
+				4C18F19B1BCEF1E2000C09FC /* HeaderCollectionReusableView.swift */,
+				4C18F1911BCD84ED000C09FC /* KeyCollectionViewCell.swift */,
+				4CA32A9F1BD64D8A00C35DEF /* Keyboard.storyboard */,
+				4C6275511BE6B49300B48B0C /* other */,
+			);
+			path = DongleKeyboard;
+			sourceTree = "<group>";
+		};
+		4C6275501BE6B45E00B48B0C /* help */ = {
+			isa = PBXGroup;
+			children = (
+				4C18F16F1BCD59E7000C09FC /* SwitchingOnViewController.swift */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		4C6275511BE6B49300B48B0C /* other */ = {
+			isa = PBXGroup;
+			children = (
+				4C7D62491BDEB5F4001C04C0 /* DongleKeyboard.entitlements */,
+				4C18F19D1BD19AC7000C09FC /* Icons.xcassets */,
+				4C18F1871BCD59FB000C09FC /* Info.plist */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		4C6275521BE6B4A900B48B0C /* other */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A90DA1BFB75270029B5D2 /* InfoPlist.strings */,
+				4C9B618B1BDF8FB200592CCE /* DnrgFramework.h */,
+				4C9B618D1BDF8FB200592CCE /* Info.plist */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		4C7D62441BDEA42D001C04C0 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A90D51BFB75230029B5D2 /* InfoPlist.strings */,
+				4C7D62481BDEAFEA001C04C0 /* Dongle.entitlements */,
+				4CA32A971BD64B3300C35DEF /* Localizable.strings */,
+				4C18F16D1BCD59E7000C09FC /* AppDelegate.swift */,
+				4CA32A671BD6438D00C35DEF /* LaunchScreen.storyboard */,
+				4C18F1741BCD59E7000C09FC /* Assets.xcassets */,
+				4C18F1791BCD59E7000C09FC /* Info.plist */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		4C7D62451BDEA446001C04C0 /* constructors */ = {
+			isa = PBXGroup;
+			children = (
+				4C99CEFA1BF4C2390047AAF4 /* constructor */,
+				4C99CEFB1BF4C2790047AAF4 /* table */,
+			);
+			name = constructors;
+			sourceTree = "<group>";
+		};
+		4C99CEFA1BF4C2390047AAF4 /* constructor */ = {
+			isa = PBXGroup;
+			children = (
+				4C7D62401BDE9044001C04C0 /* ConstructorViewController.swift */,
+				4C6275411BE407E000B48B0C /* StickyHeaderCollectionFlowLayout.swift */,
+				4C7D62461BDEA482001C04C0 /* BodyPartCollectionViewCell.swift */,
+				4C7D62421BDEA2AB001C04C0 /* BodyParts.plist */,
+			);
+			name = constructor;
+			sourceTree = "<group>";
+		};
+		4C99CEFB1BF4C2790047AAF4 /* table */ = {
+			isa = PBXGroup;
+			children = (
+				4C7D625C1BDF7BBF001C04C0 /* UserDefinedDongersTableViewController.swift */,
+				4C7D625E1BDF7C32001C04C0 /* UserDefinedDonglerTableViewCell.swift */,
+			);
+			name = table;
+			sourceTree = "<group>";
+		};
+		4C99CEFE1BF4C4150047AAF4 /* share */ = {
+			isa = PBXGroup;
+			children = (
+				4C99CEFC1BF4C3DB0047AAF4 /* ShareViewController.swift */,
+			);
+			name = share;
+			sourceTree = "<group>";
+		};
+		4C9B618A1BDF8FB200592CCE /* DnrgFramework */ = {
+			isa = PBXGroup;
+			children = (
+				4C9B61951BDF905D00592CCE /* FrameworkCode.swift */,
+				4C6275461BE653DB00B48B0C /* DngrsList.swift */,
+				4CA32A6E1BD6440500C35DEF /* Sections.plist */,
+				4C18F1971BCD93AE000C09FC /* DonglesWithSections.plist */,
+				4C6275521BE6B4A900B48B0C /* other */,
+			);
+			path = DnrgFramework;
+			sourceTree = "<group>";
+		};
+		E0B847973590448DA185C220 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C3BA4391BEE391400D2F701 /* DZNEmptyDataSet.framework */,
+				4C3BA43A1BEE391400D2F701 /* iRate.framework */,
+				4C3BA43B1BEE391400D2F701 /* MSDynamicsDrawerViewController.framework */,
+				4C3BA43C1BEE391400D2F701 /* VK_ios_sdk.framework */,
+				4C23A2E81BEE370100AFC4EE /* libDZNEmptyDataSet.a */,
+				4C23A2E91BEE370100AFC4EE /* libiRate.a */,
+				4C23A2EA1BEE370100AFC4EE /* libMSDynamicsDrawerViewController.a */,
+				4C23A2EB1BEE370100AFC4EE /* libVK-ios-sdk.a */,
+				603CA10DA86C34A48B31D527 /* Pods_Dongle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4C9B61861BDF8FB200592CCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C9B618C1BDF8FB200592CCE /* DnrgFramework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4C18F1691BCD59E7000C09FC /* Dongle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C18F17C1BCD59E7000C09FC /* Build configuration list for PBXNativeTarget "Dongle" */;
+			buildPhases = (
+				6E002C610252E6DC11197EAA /* Check Pods Manifest.lock */,
+				4C18F1661BCD59E7000C09FC /* Sources */,
+				4C18F1671BCD59E7000C09FC /* Frameworks */,
+				4C18F1681BCD59E7000C09FC /* Resources */,
+				4C18F18E1BCD59FB000C09FC /* Embed App Extensions */,
+				4C7D625B1BDEC5A7001C04C0 /* Embed Frameworks */,
+				D419FA86D76F58CE55734E71 /* Copy Pods Resources */,
+				8E8FB574C92B25CA1A77359B /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C9B618F1BDF8FB200592CCE /* PBXTargetDependency */,
+				4C18F1891BCD59FB000C09FC /* PBXTargetDependency */,
+			);
+			name = Dongle;
+			productName = Dongle;
+			productReference = 4C18F16A1BCD59E7000C09FC /* Dongle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C18F1821BCD59FB000C09FC /* DongleKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C18F18B1BCD59FB000C09FC /* Build configuration list for PBXNativeTarget "DongleKeyboard" */;
+			buildPhases = (
+				4C18F17F1BCD59FB000C09FC /* Sources */,
+				4C18F1801BCD59FB000C09FC /* Frameworks */,
+				4C18F1811BCD59FB000C09FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C9B61981BE0009700592CCE /* PBXTargetDependency */,
+			);
+			name = DongleKeyboard;
+			productName = DongleKeyboard;
+			productReference = 4C18F1831BCD59FB000C09FC /* DongleKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4C9B61881BDF8FB200592CCE /* DnrgFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C9B61941BDF8FB200592CCE /* Build configuration list for PBXNativeTarget "DnrgFramework" */;
+			buildPhases = (
+				4C9B61841BDF8FB200592CCE /* Sources */,
+				4C9B61851BDF8FB200592CCE /* Frameworks */,
+				4C9B61861BDF8FB200592CCE /* Headers */,
+				4C9B61871BDF8FB200592CCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DnrgFramework;
+			productName = DnrgFramework;
+			productReference = 4C9B61891BDF8FB200592CCE /* DnrgFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C18F1621BCD59E7000C09FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Anatoly Rosencrantz";
+				TargetAttributes = {
+					4C18F1691BCD59E7000C09FC = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 8W2627SWBG;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					4C18F1821BCD59FB000C09FC = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 8W2627SWBG;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					4C9B61881BDF8FB200592CCE = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 8W2627SWBG;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = 4C18F1651BCD59E7000C09FC /* Build configuration list for PBXProject "Dongle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+				he,
+			);
+			mainGroup = 4C18F1611BCD59E7000C09FC;
+			productRefGroup = 4C18F16B1BCD59E7000C09FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C18F1691BCD59E7000C09FC /* Dongle */,
+				4C18F1821BCD59FB000C09FC /* DongleKeyboard */,
+				4C9B61881BDF8FB200592CCE /* DnrgFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C18F1681BCD59E7000C09FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C62754C1BE6998700B48B0C /* Sections.plist in Resources */,
+				4C7A90D31BFB75230029B5D2 /* InfoPlist.strings in Resources */,
+				4CA32A951BD64B3300C35DEF /* Localizable.strings in Resources */,
+				4C62754E1BE6998C00B48B0C /* DonglesWithSections.plist in Resources */,
+				4CA32A681BD6438D00C35DEF /* LaunchScreen.storyboard in Resources */,
+				4C18F1751BCD59E7000C09FC /* Assets.xcassets in Resources */,
+				4C7D62431BDEA2AB001C04C0 /* BodyParts.plist in Resources */,
+				4CA32A691BD643EB00C35DEF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18F1811BCD59FB000C09FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C62754D1BE6998800B48B0C /* Sections.plist in Resources */,
+				4CA32A9D1BD64D8A00C35DEF /* Keyboard.storyboard in Resources */,
+				4C18F19E1BD19AC7000C09FC /* Icons.xcassets in Resources */,
+				4C62754F1BE6998C00B48B0C /* DonglesWithSections.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C9B61871BDF8FB200592CCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C62754B1BE6993D00B48B0C /* Sections.plist in Resources */,
+				4C7A90D81BFB75270029B5D2 /* InfoPlist.strings in Resources */,
+				4C62754A1BE6993700B48B0C /* DonglesWithSections.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E002C610252E6DC11197EAA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E8FB574C92B25CA1A77359B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dongle/Pods-Dongle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D419FA86D76F58CE55734E71 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dongle/Pods-Dongle-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C18F1661BCD59E7000C09FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C7D625D1BDF7BBF001C04C0 /* UserDefinedDongersTableViewController.swift in Sources */,
+				4C18F1701BCD59E7000C09FC /* SwitchingOnViewController.swift in Sources */,
+				4C18F16E1BCD59E7000C09FC /* AppDelegate.swift in Sources */,
+				4C7D62471BDEA482001C04C0 /* BodyPartCollectionViewCell.swift in Sources */,
+				4C6275421BE407E000B48B0C /* StickyHeaderCollectionFlowLayout.swift in Sources */,
+				4C7D625F1BDF7C32001C04C0 /* UserDefinedDonglerTableViewCell.swift in Sources */,
+				4C99CEFD1BF4C3DB0047AAF4 /* ShareViewController.swift in Sources */,
+				4C7D62411BDE9044001C04C0 /* ConstructorViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C18F17F1BCD59FB000C09FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C18F1921BCD84ED000C09FC /* KeyCollectionViewCell.swift in Sources */,
+				4C18F19C1BCEF1E2000C09FC /* HeaderCollectionReusableView.swift in Sources */,
+				4C18F1861BCD59FB000C09FC /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C9B61841BDF8FB200592CCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6275471BE653DB00B48B0C /* DngrsList.swift in Sources */,
+				4C9B61961BDF905D00592CCE /* FrameworkCode.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C18F1891BCD59FB000C09FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C18F1821BCD59FB000C09FC /* DongleKeyboard */;
+			targetProxy = 4C18F1881BCD59FB000C09FC /* PBXContainerItemProxy */;
+		};
+		4C9B618F1BDF8FB200592CCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C9B61881BDF8FB200592CCE /* DnrgFramework */;
+			targetProxy = 4C9B618E1BDF8FB200592CCE /* PBXContainerItemProxy */;
+		};
+		4C9B61981BE0009700592CCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C9B61881BDF8FB200592CCE /* DnrgFramework */;
+			targetProxy = 4C9B61971BE0009700592CCE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4C7A90D51BFB75230029B5D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C7A90D41BFB75230029B5D2 /* he */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4C7A90DA1BFB75270029B5D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C7A90D91BFB75270029B5D2 /* he */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4CA32A6B1BD643EB00C35DEF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA32A751BD6447F00C35DEF /* Base */,
+				4CC149B21BFB5190007A619A /* ru */,
+				4CC149B41BFB51AF007A619A /* he */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4CA32A6E1BD6440500C35DEF /* Sections.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C6275481BE65FF300B48B0C /* Base */,
+			);
+			name = Sections.plist;
+			path = ../DongleKeyboard;
+			sourceTree = "<group>";
+		};
+		4CA32A971BD64B3300C35DEF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA32A961BD64B3300C35DEF /* ru */,
+				4C951EDF1BD69F0C00B2FDCE /* he */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4CA32A9F1BD64D8A00C35DEF /* Keyboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA32A9E1BD64D8A00C35DEF /* Base */,
+				4CA32AA11BD64DAA00C35DEF /* ru */,
+				4CA32AA31BD64DAF00C35DEF /* he */,
+			);
+			name = Keyboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C18F17A1BCD59E7000C09FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4C18F17B1BCD59E7000C09FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C18F17D1BCD59E7000C09FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCEEC517C9D4BA592B9F238C /* Pods-Dongle.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ENTITLEMENTS = Dongle/Dongle.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Dongle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DongerKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4C18F17E1BCD59E7000C09FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52288EAEBB5473235FEDDA44 /* Pods-Dongle.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ENTITLEMENTS = Dongle/Dongle.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Dongle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DongerKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		4C18F18C1BCD59FB000C09FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ENTITLEMENTS = DongleKeyboard/DongleKeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DongleKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DongerKeyboard.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4C18F18D1BCD59FB000C09FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ENTITLEMENTS = DongleKeyboard/DongleKeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = DongleKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DongerKeyboard.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		4C9B61921BDF8FB200592CCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DnrgFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DnrgFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4C9B61931BDF8FB200592CCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DnrgFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rosencrantz.DnrgFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C18F1651BCD59E7000C09FC /* Build configuration list for PBXProject "Dongle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18F17A1BCD59E7000C09FC /* Debug */,
+				4C18F17B1BCD59E7000C09FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C18F17C1BCD59E7000C09FC /* Build configuration list for PBXNativeTarget "Dongle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18F17D1BCD59E7000C09FC /* Debug */,
+				4C18F17E1BCD59E7000C09FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C18F18B1BCD59FB000C09FC /* Build configuration list for PBXNativeTarget "DongleKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C18F18C1BCD59FB000C09FC /* Debug */,
+				4C18F18D1BCD59FB000C09FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C9B61941BDF8FB200592CCE /* Build configuration list for PBXNativeTarget "DnrgFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C9B61921BDF8FB200592CCE /* Debug */,
+				4C9B61931BDF8FB200592CCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C18F1621BCD59E7000C09FC /* Project object */;
+}

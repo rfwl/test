@@ -1,0 +1,42 @@
+
+/* Class = "UIButton"; normalTitle = "Cheeks"; ObjectID = "0KC-V8-VRE"; */
+"0KC-V8-VRE.normalTitle" = "Щеки";
+
+/* Class = "UILabel"; text = "SMILE"; ObjectID = "3Bm-sh-cvM"; */
+"3Bm-sh-cvM.text" = "SMILE";
+
+/* Class = "UILabel"; text = "G"; ObjectID = "Gvh-cf-hi3"; */
+"Gvh-cf-hi3.text" = "G";
+
+/* Class = "UIButton"; normalTitle = "Hands"; ObjectID = "JwW-lW-a58"; */
+"JwW-lW-a58.normalTitle" = "Руки";
+
+/* Class = "UIButton"; normalTitle = "Eyes"; ObjectID = "PAG-c2-cKg"; */
+"PAG-c2-cKg.normalTitle" = "Глаза";
+
+/* Class = "UIButton"; normalTitle = "Mouth"; ObjectID = "PUl-TV-7sF"; */
+"PUl-TV-7sF.normalTitle" = "Носы";
+
+/* Class = "UILabel"; text = "Adding the keyboard to your system"; ObjectID = "bmh-DC-HRP"; */
+"bmh-DC-HRP.text" = "Как активировать эту клавиатуру";
+
+/* Class = "UILabel"; text = "Header"; ObjectID = "h74-OW-yCu"; */
+"h74-OW-yCu.text" = "Header";
+
+/* Class = "UILabel"; text = "Full Access is needed to add user created dngrs to keyboard. Anyway, without Full Access keyboard will still work with pre-set dngrs."; ObjectID = "lfq-us-sC4"; */
+"lfq-us-sC4.text" = "Полный доступ нужен, чтоб создавать свои смайлы. Впрочем, предопределенные будут доступны и без него.";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mFp-o0-Wpe"; */
+"mFp-o0-Wpe.normalTitle" = "Отмена";
+
+/* Class = "UILabel"; text = "Mind to share:"; ObjectID = "pYx-5V-MLt"; */
+"pYx-5V-MLt.text" = "Не забудь поделиться:";
+
+/* Class = "UIButton"; normalTitle = "Body"; ObjectID = "sGI-JJ-YGb"; */
+"sGI-JJ-YGb.normalTitle" = "Тело";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "vjc-8O-As6"; */
+"vjc-8O-As6.normalTitle" = "Сохранить";
+
+/* Class = "UITextField"; placeholder = "dngr"; ObjectID = "wDi-fi-POH"; */
+"wDi-fi-POH.placeholder" = "смйл";

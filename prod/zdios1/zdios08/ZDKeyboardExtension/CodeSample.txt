@@ -1,0 +1,159 @@
+==========================================================================
+
+==========================================================================
+
+==========================================================================
+
+==========================================================================
+
+
+// Define identifier
+ let notificationName = Notification.Name("NotificationIdentifier")
+ 
+ // Register to receive notification
+ NotificationCenter.default.addObserver(self, selector: #selector(YourClassName.methodOfReceivedNotification), name: notificationName, object: nil)
+ 
+ // Post notification
+ NotificationCenter.default.post(name: notificationName, object: nil)
+ All of the system notification types are now defined as static constants on Notification.Name; i.e. .UIDeviceBatteryLevelDidChange, .UIApplicationDidFinishLaunching, .UITextFieldTextDidChange, etc.
+ 
+ You can extend Notification.Name with your own custom notifications in order to stay consistent with the system notifications:
+ 
+ // Definition:
+ extension Notification.Name {
+ static let yourCustomNotificationName = Notification.Name("yourCustomNotificationName")
+ }
+ 
+ // Usage:
+ NotificationCenter.default.post(name: .yourCustomNotificationName, object: nil)
+
+ 
+ 
+ func batteryLevelChanged(notification: Notification) {
+ // do something useful with this information
+ }
+ 
+ let observer = NotificationCenter.default.addObserver(
+ forName: NSNotification.Name.UIDeviceBatteryLevelDidChange,
+ object: nil, queue: nil,
+ using: batteryLevelChanged)
+ and you can even just use a closure instead of a method if you want:
+ 
+ let observer = NotificationCenter.default.addObserver(
+ forName: NSNotification.Name.UIDeviceBatteryLevelDidChange,
+ object: nil, queue: nil) { _ in print("") }
+ You can use the returned value to stop listening for the notification later:
+ 
+ NotificationCenter.default.removeObserver(observer)
+ 
+ 
+*/
+/*
+ 
+ (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+ {
+ [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+ [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+ {
+ //update views here, e.g. calculate your view
+ }
+ completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+ {
+ }];
+ }
+ 
+ * Codes from apple web site:
+ https://developer.apple.com/library/content/samplecode/NavBar/Listings/CustomAppearance_CustomAppearanceViewController_swift.html
+ @available(iOS 8.0, *)
+ override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+ super.viewWillTransition(to: size, with: coordinator)
+ 
+ // This works around a bug in iOS 8.0 - 8.2 in which the navigation bar
+ // will not display the correct background image after rotating the device.
+ // This bug affects bars in navigation controllers that are presented
+ // modally. A bar in the window's rootViewController would not be affected.
+ coordinator.animate(alongsideTransition: { context in
+ // The workaround is to toggle some appearance related setting on the
+ // navigation bar when we detect that the view controller has changed
+ // interface orientations.  In our example, we call the
+ // -configureNewNavBarBackground: which reapplies our appearance
+ // based on the current selection.  In a real app, changing just the
+ // barTintColor or barStyle would have the same effect.
+ self.configureNewNavBarBackground(self.backgroundSwitcher)
+ }, completion: nil)
+ }
+ 
+ 
+ */
+/*
+
+var inputView: UIInputView?
+The primary view for the input view controller.
+Controlling a Custom Keyboard
+func advanceToNextInputMode()
+Switches to the next keyboard in the list of user-enabled keyboards.
+func dismissKeyboard()
+Dismisses the custom keyboard from from the screen.
+
+var documentContextAfterInput: String?
+
+Textual context after the insertion point in the current text input object.
+var documentContextBeforeInput: String?
+
+Textual context before the insertion point in the current text input object.
+Adjusting the Insertion Point Position
+func adjustTextPosition(byCharacterOffset: Int)
+
+Moves the insertion point forward or backward in the current text input object.
+
+*/
+/*
+     
+    func reportTouches(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.location(in: self.view) 
+        let found:UIView? = self.view.hitTest(location!,with:event!)
+        if found == nil {return}
+        
+        if let tbBtn = found as? ToolbarButton {
+        	if touch?.phase == UITouchPhase.began {
+        		//print("DB-" + tbBtn.buttonName)
+                commander.reportTouchBegan(tbBtn.buttonName)                
+        	} else if touch?.phase == UITouchPhase.ended {
+        		//print("DE-" + tbBtn.buttonName)
+                commander.reportTouchEnded(tbBtn.buttonName)   
+        	} else if touch?.phase == UITouchPhase.cancelled {
+        		//print("DC-" + tbBtn.buttonName)
+                commander.reportTouchCancelled(tbBtn.buttonName)   
+        	}
+        } else {
+        	// Ignore that only buttons will be considered here
+        }  
+    } 
+
+class func getWidthForString(_ str: String, font: UIFont) -> CGFloat {
+ let attrs = [NSFontAttributeName:font]
+ let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
+ return attributedString.size().width
+ }
+ 
+ //  UIColorExtensions.swift
+ import UIKit
+ extension UIColor {
+ 
+ convenience init(argb: UInt) {
+ self.init(
+ red: CGFloat((argb & 0xFF0000) >> 16) / 255.0,
+ green: CGFloat((argb & 0x00FF00) >> 8) / 255.0,
+ blue: CGFloat(argb & 0x0000FF) / 255.0,
+ alpha: CGFloat((argb & 0xFF000000) >> 24) / 255.0
+ )
+ }
+ }
+ usage:
+ 
+ var clearColor: UIColor = UIColor.init(argb: 0x00000000)
+ var redColor: UIColor = UIColor.init(argb: 0xFFFF0000)
+ 
+ 
+ 

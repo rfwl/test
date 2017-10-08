@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="字典输入法" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎使用字典输入法" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQt-bf-jV0">
+                                <rect key="frame" x="10" y="30" width="394" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="haW-V6-6PK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iDM-kt-iqL">
+                                <rect key="frame" x="10" y="80" width="394" height="456"/>
+                                <color key="backgroundColor" red="0.96628421545028687" green="0.97797089815139771" blue="0.91590648889541626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <mutableString key="text">字典输入法是一种中文拼音输入法. 极易掌握, 无需学习. 用法等同于查拼音字典, 依次点击声母, 拼音, 汉字和词组即可. 无需英文键盘, 无需编码, 无需笔划.  每个汉字需要最多三次, 平均约2.3次点击. 不要求精通汉语拼音，不用逐个字母打出拼音. 同时, 能快速检取常用汉字.
+
+本应用己经在此设备上安装了字典输入法. 如果这是首次安装字典输入法, 请在此设备上设置信任给字典输入法的开发者ontpm@hotmail.com. 方法是在设置页面, 依次点击 [通用], [设备管理], 选取[ontpm@hotmail.com], 再点击[信任]按钮.  另外, 在能够使用字典输入法之前, 必须选取其进入系统的键盘菜单. 方法是在设置页面, 依次点击 [通用], [键盘], [增加新键盘], 选取[键盘 - 字典输入法]. 这将使[键盘 - 字典输入法]出现在自定义键盘或系统键盘的键盘菜单中供用户选取为当前键盘, 即显示出字典输入法的用户界面. 自定义键盘或系统键盘都有一个换键盘按钮, 用于显示键盘菜单. 换键盘按钮的表面一般是地球图案或是ABC等. 更多用户辅助信息, 请访问字典输入法的支持网页[caringsoftware.com/zdsrf].
+
+字典输入法是采用iOS应用扩展 - 自定义键盘机制实现的中文拼音输入法. 它的用户界面顶部是有十个按钮的工具栏, 下面是主体部分, 用于显示汉字, 词组和字符, 供用户选取并输入到系统的当前文本框内. 界面的初始状态是显示26个声母. 用户点击一个声母, 它的所有拼音会显示出来. 用户点击一个拼音, 它的所有汉字会显示出来. 用户点击一个汉字, 它会被输入到当前文本框去, 并且它的词组会显示出来. 用户点击一个词组, , 它也会被输入到当前文本框去, 并且它的所有子词组会显示出来. 如果被点击的汉字没有词组或者被点击的词组没有子词组, 界面就会回到初始状态即显示26个声母. 
+
+为了加速输入常用汉字, 如果按住一个声母超过0.4秒, 它的拼音不会显示出来, 但是它的所有拼音下的常用汉字会以拼音的次序直接显示出来. 另外, 工具栏中有一个常字按钮能将最常用的大约140个汉字显示出来. 另外，字典输入法也支持输入数字, 字母和符号. 
+
+字典输入法的特点如下：
+
+1. 极易掌握, 无需学习. 用法等同于查拼音字典, 依次点击声母, 拼音, 汉字和词组即可. 
+2. 尽量减小了输入过程对文章构思的干扰. 它是纯粹拼音输入法, 无需西文键盘, 无需编码, 无需笔划. 
+3. 最少的点击次数, 快速输入的潜力巨大. 每个汉字最多需要三次点击. 一般情况下, 每个汉字平均需要约2.3次点击. 
+4. 不要求精通汉语拼音. 只要选出声母, 拼音会显示出来, 不要求用户逐个字母打出拼音. 同时也可以由声母直接找到绝大部分常用汉字.  这样就可以大幅减小用户的方言对输入速度的影响. 
+5. 用户能快速检取常用汉字. 一般文章中绝大部分都是常用汉字. 字典输入法提供两种快速检取常用汉字的方法: 工具栏的常字按钮能显示最常用的大约140个汉字; 如果按住声母超过0.4秒，该声母的所有拼音下的常用汉字会以拼音的次序直接显示出来.
+
+
+字典输入法顶部工具栏按钮清单：
+
+1. 英: 显示数字, 小写英文字母, 大写英文字母, 及标点符号.
+2. 常: 显示约140个最常用汉字, 在开头十个汉字之后, 其余汉字以拼音次序出现. 
+3. 汉: 显示全部26个声母. 这也是用户界面的初始状态. 可由此选取声母, 拼音, 汉字和词组.
+4: 空格: 输入一个空格到当前文本框内. 界面主体部分的显示内容不变.    
+5: 逗号: 输入一个只要空格到当前文本框内. 界面主体部分的显示内容不变.
+6. 句号: 输入一个空格到当前文本框内. 界面主体部分的显示内容不变.
+7. 退格: 在系统的当前文本框内, 删除前一个字符. 界面主体部分的显示内容不变.
+8. 换行: 输入一个换行符到当前文本框内. 界面主体部分的显示内容不变.
+9. 换键盘(表面是地球图案 ): 退出字典输入法, 换成下一个键盘扩展或系统键盘.
+10. 关闭 (表面是键盘图案 ): 关闭字典输入法界面. 当用户点击一个文本框时, 字典输入法界面会再次出现.
+
+
+
+
+
+
+
+
+
+</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="iDM-kt-iqL" firstAttribute="top" secondItem="NQt-bf-jV0" secondAttribute="bottom" constant="10" id="1Yp-tB-l5j"/>
+                            <constraint firstAttribute="bottom" secondItem="iDM-kt-iqL" secondAttribute="bottom" constant="200" id="CCY-3e-Olf"/>
+                            <constraint firstItem="NQt-bf-jV0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="EHl-a0-hUS"/>
+                            <constraint firstAttribute="trailing" secondItem="iDM-kt-iqL" secondAttribute="trailing" constant="10" id="Sh7-c5-8pa"/>
+                            <constraint firstAttribute="trailing" secondItem="NQt-bf-jV0" secondAttribute="trailing" constant="10" id="fu7-Dp-uQy"/>
+                            <constraint firstItem="iDM-kt-iqL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="iDF-iw-aAo"/>
+                            <constraint firstItem="NQt-bf-jV0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="zGh-z6-NCa"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1455.072463768116" y="-490.76086956521743"/>
+        </scene>
+    </scenes>
+</document>

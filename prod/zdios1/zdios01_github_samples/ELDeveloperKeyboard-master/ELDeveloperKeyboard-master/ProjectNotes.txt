@@ -1,0 +1,42 @@
+Start studying ELDeveloperKeyboard project:
+================================================================================
+* Basically the entry point is in KeyboardViewController:: initializeKeyboard():
+
+*** Added PredictiveTextScrollView was added at the top with full width.
+ 
+*** Added KeyButton ShiftButton, TouchUpInside->  shiftButtonPressed.  
+
+*** Added KeyButton DeleteButton, TouchUpInside->  deleteButtonPressed
+deleteButtonLongPressGestureRecognizer
+deleteButtonSwipeLeftGestureRecognizer		
+
+*** Added KeyButton TabButton, TouchUpInside-> tabButtonPressed.
+
+*** Added KeyButton NextKeyboardButton, TouchUpInside-> advanceToNextInputMode
+
+*** Added KeyButton SpaceButton, 
+currentLanguageLabel = UILabel
+spaceButtonLongPressGestureRecognizer
+spaceButtonSwipeLeftGestureRecognizer
+spaceButtonSwipeRightGestureRecognizer
+
+*** Added KeyButton ReturnButton, TouchUpInside-> returnButtonPressed 
+
+*** Added CharacterButton CharacterButtons
+
+*** Added SwipeView: It will draw points on the screen to show swap effect.
+
+
+
+
+================================================================================
+
+
+
+
+
+
+================================================================================
+
+
+================================================================================ 

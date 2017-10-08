@@ -1,0 +1,7 @@
+use_frameworks!
+target 'Dongle' do
+	pod 'VK-ios-sdk'
+	pod 'iRate'
+	pod 'MSDynamicsDrawerViewController'
+	pod 'DZNEmptyDataSet'
+end

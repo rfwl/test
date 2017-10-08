@@ -1,0 +1,186 @@
+
+======================================
+? ICON Button change background ICON
+? Down / Up on buttons
+? hover over effect on buttons.
+
+====================================== Model
+
+* Special KeyLevels
+NumberKeyLevel
+AlphbetKeyLevel
+SymbolKeyLevel
+DictionaryKeyLevel
+MostUsedHanziKeyLevel
+RecentHanziKeyLevel
+
+====================================== View
+
+* Controls
+MenuItemButton
+KeyLevelButton
+ToolbarButton
+
+* UIViewControllers
+
+> KeyboardViewController
+1 > ToolbarViewController
+1.1 > ToolbarNumber
+
+1.2 > ToolbarHanzi
+
+1.3 > ToolbarSpecialButtons
+
+1.4 > ToolbarIMEButtons
+
+2 > KeyLevelViewController
+Draw child key levels under a key level.
+
+====================================== UI
+Toolbar
+
+1> Character
+1.1 > Numeric, plus most-used-symbols,  Stay on Page. 
+1.2 > Alphabet, plus Shift button  and most-used-symbols Stay on Page
+1.3 > Symbol. Go Back to Hanzi PI Page once clicked
+
+2> Hanzi
+
+2.1 > PI
+
+2.2 > Most_Used
+
+2.3 > Recent-Used 
+
+2.4 > Going up, go up a level
+
+2.5 > Custom PH Library[Not Now]
+
+3> Special-Keys
+
+3.1 > Enter 
+
+3.2 > Backspace
+
+3.3 > Space
+
+3.4 > ,
+
+3.5 > .
+
+4> IME Buttons
+
+4.1 > Close IME
+
+4.2 > Next IME
+
+4.3 > Prev IME
+
+4.4 > IME Setting Application(Not Now)
+
+
+5 Main Scroll View for KeyLevelView
+Draw children from a KeyLevel
+5.1 > KeyLevelView: 
+Draw child keyLevels at the prescribed locations and sizes
+Draw child keyLevels at dynamically generated locations
+
+
+====================================== command
+
+
+
+
+Draw KeyLevel 
+
+
+Output Hanzi Command
+* Output the Hanzi to the text document 
+* Added the output Hanzi into Recent-Used-Hanzis KeyLevel 
+* Show child PHs.
+
+
+
+Toolbar Character Key Commands
+
+1> Open Numeric Keyboard > Tap on Toolbar Character Key
+Show Special Numberic Keylevel into main keylevel view with scaled predefined locations
+
+2> Show Toolbar Character Popover Menu > Touch down Toolbar Numberic Key
+
+2.1> Open Numeric Keyboard > Touch-up on Toolbar Numberic Menu Item
+Show Special Numberic Keylevel into main keylevel view with scaled predefined locations
+
+2.2> Open Alphabet Keyboard > Touch-up on Toolbar Alphabet Menu Item
+Show Special Alphabet Keylevel into main keylevel view with scaled predefined locations
+
+2.3> Open Symbol Keyboard > Touch-up on Toolbar Symbol Menu Item
+Show Special Symbol Keylevel into main keylevel view with scaled predefined locations
+
+3> Close Toolbar Numeric Popover Menu > Touch-out Toolbar Numeric Key and Toolbar Numberic/Alphabet/Symbol Menu Item
+
+
+Toolbar Hanzi Button Commands
+
+1> Show PIs > Tap on Toolbar Hanzi Button
+Show PIs
+
+2> Show Toolbar Hanzi Button Popover Menu > Touch down Toolbar Hanzi Button
+
+2.1> Show PIs > Touch-down on Toolbar Hanzi Menu Item
+Show PIs
+
+2.2> Most-Used Hanzis > Touch-up on Toolbar Most-Used Hanzis  Menu Item
+Shwo Most-Used Hanzis from special Most-Used Hanzi KeyLevel
+
+2.3> Recent-Used Hanzis > Touch-up on Toolbar MRecent-Used Hanzis  Menu Item
+Show Recent-Used Hanzis from special Recent-Used Hanzi KeyLevel
+
+3> Close Toolbar Hanzi Button Popover Menu > Touch-out Toolbar Hanzi Button and Toolbar Hanzi Button Mosr-Used/Recent Menu Item
+
+Toolbar Special Key Commands
+
+1> Output Enter Key > Tap on SpecialKey  Button
+Output Enter key
+
+2> Show Toolbar SpecialKey Popover Menu > Touch down Toolbar SpecialKey Button
+
+2.1> Output Enter Key > Touch-up on Toolbar SpecialKey Enter Menu Item
+Output Enter key
+
+2.2> Output Backspace Key > Touch-up on Toolbar SpecialKey Backspace Menu Item
+Output Backspace key
+
+2.3> Output Space Key > Touch-up on Toolbar SpecialKey Space Menu Item
+Output Space key
+
+2.4> Output Comma Key > Touch-up on Toolbar SpecialKey Comma Menu Item
+Output Comma key
+
+2.4> Output Period Key > Touch-up on Toolbar SpecialKey Period Menu Item
+Output Period key
+
+3> Close Toolbar Numeric Popover Menu > Touch-out Toolbar SpecialKey Button and Toolbar SpecialKey Enter/Backspace/Space/Comma/Period Menu Item
+
+
+
+Toolbar IMEButton Commands
+
+1> Close IME > Tap on Toolbar IME Button
+Close IME
+
+2> Show Toolbar IME Button Popover Menu > Touch down Toolbar IME Button
+
+2.1> Close IME > Touch-up on Toolbar Close IME Menu Item
+Close IME
+
+2.2> Next IME > Touch-up on Toolbar Next IME Menu Item
+Next IME
+
+2.3> Prev IME > Touch-up on Toolbar Prev IME Menu Item
+Prev IME
+
+3> Close Toolbar IME Button Popover Menu > Touch-out Toolbar IME Button and Toolbar IMEButton Close/Next/Prev IME Menu Item
+
+
+======================================

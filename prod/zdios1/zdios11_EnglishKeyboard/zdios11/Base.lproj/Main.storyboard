@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="zdios11" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Test Keyboard from Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9Eu-z5-zv4">
+                                <rect key="frame" x="10" y="40" width="355" height="100"/>
+                                <color key="backgroundColor" red="0.83227425813674927" green="0.95261567831039429" blue="0.95494109392166138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="PuA-zg-XyK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iV9-ki-X74">
+                                <rect key="frame" x="10" y="257" width="355" height="400"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="zbr-Ew-wjA"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4A-Sk-2zM">
+                                <rect key="frame" x="10" y="155" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="ehR-t3-YRf"/>
+                                </constraints>
+                                <state key="normal" title="Page1">
+                                    <color key="titleShadowColor" red="0.069435305893421173" green="0.73166269063949585" blue="0.76071900129318237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClick1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AGN-sg-OqJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKD-5C-q6y">
+                                <rect key="frame" x="88" y="155" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Page2">
+                                    <color key="titleShadowColor" red="0.069435305893421173" green="0.73166269063949585" blue="0.76071900129318237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClick2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yiv-uJ-nxA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPx-aq-tPt">
+                                <rect key="frame" x="166" y="155" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Page3">
+                                    <color key="titleShadowColor" red="0.069435305893421173" green="0.73166269063949585" blue="0.76071900129318237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClick3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DPc-fz-iDi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuP-Jj-wqU">
+                                <rect key="frame" x="244" y="155" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Page4">
+                                    <color key="titleShadowColor" red="0.069435305893421173" green="0.73166269063949585" blue="0.76071900129318237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClick4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpV-yr-4sN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="x4A-Sk-2zM" firstAttribute="top" secondItem="9Eu-z5-zv4" secondAttribute="bottom" constant="15" id="0CQ-fm-yju"/>
+                            <constraint firstAttribute="trailing" secondItem="9Eu-z5-zv4" secondAttribute="trailing" constant="10" id="FSd-di-aa8"/>
+                            <constraint firstItem="iV9-ki-X74" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="KrI-0G-Slk"/>
+                            <constraint firstItem="9Eu-z5-zv4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="QFG-fq-PYj"/>
+                            <constraint firstItem="9Eu-z5-zv4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="UZp-Jn-k7T"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iV9-ki-X74" secondAttribute="bottom" constant="10" id="dL9-3M-U9H"/>
+                            <constraint firstAttribute="trailing" secondItem="iV9-ki-X74" secondAttribute="trailing" constant="10" id="hLH-wI-joG"/>
+                            <constraint firstItem="x4A-Sk-2zM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="zvZ-VM-Ezg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="keyboardViewContainer" destination="iV9-ki-X74" id="vSn-Hi-sSr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537.5" y="-97.5"/>
+        </scene>
+    </scenes>
+</document>

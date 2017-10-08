@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "KeyLevelViewController.reportTouches(Set&lt;UITouch&gt;, with : UIEvent?) -&gt; ():KeyLevelViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scrView.contentSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
