@@ -25,7 +25,7 @@ class KeyView: UIControl {
         self.layer.borderColor = UIColor.cyan.cgColor
         self.isOpaque = false
         self.backgroundColor = UIColor.brown
-        self.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = false
         
     }
     

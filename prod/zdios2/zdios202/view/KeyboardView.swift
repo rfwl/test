@@ -103,7 +103,9 @@ class KeyboardView: UIView {
     
     //=============================================================================
     // Operations
+    var drawnKeyboardPage : KeyboardPage?
     func drawPage(_ page:KeyboardPage) {
+        drawnKeyboardPage = page
         for vw in self.subviews {
             vw.removeFromSuperview()
         }
@@ -202,12 +204,26 @@ class KeyboardView: UIView {
     func findAndHighlightTouchedKeyView(_ pt:CGPoint, with event: UIEvent? ){
         //func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
         //let pt1:CGPoint = self.convert(pt, to: nil)
-        let newTouchedKeyView = self.hitTest(pt, with:event)
-        if let touched = newTouchedKeyView as? KeyView {
-            touchedKeyView = touched
-            touched.addHighlight()
-        } else {
-            touchedKeyView = nil
+        //let newTouchedKeyView = self.hitTest(pt, with:event) //hitTest call point(inside: with event:) for sub views recursively if sub view's isUserInterctionEnabled.
+        //if let touched = newTouchedKeyView as? KeyView {
+        //    touchedKeyView = touched
+        //    touched.addHighlight()
+        //} else {
+        //    touchedKeyView = nil
+        //}
+        touchedKeyView = nil
+        if let page = self.drawnKeyboardPage {
+            for row in page.rows {
+                for ky in row.keys {
+                    if let kv = ky.view {
+                        if ky.frame.contains(pt) {
+                            touchedKeyView = kv as? KeyView
+                            touchedKeyView?.addHighlight()
+                            return
+                        }
+                    }
+                }
+            }
         }
     }
 
