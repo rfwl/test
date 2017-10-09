@@ -78,62 +78,51 @@ class KeyboardKey {
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
    	func setMainAndSecondaryFrames(){
+        mainCellFrame = CGRect.zero
+        secondaryCellFrame = CGRect.zero
    		switch self.cellConfiguration {
-   		case .SingleCell:
-   		case .SingleCellPlusPopUpCells:
+   		case .SingleCell,.SingleCellPlusPopUpCells:
    			mainCellFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
    			secondaryCellFrame = CGRect.zero
-   		break
-   		case .SecondaryCell:
-   		case .SecondarCellPlusPopUpCells:
+   		case .SecondaryCell, .SecondarCellPlusPopUpCells:
    			calculateMainCellFrame()
-  			calculateSecondaryCellFrame()		
-   		break
-   		default:
-   			mainCellFrame = CGRect.zero
-    		secondaryCellFrame = CGRect.zero
-   		break
+  			calculateSecondaryCellFrame()
+   		//default:
+   			//mainCellFrame = CGRect.zero
+    		//secondaryCellFrame = CGRect.zero
    		}
     } //end of func
    	
    	 func calculateSecondaryCellFrame(){
     	let w = self.frame.width * self.secondaryCellSizeScale
     	let h = self.frame.height * self.secondaryCellSizeScale
+        self.secondaryCellFrame = CGRect.zero
     	switch self.secodaryCellLocation {
-    	case TopLeft:
+    	case .TopLeft:
     		self.secondaryCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
-    		break
-    	case TopRight:
+    	case .TopRight:
     		self.secondaryCellFrame = CGRect(x: self.frame.width-w, y: 0, width: w, height: h)
-    		break
-    	case BottomLeft:
+    	case .BottomLeft:
     		self.secondaryCellFrame = CGRect(x: 0, y: self.frame.height-h, width: w, height: h)
-    		break
-        case BottomRight:    
+        case .BottomRight:
     		self.secondaryCellFrame = CGRect(x: self.frame.width, y: self.frame.height-h, width: w, height: h)
-    		break
-        default:
-        	self.secondaryCellFrame = CGRect.zero
-        break
+        //default:
+        	//self.secondaryCellFrame = CGRect.zero
         }
     }
     
     func calculateMainCellFrame(){
     	let w = self.frame.width 
-    	let sh = self.frame.height * self.mainCellSizeScale
-    	let h = self.frame.height - sh 
+    	let sh = self.frame.height * self.secondaryCellSizeScale
+    	let h = self.frame.height - sh
+        self.mainCellFrame = CGRect.zero
     	switch self.secodaryCellLocation {
-    	case TopLeft:
-    	case TopRight:
+    	case .TopLeft, .TopRight:
     		self.mainCellFrame = CGRect(x: 0, y: sh, width: w, height: h )
- 			break
-    	case BottomLeft:
-        case BottomRight:    
+    	case .BottomLeft, .BottomRight:
     		self.mainCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
-    		break
-        default:
-        	self.mainCellFrame = CGRect.zero
-        break
+        //default:
+        	//self.mainCellFrame = CGRect.zero
         }
     }
    	//================================================
@@ -141,15 +130,15 @@ class KeyboardKey {
    	
    	func drawPopUpPath(_ popUpFrame:CGRect) {
                 
-        let x1 = popUpFrame.x 
-        let x2 = self.frame.x 
-        let x3 = self.frame.x + self.frame.width 
-        let x4 = popUpFrame.x + popUpFrame.width
+        let x1 = popUpFrame.minX
+        let x2 = self.frame.minX
+        let x3 = self.frame.minX + self.frame.width
+        let x4 = popUpFrame.minX + popUpFrame.width
         
-        let y1 = popUpFrame.y 
-        let y2 = popUpFrame.y + popUpFrame.height   
-        let y3 = self.frame.y  
-        let y4 = self.frame.y + self.frame.height
+        let y1 = popUpFrame.minY
+        let y2 = popUpFrame.minY + popUpFrame.height
+        let y3 = self.frame.minY
+        let y4 = self.frame.minY + self.frame.height
         
         let r1 = CGFloat(10.0) 
         let r2 = CGFloat(5.0) 
@@ -157,7 +146,7 @@ class KeyboardKey {
         
         let p1 = CGPoint(x:x1, y:y1), p2 = CGPoint(x:x4, y:y1), p3 = CGPoint(x:x1, y:y2), p4 = CGPoint(x:x4, y:y2)
         let p1c = p1.shift(x:r1, y:r1), p2c = p2.shift(x:-r1, y:r1), p3c = p3.shift(x:r1, y:-r1), p4c = p4.shift(x:-r1, y:-r1)
-        let p1a = p1.shift(x:r1, y:0), p2a = p2.shift(x:0, y:r1), p3a = p3.shift(x:0, y:-r1), p4a = p4.shift(x:-r1, y:0)
+        let p1a = p1.shift(x:r1, y:0), p2a = p2.shift(x:0, y:r1), p3a = p3.shift(x:0, y:-r1)  //, p4a = p4.shift(x:-r1, y:0)
         
         let left  = CGFloat(Double.pi)
         let up    = CGFloat(1.5*Double.pi)
@@ -219,7 +208,8 @@ class KeyboardKey {
         //path6.close()
         path6.lineWidth = 3
         path6.stroke()
-        
+    } //end of func
+    
         
         
    	
@@ -229,5 +219,11 @@ class KeyboardKey {
    	//
 } // end of class
  
- 
+
+extension CGPoint {
+    func shift(x:CGFloat, y:CGFloat) -> CGPoint {
+        return CGPoint(x: self.x + x, y:self.y + y)
+    }
+}
+
  
