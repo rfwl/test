@@ -217,7 +217,7 @@ class KeyboardView: UIView {
                 for ky in row.keys {
                     if let kv = ky.view {
                         if ky.frame.contains(pt) {
-                            touchedKeyView = kv as? KeyView
+                            touchedKeyView = kv
                             touchedKeyView?.addHighlight()
                             return
                         }

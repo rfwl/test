@@ -71,7 +71,7 @@ class KeyboardKey {
     
     //================================================
    	// Transient Properties
-    var keyView:KeyView?
+    var view:KeyView?
     
     //================================================
    	// Cells 
@@ -127,7 +127,7 @@ class KeyboardKey {
     }
    	//================================================
    	// Pop-up
-   	var popUpBorderWidth:Int=3
+   	var popUpBorderWidth = CGFloat(3.0)
    	var popUpBorderColor:UIColor = UIColor.gray
    	var popUpGap = CGFloat(10.0) // will be used as corner radius between pop-up and self.frame
    	var cornerRadius = CGFloat(5.0)
@@ -140,12 +140,12 @@ class KeyboardKey {
         static let right = CGFloat(0.0)       
     }
         
-   	func calculatePopUpRect(_ width:CGFloat, height:CGFloat) {
+   	func calculatePopUpRect(_ width:CGFloat, height:CGFloat) -> CGRect {
    		// ------ calculate maxW
    		let minDelta =  popUpCornerRadius + popUpGap
-   		let maxW = screenWidth 
+   		var maxW = screenWidth
    		if self.frame.minX < minDelta {maxW -= self.frame.minX}
-   		if screenWidth- self.frame.maxX < minDelta >  {maxW -= screenWidth- self.frame.maxX}
+   		if screenWidth - self.frame.maxX < minDelta {maxW -= screenWidth - self.frame.maxX}
    		let minW = self.frame.width + 2*minDelta
    		// ------- calculate target width 
    		var targetW = width
@@ -156,10 +156,10 @@ class KeyboardKey {
    			targetW = minW 
    		}
    		   		
-   		var delta = (w - minW)/2
+   		var delta = (targetW - minW)/2
    		if delta < minDelta { delta = 0 }
-   		var x = self.frame.minX - delta    		  		 
-   		var y = self.frame.minY - self.popUpGap - height
+   		let x = self.frame.minX - delta
+   		let y = self.frame.minY - self.popUpGap - height
    		
    		return CGRect(x:x,y:y,width:targetW,height:height) 
    			    
@@ -177,7 +177,7 @@ class KeyboardKey {
         
         let y1 = popUpFrame.minY
         let y2 = popUpFrame.minY + popUpFrame.height
-        let y3 = self.frame.minY
+        //let y3 = self.frame.minY
         let y4 = self.frame.minY + self.frame.height
         
         let r1 = popUpCornerRadius 
@@ -186,11 +186,16 @@ class KeyboardKey {
         
         let p1 = CGPoint(x:x1, y:y1), p2 = CGPoint(x:x4, y:y1), p3 = CGPoint(x:x1, y:y2), p4 = CGPoint(x:x4, y:y2)
         let p1c = p1.shift(x:r1, y:r1), p2c = p2.shift(x:-r1, y:r1), p3c = p3.shift(x:r1, y:-r1), p4c = p4.shift(x:-r1, y:-r1)
-        let p1a = p1.shift(x:r1, y:0), p2a = p2.shift(x:0, y:r1), p3a = p3.shift(x:0, y:-r1)  //, p4a = p4.shift(x:-r1, y:0)
+        let p1a = p1.shift(x:r1, y:0), p2a = p2.shift(x:0, y:r1), p3a = p3.shift(x:0, y:-r1), p4a = p4.shift(x:-r1, y:0)
 
-        let q1 = CGPoint(x:x2, y:y3), q2 = CGPoint(x:x3, y:y3), q3 = CGPoint(x:x2, y:y4), q4 = CGPoint(x:x3, y:y4)
-        let q1c = q1.shift(x:r2, y:r2), q2c = q2.shift(x:-r2, y:r2), q3c = q3.shift(x:r2, y:-r2), q4c = q4.shift(x:-r2, y:-r2)
-        let q1a = q1.shift(x:r2, y:0), q2a = q2.shift(x:0, y:r2), q3a = q3.shift(x:0, y:-r2), q4a = q4.shift(x:-r2, y:0)
+        //let q1 = CGPoint(x:x2, y:y3), q2 = CGPoint(x:x3, y:y3),
+        let q3 = CGPoint(x:x2, y:y4), q4 = CGPoint(x:x3, y:y4)
+        //let q1c = q1.shift(x:r2, y:r2),
+        //let q2c = q2.shift(x:-r2, y:r2),
+        let q3c = q3.shift(x:r2, y:-r2), q4c = q4.shift(x:-r2, y:-r2)
+        //let q1a = q1.shift(x:r2, y:0),
+        //let q2a = q2.shift(x:0, y:r2),
+        let q3a = q3.shift(x:0, y:-r2), q4a = q4.shift(x:-r2, y:0)
  
         let s1 = CGPoint(x:x2, y:y2), s2 = CGPoint(x:x3, y:y2)
         let s1c = s1.shift(x:-r3,y:r3), s2c = s2.shift(x:r3,y:r3)
@@ -201,7 +206,7 @@ class KeyboardKey {
         path.move(to: p1a)
         path.addArc(withCenter: p1c, radius: r1, startAngle: ArcAngles.up, endAngle: ArcAngles.left, clockwise: false)
         
-        if abs(x1,x2) > r1+r2 {                
+        if abs(x1-x2) > r1+r2 {
 	        path.addLine(to:p3a)
 	        path.addArc(withCenter: p3c, radius: r1, startAngle: ArcAngles.left, endAngle: ArcAngles.down, clockwise: false)
 	        
@@ -214,9 +219,9 @@ class KeyboardKey {
 	    path.addLine(to:q4a)
 	    path.addArc(withCenter: q4c, radius: r3, startAngle: ArcAngles.down, endAngle: ArcAngles.right, clockwise: false)
         
-        if abs(x3,x4) > r1+r2 {                
-	        path.addLine(to:q2a)
-	        path.addArc(withCenter: q2c, radius: r2, startAngle: ArcAngles.left, endAngle: ArcAngles.up, clockwise: false)
+        if abs(x3-x4) > r1+r2 {
+	        path.addLine(to:s2a)
+	        path.addArc(withCenter: s2c, radius: r2, startAngle: ArcAngles.left, endAngle: ArcAngles.up, clockwise: false)
 	        
 	        path.addLine(to:p4a)
 	        path.addArc(withCenter: p4c, radius: r1, startAngle: ArcAngles.down, endAngle: ArcAngles.right, clockwise: false)
@@ -226,7 +231,7 @@ class KeyboardKey {
         path.addArc(withCenter: p2c, radius: r1, startAngle: ArcAngles.right, endAngle: ArcAngles.up, clockwise: false)
         
         path.close()
-        path.lineWidth = popUpBorderWidth
+        path.lineWidth = self.popUpBorderWidth
         path.stroke()            
         
     } //end of func
