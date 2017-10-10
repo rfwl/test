@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "KeyView.showPopUp():KeyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.popUpRect">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "KeyboardView.findAndHighlightTouchedKeyView(_:with:):KeyboardView.swift">
          <PersistentStrings>
             <PersistentString

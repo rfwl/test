@@ -26,6 +26,7 @@ class KeyView: UIControl {
         self.isOpaque = false
         self.backgroundColor = UIColor.brown
         self.isUserInteractionEnabled = false
+        self.clipsToBounds = false
         
     }
     
@@ -47,12 +48,24 @@ class KeyView: UIControl {
             } else {
                 
             }
-        }
-    }
+            //-------------------------------------------------------------
+            if let rt = self.popUpRect {
+                let ctx = UIGraphicsGetCurrentContext()
+                ctx?.saveGState()
+                ky.drawPopUpPath(rt)
+                ctx?.restoreGState()
+            }
+            //-------------------------------------------------------------
+            
+            
+            //-------------------------------------------------------------
+        } // end of if let ky = self.keyDefinition
+    } //end of func
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return true // self.bounds.contains(point)
-    }
+    
+    //override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    //    return true // self.bounds.contains(point)
+    //}
   
     //=====================================================================
     // KeyDefinition
@@ -121,6 +134,17 @@ class KeyView: UIControl {
         
     }
     
+    var popUpRect : CGRect?
+    func showPopUp(){
+        if let ky = self.keyDefinition {
+            popUpRect = ky.calculatePopUpRect(CGFloat(200), height: CGFloat(40))
+            self.setNeedsDisplay()
+        } // end of if let ky = self.keyDefinition
+    }
+    func hidePopUp(){
+        popUpRect = nil
+        self.setNeedsDisplay()
+    }
     //=====================================================================
     //
     

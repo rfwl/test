@@ -232,7 +232,7 @@ class KeyboardKey {
         
         path.close()
         path.lineWidth = self.popUpBorderWidth
-        path.stroke()            
+        path.fill()            
         
     } //end of func
     

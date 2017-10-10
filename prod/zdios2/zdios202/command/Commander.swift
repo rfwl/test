@@ -12,10 +12,16 @@ class Commander {
     //===================================================
     // Report KeyView Touches
     static func reportTouchDownKeyView(_ keyView:KeyView?) {
-        print("Touch down " )
+        //print("Touch down " )
+        if let kv = keyView {
+            kv.showPopUp()
+        }
     }
     static func reportTapKeyView(_ keyView:KeyView?) {
-        print("Tap " )
+        //print("Tap " )
+        if let kv = keyView {
+            kv.hidePopUp()
+        }
     }
     static func reportLongPressKeyView(_ keyView:KeyView?) {
         print("Long Press  ")

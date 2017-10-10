@@ -219,12 +219,12 @@ class ShapeLibrary {
             ctx?.saveGState()
             ctx?.translateBy(x: xOffset, y: yOffset)
 
-        } //end of func
+      } //end of func
 
       static func endCenter() {
             let ctx = UIGraphicsGetCurrentContext()
             ctx?.restoreGState()
-        } //end of func
+      } //end of func
 
     
     
