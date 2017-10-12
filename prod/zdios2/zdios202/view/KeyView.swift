@@ -137,7 +137,7 @@ class KeyView: UIControl {
     var popUpRect : CGRect?
     func showPopUp(){
         if let ky = self.keyDefinition {
-            popUpRect = ky.calculatePopUpRect(CGFloat(200), height: CGFloat(40))
+            popUpRect = ky.calculatePopUpRect(CGFloat(20), height: CGFloat(10))
             self.setNeedsDisplay()
         } // end of if let ky = self.keyDefinition
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3351A771F8E0A560099AC31 /* PopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3351A761F8E0A560099AC31 /* PopUpContainerView.swift */; };
 		C34D470B1F850CB300DC5965 /* enter_key.png in Resources */ = {isa = PBXBuildFile; fileRef = C34D47081F850CB300DC5965 /* enter_key.png */; };
 		C34D470C1F850CB300DC5965 /* next_key.png in Resources */ = {isa = PBXBuildFile; fileRef = C34D47091F850CB300DC5965 /* next_key.png */; };
 		C34D470D1F850CB300DC5965 /* space_key.png in Resources */ = {isa = PBXBuildFile; fileRef = C34D470A1F850CB300DC5965 /* space_key.png */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C3351A761F8E0A560099AC31 /* PopUpContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContainerView.swift; sourceTree = "<group>"; };
 		C34D47081F850CB300DC5965 /* enter_key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = enter_key.png; path = view/key_icons/enter_key.png; sourceTree = "<group>"; };
 		C34D47091F850CB300DC5965 /* next_key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = next_key.png; path = view/key_icons/next_key.png; sourceTree = "<group>"; };
 		C34D470A1F850CB300DC5965 /* space_key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = space_key.png; path = view/key_icons/space_key.png; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				C3C0A2E91F806F36001C3D10 /* KeyView.swift */,
 				C3C0A2ED1F819C54001C3D10 /* ShapeLibrary.swift */,
 				C34F28D41F82EB70006EB371 /* ImageLibrary.swift */,
+				C3351A761F8E0A560099AC31 /* PopUpContainerView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C36B47AC1F7BCCA400B692E6 /* KeyCell.swift in Sources */,
+				C3351A771F8E0A560099AC31 /* PopUpContainerView.swift in Sources */,
 				C3C0A2EC1F806F5A001C3D10 /* Commander.swift in Sources */,
 				C36B479B1F7BCB9B00B692E6 /* ViewController.swift in Sources */,
 				C3C0A2E21F7F2E82001C3D10 /* KeyboardKey.swift in Sources */,

@@ -12,6 +12,16 @@ class KeyboardView: UIView {
         self.isMultipleTouchEnabled = true
         self.isUserInteractionEnabled = true
         self.isOpaque = false
+        Commander.keyboardView = self
+        
+        /*
+        let coverRect = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        self.popUpContainerView = UIView(frame:coverRect)
+        self.popUpContainerView.isOpaque = false
+        self.popUpContainerView.isUserInteractionEnabled = false
+        self.addSubview(self.popUpContainerView)
+         */
+        
     }
     
     required init?(coder: NSCoder) {
@@ -125,6 +135,42 @@ class KeyboardView: UIView {
         
         
     } //end of func
+    /*
+     
+     //=====================================================================
+     // ocerrides
+    var popUpRect : CGRect?
+    var popUpKeyView : KeyView?
+    func showPopUp(_ kv:KeyView){
+        if let ky = kv.keyDefinition {
+            popUpKeyView = kv
+            popUpRect = ky.calculatePopUpRect(CGFloat(200), height: CGFloat(40))
+            self.setNeedsDisplay()
+        } // end of if let ky = self.keyDefinition
+    }
+    func hidePopUp(){
+        popUpRect = nil
+        self.setNeedsDisplay()
+    }
+   
+    public override func draw(_ frame: CGRect) {
+        if let kv = self.popUpKeyView {
+           if let ky = kv.keyDefinition {
+                if let rt = self.popUpRect {
+                    let ctx = UIGraphicsGetCurrentContext()
+                    ctx?.saveGState()
+                    ky.drawPopUpPath(rt)
+                    ctx?.restoreGState()
+                }
+            }
+        }
+        //-------------------------------------------------------------
+            
+            
+        //-------------------------------------------------------------
+      
+    } //end of func
+    */
     //=============================================================================
     // Touche Event Handlers
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -9,18 +9,22 @@
 import Foundation
 class Commander {
     
+    static var keyboardView:KeyboardView?
+    static var popUpContainerView : PopUpContainerView?
     //===================================================
     // Report KeyView Touches
     static func reportTouchDownKeyView(_ keyView:KeyView?) {
         //print("Touch down " )
-        if let kv = keyView {
-            kv.showPopUp()
+        if let pucvw = popUpContainerView {
+            if let kvw = keyView {
+                pucvw.showPopUp(kvw)
+            }
         }
     }
     static func reportTapKeyView(_ keyView:KeyView?) {
         //print("Tap " )
-        if let kv = keyView {
-            kv.hidePopUp()
+        if let pucvw = popUpContainerView {
+                pucvw.hidePopUp()
         }
     }
     static func reportLongPressKeyView(_ keyView:KeyView?) {

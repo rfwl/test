@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "KeyboardKey.calculatePopUpRect(_:height:):KeyboardKey.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "KeyView.showPopUp():KeyView.swift">
          <PersistentStrings>
             <PersistentString

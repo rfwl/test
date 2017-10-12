@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var keyboardViewContainer: UIView!
     
     var keyboardView:KeyboardView?
+    var popUpContainerView:PopUpContainerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,10 @@ class ViewController: UIViewController {
         keyboardView?.keyboardDefinition = defaultKeyboard()
         //keyboardView!.backgroundColor = UIColor.green // for debug
         keyboardViewContainer.addSubview(keyboardView!)
+        let frm1 = CGRect(x: frm.minX, y: frm.minY - 50, width: frm.width, height: frm.height)
+        popUpContainerView = PopUpContainerView(frame:frm1)
+        keyboardViewContainer.addSubview(popUpContainerView!)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
