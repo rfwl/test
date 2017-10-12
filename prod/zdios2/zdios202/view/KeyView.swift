@@ -48,13 +48,7 @@ class KeyView: UIControl {
             } else {
                 
             }
-            //-------------------------------------------------------------
-            if let rt = self.popUpRect {
-                let ctx = UIGraphicsGetCurrentContext()
-                ctx?.saveGState()
-                ky.drawPopUpPath(rt)
-                ctx?.restoreGState()
-            }
+           
             //-------------------------------------------------------------
             
             
@@ -134,22 +128,34 @@ class KeyView: UIControl {
         
     }
     
-    var popUpRect : CGRect?
-    func showPopUp(){
-        if let ky = self.keyDefinition {
-            popUpRect = ky.calculatePopUpRect(CGFloat(20), height: CGFloat(10))
-            self.setNeedsDisplay()
-        } // end of if let ky = self.keyDefinition
-    }
-    func hidePopUp(){
-        popUpRect = nil
-        self.setNeedsDisplay()
-    }
+  
     //=====================================================================
     //
     
 } //end of class
 /*
+ 
+ 
+ //-------------------------------------------------------------
+ if let rt = self.popUpRect {
+ let ctx = UIGraphicsGetCurrentContext()
+ ctx?.saveGState()
+ ky.drawPopUpPath(rt)
+ ctx?.restoreGState()
+ }
+ 
+ var popUpRect : CGRect?
+ func showPopUp(){
+ if let ky = self.keyDefinition {
+ popUpRect = ky.calculatePopUpRect(CGFloat(20), height: CGFloat(10))
+ self.setNeedsDisplay()
+ } // end of if let ky = self.keyDefinition
+ }
+ func hidePopUp(){
+ popUpRect = nil
+ self.setNeedsDisplay()
+ }
+ 
  func addToolbarButton(_ frm:CGRect, title tl:String,name nm:String,img inm:String) {
  let btn:ToolbarButton = ToolbarButton(frame:frm,name:nm)
  //btn.mainVC = self.mainVC

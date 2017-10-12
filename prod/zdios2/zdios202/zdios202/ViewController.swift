@@ -34,7 +34,9 @@ class ViewController: UIViewController {
         keyboardView?.keyboardDefinition = defaultKeyboard()
         //keyboardView!.backgroundColor = UIColor.green // for debug
         keyboardViewContainer.addSubview(keyboardView!)
-        let frm1 = CGRect(x: frm.minX, y: frm.minY - 50, width: frm.width, height: frm.height)
+        
+        let frm1 = CGRect(x: frm.minX, y: frm.minY - PopUpSettings.heightAboveKeyboardView, width: frm.width, height: frm.height)
+        
         popUpContainerView = PopUpContainerView(frame:frm1)
         keyboardViewContainer.addSubview(popUpContainerView!)
         
