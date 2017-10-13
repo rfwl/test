@@ -83,13 +83,13 @@ class PopUpContainerView: UIView {
     
     func drawPopUpPathForKeyView(_ keyView:KeyView, width:CGFloat) {
         //-------------------------------------------------
-        // ------ calculate maxW
+        // calculate maxW
         let minDelta =  PopUpSettings.popUpCornerRadius + PopUpSettings.popUpGap
         var maxW = self.frame.width
         if self.frame.minX < minDelta {maxW -= self.frame.minX}
         if self.frame.width - keyView.frame.maxX < minDelta {maxW -= self.frame.width - keyView.frame.maxX}
-        let minW = keyView.frame.width + 2*minDelta
-        // ------- calculate target width
+        let minW = keyView.frame.width
+        // calculate target width
         var targetW = width
         if targetW > maxW {
             targetW = maxW
@@ -97,15 +97,24 @@ class PopUpContainerView: UIView {
         if targetW < minW {
             targetW = minW
         }
-        
+        // calculate delta
         var delta = (targetW - keyView.frame.width)/2
         if delta < minDelta { delta = 0 }
-        var x = keyView.frame.minX - delta
-        if x<0 {
-            x = 0
-        } else if x+targetW > maxW {
-            x -= x+targetW - maxW
+        // calculate x = minX of the target popup rect
+        var x = PopUpSettings.popUpBorderWidth/2
+        if keyView.frame.minX < minDelta { // Possible first key
+            x = keyView.frame.minX
+        } else if keyView.frame.maxX > maxW - minDelta {
+            x = keyView.frame.maxX - targetW
+        } else {
+            x = keyView.frame.minX - delta
+            if x<PopUpSettings.popUpBorderWidth/2 { // beyond left side view border
+                x = PopUpSettings.popUpBorderWidth/2
+            } else if x+targetW+PopUpSettings.popUpBorderWidth/2  > maxW { // beyond right view border
+                x -= x+targetW+PopUpSettings.popUpBorderWidth/2 - maxW
+            }
         }
+        // Calculate y
         let y = keyView.frame.minY - PopUpSettings.popUpGap - PopUpSettings.popUpHeight
         
         let popUpFrame:CGRect = CGRect(x:x,y:y,width:targetW,height: PopUpSettings.popUpHeight)
@@ -176,6 +185,7 @@ class PopUpContainerView: UIView {
         path.close()
         
         path.fill()
+        path.stroke()
         
         //-------------------------------------------------
         let path1:UIBezierPath = UIBezierPath()
