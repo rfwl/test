@@ -7,14 +7,24 @@
 //
 
 import Foundation
+import AVFoundation
+
 class Commander {
     
     static var keyboardView:KeyboardView?
     static var popUpContainerView : PopUpContainerView?
     //===================================================
     // Report KeyView Touches
+    
+    static func reportTouchStatus(_ touchStatus:EnumTouchStatus, kv:KeyView, curLoc: CGPoint=CGPoint.zero, downLoc:CGPoint=CGPoint.zero ) {
+        print( touchStatus.toString() )
+       
+    }
+    
     static func reportTouchDownKeyView(_ keyView:KeyView?) {
         //print("Touch down " )
+        let systemSoundID: SystemSoundID = 1104
+        AudioServicesPlaySystemSound(systemSoundID)
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
                 pucvw.showPopUp(kvw)
@@ -28,7 +38,9 @@ class Commander {
         }
     }
     static func reportLongPressKeyView(_ keyView:KeyView?) {
-        print("Long Press  ")
+        //print("Long Press  ")
+        let systemSoundID: SystemSoundID = 1057
+        AudioServicesPlaySystemSound (systemSoundID)
     }
   
     //===================================================
