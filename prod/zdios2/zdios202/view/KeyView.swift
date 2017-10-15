@@ -40,19 +40,8 @@ class KeyView: UIControl {
             if ky.hasSecondaryCell { return }
             let mainCell = ky.getMainCell()
             if mainCell.labelingType == .Shape {
-                if let shapeName = mainCell.shape {
-                    ShapeLibrary.drawShape(shapeName, bounds: frame, color: UIColor.blue)
-                }
-            } else if mainCell.labelingType == .Icon {
-                
-            } else {
-                
+                mainCell.drawInView(self,frame: self.bounds)
             }
-           
-            //-------------------------------------------------------------
-            
-            
-            //-------------------------------------------------------------
         } // end of if let ky = self.keyDefinition
     } //end of func
     
@@ -72,9 +61,9 @@ class KeyView: UIControl {
                     // Key has no secondary cell
                     let mainCell = ky.getMainCell()
                     if mainCell.labelingType == .Text {
-                        drawKeyCell_Text(keyCell: mainCell, bounds: self.bounds)
+                        mainCell.addToView_Text(self, frame: self.bounds)
                     } else if mainCell.labelingType == .Icon {
-                        drawKeyCell_Image(keyCell: mainCell, bounds: self.bounds)
+                        mainCell.addToView_Image(self, frame: self.bounds)
                     }
                 }
                 self.setNeedsDisplay()
@@ -82,41 +71,6 @@ class KeyView: UIControl {
         }
     }
     
-    func drawKeyCell_Text(keyCell: KeyCell, bounds: CGRect) {
-        let lbl:UILabel = UILabel()
-        let labelInset: CGFloat = 2
-        lbl.frame = CGRect(x: labelInset, y: labelInset, width: bounds.width - labelInset * 2, height: bounds.height - labelInset * 2)
-        lbl.textAlignment = NSTextAlignment.center
-        lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
-        lbl.font = lbl.font.withSize(22)
-        lbl.adjustsFontSizeToFitWidth = true
-        lbl.minimumScaleFactor = CGFloat(0.1)
-        lbl.isUserInteractionEnabled = false
-        lbl.numberOfLines = 1
-        lbl.text = keyCell.text
-        self.addSubview(lbl)
-    }
-    func drawKeyCell_Image(keyCell: KeyCell, bounds: CGRect) {
-        //FWL20171005: Using UIImageView as sub view.
-        if let img = ImageLibrary.buildUIImage(keyCell.icon!) {
-            let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast s
-            iv.frame = self.bounds
-            iv.contentMode = UIViewContentMode.scaleAspectFit
-            self.addSubview(iv)
-        }
-    }
-    func drawKeyCell_Image1(keyCell: KeyCell, bounds: CGRect) {
-        //FWL20171005: From web post, only using img as patternImage to backgroundColor will not show the image out.
-        // So have to draw and trhen to set the background color in pattern image.
-        // This way using background color in pattern image is slower than using UIImageView as sub view.
-        if let img = ImageLibrary.buildUIImage(keyCell.icon!) {
-            UIGraphicsBeginImageContext(self.frame.size)
-            img.draw(in: self.bounds)
-            let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            backgroundColor = UIColor(patternImage: image)
-        }
-    }
    
     //=====================================================================
     // Operations
@@ -130,8 +84,19 @@ class KeyView: UIControl {
     
   
     //=====================================================================
+    // Transient Properties
+    var popUpFrame:CGRect = CGRect.zero // Ghe rect is defined in pop up container view
+    
+    
+    
+    //=====================================================================
     //
     
+    //=====================================================================
+    //
+    
+    //=====================================================================
+    //
 } //end of class
 /*
  

@@ -17,32 +17,53 @@ class Commander {
     // Report KeyView Touches
     
     static func reportTouchStatus(_ touchStatus:EnumTouchStatus, kv:KeyView, curLoc: CGPoint=CGPoint.zero, downLoc:CGPoint=CGPoint.zero ) {
-        print( touchStatus.toString() )
+        //print( touchStatus.toString() )
+        switch touchStatus {
+        case .Down: onTouch_Down(kv)
+        case .DownHold: onTouch_DownHold(kv)
+        case .DownHoldMove: onTouch_DownHoldMove(kv)
+        case .DownHoldMoveUp: onTouch_DownHoldMoveUp(kv)
+        case .DownUp: onTouch_DownUp(kv)
+        case .DownHoldUp: onTouch_DownHoldUp(kv)
+        default: break
+            
+        }
+        
        
     }
-    
-    static func reportTouchDownKeyView(_ keyView:KeyView?) {
-        //print("Touch down " )
+    //===================================================
+    //
+    static func onTouch_Down(_ keyView:KeyView?) {
         let systemSoundID: SystemSoundID = 1104
         AudioServicesPlaySystemSound(systemSoundID)
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
-                pucvw.showPopUp(kvw)
+                pucvw.showPopUp_MainCell(kvw)
             }
         }
     }
-    static func reportTapKeyView(_ keyView:KeyView?) {
-        //print("Tap " )
+    static func onTouch_DownHold(_ keyView:KeyView?) {
+        if let pucvw = popUpContainerView {
+            if let kvw = keyView {
+                pucvw.showPopUp_SecondaryCells(kvw)
+            }
+        }
+    }
+    static func onTouch_DownUp(_ keyView:KeyView?) {
         if let pucvw = popUpContainerView {
                 pucvw.hidePopUp()
         }
     }
-    static func reportLongPressKeyView(_ keyView:KeyView?) {
-        //print("Long Press  ")
+    static func onTouch_DownHoldUp(_ keyView:KeyView?) {
         let systemSoundID: SystemSoundID = 1057
         AudioServicesPlaySystemSound (systemSoundID)
     }
-  
+    static func onTouch_DownHoldMove(_ keyView:KeyView?) {
+    
+    }
+    static func onTouch_DownHoldMoveUp(_ keyView:KeyView?) {
+    
+    }
     //===================================================
     //
     
