@@ -290,7 +290,24 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     //
-    
+    func addCellsToPopUp_SecondaryCells(_ keyView:KeyView){
+        if let ky = keyView.keyDefinition {
+            //-------------------------------------------------------------
+         	var leftMax = keyView.popUpRect_SecondaryCells.minX
+         	var leftMin = keyView.frame.center.x
+            var rightMax = keyView.popUpRect_SecondaryCells.maxX	   
+            var rightMin = keyView.frame.center.x
+            
+            
+            
+            
+            
+            
+            
+            
+            //-------------------------------------------------------------
+        } // end of if let _ = keyView.keyDefinition 
+    } // end of func
    
     
     //=====================================================================

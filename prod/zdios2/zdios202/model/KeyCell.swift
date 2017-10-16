@@ -12,6 +12,7 @@ import UIKit
 class KeyCell {
     var output:String
     var labelingType:EnumLabelingType
+    var widthInPopUpUnit:int = 1
     
     var text:String?
     var shape:String?
@@ -86,6 +87,7 @@ class KeyCell {
         lbl.numberOfLines = 1
         lbl.text = self.text
         view.addSubview(lbl)
+        self.keyCellView = lbl
     }
     
     func addToView_Image(_ view:UIView, frame: CGRect) {
@@ -95,6 +97,7 @@ class KeyCell {
             iv.frame = frame
             iv.contentMode = UIViewContentMode.scaleAspectFit
             view.addSubview(iv)
+            self.keyCellView = iv
         }
     }
     
@@ -110,6 +113,10 @@ class KeyCell {
             view.backgroundColor = UIColor(patternImage: image)
         }
     }
+    //======================================================
+    // Transient Properties
+    var keyCellView : UIView? 
+    
     //======================================================
     
 } // end of class
