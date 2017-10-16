@@ -86,13 +86,13 @@ class PopUpContainerView: UIView {
         let maxWidth = self.frame.width - 2 * PopUpSettings.popUpBorderWidth
         let minWidth = keyView.frame.width
         //--------------------------------------------------------------
-        var neededWidth = 0
+        var neededWidth = CGFloat(0)
         if isPopUpForMainCell {
-			neededWidth = keyView.frame.width
+			neededWidth = keyView.frame.width + 2 * PopUpSettings.minDelta
 		} else {
 			if let ky = keyView.keyDefinition { 
-				var cntCells = ky.keyCellArray.length -1
-				neededWidth = cntCells * (PopUpSettings.popUpCellWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
+				let cntCells = ky.keyCellArray.count - 1
+				neededWidth = CGFloat(cntCells) * (PopUpSettings.popUpCellWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
 				if neededWidth < 0 {
 					neededWidth = 0
 				}  
@@ -106,31 +106,31 @@ class PopUpContainerView: UIView {
 		
 		// calculate delta
         var delta = (neededWidth - keyView.frame.width)/2
-        if delta < minDelta { delta = 0 }
+        if delta < PopUpSettings.minDelta { delta = 0 }
         
         // calculate x = minX of the target popup rect
         var x = PopUpSettings.popUpBorderWidth/2
         keyView.isLeftMostInPopUp = false
         keyView.isRightMostInPopUp = false
         
-        if keyView.frame.minX < minDelta { // Possible first key
+        if keyView.frame.minX < PopUpSettings.minDelta { // Possible first key
             keyView.isLeftMostInPopUp = true
             x = keyView.frame.minX
-        } else if keyView.frame.maxX > maxX - minDelta {
+        } else if keyView.frame.maxX > maxX - PopUpSettings.minDelta {
             keyView.isRightMostInPopUp = true
             x = keyView.frame.maxX - neededWidth           
         } else {
             x = keyView.frame.minX - delta
             if x<PopUpSettings.popUpBorderWidth/2 { // beyond left side view border
                 x = PopUpSettings.popUpBorderWidth/2
-            } else if x+targetW+PopUpSettings.popUpBorderWidth/2  > maxX { // beyond right view border
-                x -= x+targetW+PopUpSettings.popUpBorderWidth/2 - maxX
+            } else if x+neededWidth+PopUpSettings.popUpBorderWidth/2  > maxX { // beyond right view border
+                x -= x+neededWidth+PopUpSettings.popUpBorderWidth/2 - maxX
             }
         }
         // Calculate y
-        let y = keyView.frame.minY - PopUpSettings.popUpGap - PopUpSettings.popUpHeight
+        let y = keyView.frame.minY - PopUpSettings.popUpGap - PopUpSettings.popUpHeight + PopUpSettings.heightAboveKeyboardView
         // KeyView's Pop-Up Rect's Coordinates in PopUpContainerView.
-        let popUpFrame:CGRect = CGRect(x:x,y:y,width:targetW,height: PopUpSettings.popUpHeight)
+        let popUpFrame:CGRect = CGRect(x:x,y:y,width:neededWidth,height: PopUpSettings.popUpHeight)
         if isPopUpForMainCell {
         	keyView.popUpFrame_MainCell = popUpFrame
         } else {
@@ -145,16 +145,19 @@ class PopUpContainerView: UIView {
         //-------------------------------------------------
         let strokeColor:UIColor = PopUpSettings.popUpBorderColor
         strokeColor.set()
-        
-        let x1 = keyView.popUpFrame.minX
+        var frm = keyView.popUpFrame_MainCell
+        if !isPopUpForMainCell {
+            frm = keyView.popUpFrame_SecondaryCells
+        }
+        let x1 = frm.minX
         let x2 = keyView.frame.minX
-        let x3 = keyView.frame.minX + keyView.frame.width
-        let x4 = keyView.popUpFrame.minX + keyView.popUpFrame.width
+        let x3 = keyView.frame.maxX
+        let x4 = frm.maxX
         
-        let y1 = keyView.popUpFrame.minY + PopUpSettings.heightAboveKeyboardView
-        let y2 = keyView.popUpFrame.minY + keyView.popUpFrame.height + PopUpSettings.heightAboveKeyboardView
-        let y3 = keyView.frame.minY + PopUpSettings.heightAboveKeyboardView
-        let y4 = keyView.frame.minY + keyView.frame.height + PopUpSettings.heightAboveKeyboardView
+        let y1 = frm.minY
+        let y2 = frm.maxY
+        let y3 = keyView.frame.minY + PopUpSettings.heightAboveKeyboardView //keyView.frame is relative to KeyView's Surface
+        let y4 = keyView.frame.maxY + PopUpSettings.heightAboveKeyboardView
         
         let r1 = PopUpSettings.popUpCornerRadius
         let r2 = PopUpSettings.popUpGap
@@ -234,7 +237,7 @@ class PopUpContainerView: UIView {
             popUpKeyView = keyView
             isPopUpForMainCell = true
             // Calculate width
-            let popUpWidth = buildPopUpRectForKeyView(keyView)
+            buildPopUpRectForKeyView(keyView)
             addToPopUp_MainCell(keyView)
             self.setNeedsDisplay()
         }
@@ -250,14 +253,14 @@ class PopUpContainerView: UIView {
         }
         // Add sub views from cell
         if let kc = keyView.keyDefinition?.getMainCell() {
-            kc.addToView(self, frame: keyView.popUpFrame)
+            kc.addToView(self, frame: keyView.popUpFrame_MainCell)
         }
     }
     
     func drawInPopUp_MainCell(_ keyView:KeyView) {
         drawPopUpBorderPath(keyView)
         if let kc = keyView.keyDefinition?.getMainCell() {
-            kc.drawInView(self, frame: keyView.popUpFrame)
+            kc.drawInView(self, frame: keyView.popUpFrame_MainCell) // This is useless if KeyCellType = Shape is removed
         }
     }
     
@@ -267,8 +270,7 @@ class PopUpContainerView: UIView {
         if let _ = keyView.keyDefinition {
             popUpKeyView = keyView
             isPopUpForMainCell = false
-            let popUpWidth = keyView.frame.width + 2 * (PopUpSettings.popUpCornerRadius + PopUpSettings.popUpGap)
-            buildPopUpRectForKeyView(keyView, width:popUpWidth)
+            buildPopUpRectForKeyView(keyView)
             addToPopUp_SecondaryCells(keyView)
             self.setNeedsDisplay()
         }
@@ -293,10 +295,10 @@ class PopUpContainerView: UIView {
     func addCellsToPopUp_SecondaryCells(_ keyView:KeyView){
         if let ky = keyView.keyDefinition {
             //-------------------------------------------------------------
-         	var leftMax = keyView.popUpRect_SecondaryCells.minX
-         	var leftMin = keyView.frame.center.x
-            var rightMax = keyView.popUpRect_SecondaryCells.maxX	   
-            var rightMin = keyView.frame.center.x
+         	//var leftMax = keyView.popUpRect_SecondaryCells.minX
+         	//var leftMin = keyView.frame.center.x
+            //var rightMax = keyView.popUpRect_SecondaryCells.maxX
+            //var rightMin = keyView.frame.center.x
             
             
             

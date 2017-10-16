@@ -12,7 +12,7 @@ import UIKit
 class KeyCell {
     var output:String
     var labelingType:EnumLabelingType
-    var widthInPopUpUnit:int = 1
+    var widthInPopUpUnit:Int = 1
     
     var text:String?
     var shape:String?
@@ -76,8 +76,9 @@ class KeyCell {
     }
     func addToView_Text(_ view:UIView, frame: CGRect) {
         let lbl:UILabel = UILabel()
-        let labelInset: CGFloat = 2
-        lbl.frame = CGRect(x: labelInset, y: labelInset, width: frame.width - labelInset * 2, height: frame.height - labelInset * 2)
+        //let labelInset: CGFloat = 2
+        //lbl.frame = CGRect(x: labelInset, y: labelInset, width: frame.width - labelInset * 2, height: frame.height - labelInset * 2)
+        lbl.frame = frame
         lbl.textAlignment = NSTextAlignment.center
         lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
         lbl.font = lbl.font.withSize(22)
