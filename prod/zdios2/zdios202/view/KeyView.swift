@@ -85,9 +85,10 @@ class KeyView: UIControl {
   
     //=====================================================================
     // Transient Properties
-    var popUpFrame:CGRect = CGRect.zero // Ghe rect is defined in pop up container view
-    
-    
+    var popUpFrame_MainCell:CGRect = CGRect.zero // the Rect is calculated in pop up container view
+    var popUpFrame-SecondaryCells:CGRect = CGRect.zero
+    var isLeftMostInPopUp:Bool = false
+    var isRightMostInPopUp:Bool = false
     
     //=====================================================================
     //

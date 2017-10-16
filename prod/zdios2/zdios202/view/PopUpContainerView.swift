@@ -18,6 +18,9 @@ class PopUpSettings {
     static var popUpCornerRadius = CGFloat(5.0)
     static var popUpHeight = CGFloat(40.0)
     
+    static var popUpCellWidth = CGFloat(30.0)
+    static var popUpCellGap = CGFloat(3.0)
+    
     static var heightAboveKeyboardView:CGFloat {
         get {
             return popUpHeight + popUpGap + popUpBorderWidth
@@ -77,6 +80,66 @@ class PopUpContainerView: UIView {
         popUpKeyView = nil
         self.setNeedsDisplay()
     }
+    
+     func buildPopUpRectForKeyView(_ keyView:KeyView) {
+        let maxX = self.frame.width - PopUpSettings.popUpBorderWidth/2
+        let maxWidth = self.frame.width - 2 * PopUpSettings.popUpBorderWidth
+        let minWidth = keyView.frame.width
+        //--------------------------------------------------------------
+        var neededWidth = 0
+        if isPopUpForMainCell {
+			neededWidth = keyView.frame.width
+		} else {
+			if let ky = keyView.keyDefinition { 
+				var cntCells = ky.keyCellArray.length -1
+				neededWidth = cntCells * (PopUpSettings.popUpCellWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
+				if neededWidth < 0 {
+					neededWidth = 0
+				}  
+			}	 
+		}
+		if neededWidth > maxWidth { // Limit the needed width so some cells will not be added into pop up rect for avoiding going beyond.
+			neededWidth = maxWidth		
+		} else if neededWidth < minWidth {
+			neededWidth = minWidth
+		}
+		
+		// calculate delta
+        var delta = (neededWidth - keyView.frame.width)/2
+        if delta < minDelta { delta = 0 }
+        
+        // calculate x = minX of the target popup rect
+        var x = PopUpSettings.popUpBorderWidth/2
+        keyView.isLeftMostInPopUp = false
+        keyView.isRightMostInPopUp = false
+        
+        if keyView.frame.minX < minDelta { // Possible first key
+            keyView.isLeftMostInPopUp = true
+            x = keyView.frame.minX
+        } else if keyView.frame.maxX > maxX - minDelta {
+            keyView.isRightMostInPopUp = true
+            x = keyView.frame.maxX - neededWidth           
+        } else {
+            x = keyView.frame.minX - delta
+            if x<PopUpSettings.popUpBorderWidth/2 { // beyond left side view border
+                x = PopUpSettings.popUpBorderWidth/2
+            } else if x+targetW+PopUpSettings.popUpBorderWidth/2  > maxX { // beyond right view border
+                x -= x+targetW+PopUpSettings.popUpBorderWidth/2 - maxX
+            }
+        }
+        // Calculate y
+        let y = keyView.frame.minY - PopUpSettings.popUpGap - PopUpSettings.popUpHeight
+        // KeyView's Pop-Up Rect's Coordinates in PopUpContainerView.
+        let popUpFrame:CGRect = CGRect(x:x,y:y,width:targetW,height: PopUpSettings.popUpHeight)
+        if isPopUpForMainCell {
+        	keyView.popUpFrame_MainCell = popUpFrame
+        } else {
+        	keyView.popUpFrame_SecondaryCells = popUpFrame
+        }
+        
+        
+    } //end of func
+    
     
     func drawPopUpBorderPath(_ keyView:KeyView) {
         //-------------------------------------------------
@@ -177,17 +240,7 @@ class PopUpContainerView: UIView {
         }
     }
     
-    func buildPopUpRectForKeyView_MainCell(_ keyView:KeyView) {
-        let minDelta =  PopUpSettings.popUpCornerRadius + PopUpSettings.popUpGap
-        var maxW = self.frame.width
-        if self.frame.minX < PopUpSettings.minDelta {maxW -= self.frame.minX}
-        if self.frame.width - keyView.frame.maxX < minDelta {maxW -= self.frame.width - keyView.frame.maxX}
-        let minW = keyView.frame.width
-        // calculate target width
-        var targetW = width
-        
-    }
-    
+   
     func addToPopUp_MainCell(_ keyView:KeyView) {
         
         // Draw pop up border path
@@ -222,7 +275,39 @@ class PopUpContainerView: UIView {
     }
     
     
-    func buildPopUpRectForKeyView_SecondaryCells(_ keyView:KeyView, width:CGFloat) {
+  
+    
+    func addToPopUp_SecondaryCells(_ keyView:KeyView) {
+        
+        
+    }
+    
+   
+    func drawInPopUp_SecondaryCells(_ keyView:KeyView) {
+        drawPopUpBorderPath(keyView)
+        
+    }
+    
+    //=====================================================================
+    //
+    
+   
+    
+    //=====================================================================
+    //
+   
+    
+} //end of class
+
+extension CGPoint {
+    func shift(x:CGFloat, y:CGFloat) -> CGPoint {
+        return CGPoint(x: self.x + x, y:self.y + y)
+    }
+}
+
+/*
+
+  func buildPopUpRectForKeyView_SecondaryCells(_ keyView:KeyView, width:CGFloat) {
         //-------------------------------------------------
         // calculate maxW
         let minDelta =  PopUpSettings.popUpCornerRadius + PopUpSettings.popUpGap
@@ -261,33 +346,5 @@ class PopUpContainerView: UIView {
         let popUpFrame:CGRect = CGRect(x:x,y:y,width:targetW,height: PopUpSettings.popUpHeight)
         keyView.popUpFrame = popUpFrame
     }
-    
-    func addToPopUp_SecondaryCells(_ keyView:KeyView) {
-        
-        
-    }
-    
-   
-    func drawInPopUp_SecondaryCells(_ keyView:KeyView) {
-        drawPopUpBorderPath(keyView)
-        
-    }
-    
-    //=====================================================================
-    //
-    
-   
-    
-    //=====================================================================
-    //
-   
-    
-} //end of class
 
-extension CGPoint {
-    func shift(x:CGFloat, y:CGFloat) -> CGPoint {
-        return CGPoint(x: self.x + x, y:self.y + y)
-    }
-}
-
-
+*/
