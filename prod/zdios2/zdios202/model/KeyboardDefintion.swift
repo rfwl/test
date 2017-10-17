@@ -192,6 +192,19 @@ func defaultKeyboard() -> KeyboardDefinition {
     let symbolPage = KeyboardPage([symbolPageR0,symbolPageR1,symbolPageR2,symbolPageR3])
     //-----------------------------------------------------
     //
+  
+    for ky:KeyboardKey in upLetterPageR0.keys {
+        let kc1 = KeyCell("1")
+        let kc2 = KeyCell("2")
+        let kc3 = KeyCell("3")
+        ky.keyCellArray.append(kc1)
+        ky.keyCellArray.append(kc2)
+        ky.keyCellArray.append(kc3)
+        
+    }
+    
+    //-----------------------------------------------------
+    //
     let  defaultKeyboard = KeyboardDefinition([uppercasePage,lowercasePage,numberPage,symbolPage])
     return defaultKeyboard
     

@@ -9,7 +9,7 @@ class KeyboardKey {
    	// Cell Configurations 
  	var keyCellArray:[KeyCell]
  	
- 	var hasSecondaryCells:Bool = false;
+ 	var hasSecondaryCell:Bool = false;
  	var secondaryCellSizeScale = CGFloat(0.25);
  	var cellConfiguration:EnumCellConfiguration = EnumCellConfiguration.SingleCell
  	var secodaryCellLocation:EnumSecondaryCellLocation = EnumSecondaryCellLocation.BottomRight
@@ -33,7 +33,7 @@ class KeyboardKey {
         return keyCellArray[0]
     }
     
-     func getSecondaryCells() -> [KeyCell]? {
+     func getSecondaryCells() -> ArraySlice<KeyCell>? {
      	if keyCellArray.count>0 {
      		return keyCellArray.dropFirst()
      	} else {

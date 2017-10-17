@@ -60,11 +60,7 @@ class KeyView: UIControl {
                 } else {
                     // Key has no secondary cell
                     let mainCell = ky.getMainCell()
-                    if mainCell.labelingType == .Text {
-                        mainCell.addToView_Text(self, frame: self.bounds)
-                    } else if mainCell.labelingType == .Icon {
-                        mainCell.addToView_Image(self, frame: self.bounds)
-                    }
+                    mainCell.addToView(self, frame: self.bounds)
                 }
                 self.setNeedsDisplay()
             }

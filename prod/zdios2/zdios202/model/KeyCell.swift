@@ -12,7 +12,7 @@ import UIKit
 class KeyCell {
     var output:String
     var labelingType:EnumLabelingType
-    var widthInPopUpUnit:Int = 1
+    var widthInPopUpUnit:CGFloat = CGFloat(1)
     
     var text:String?
     var shape:String?
@@ -74,19 +74,21 @@ class KeyCell {
             self.keyCellView = lbl
             view.addSubview(lbl)
         } else if self.labelingType == .Icon {
-            let iv = self.buildView_Icon()
-            iv.frame=frame
-            self.keyCellView = iv
-            view.addSubview(iv)
+            if let iv = self.buildView_Icon() {
+                iv.frame=frame
+                self.keyCellView = iv
+                view.addSubview(iv)
+            }
         }
     }
     
-    func buildView()->UIView {
+    func buildView()->UIView? {
         if self.labelingType == .Text {
             return self.buildView_Text()
         } else if self.labelingType == .Icon {
  			return self.buildView_Icon()
         }
+        return nil
     }
     
     func buildView_Text()->UIView {
@@ -106,13 +108,14 @@ class KeyCell {
       
     }
     
-    func buildView_Image()->UIView {
+    func buildView_Icon()->UIView? {
         //FWL20171005: Using UIImageView as sub view.
         if let img = ImageLibrary.buildUIImage(self.icon!) {
             let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast            
             iv.contentMode = UIViewContentMode.scaleAspectFit
             return iv
         }
+        return nil
     }
     
     func addToView_Image1(_ view:UIView, frame: CGRect) {

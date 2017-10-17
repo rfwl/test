@@ -154,19 +154,22 @@ class KeyboardView: UIView {
             downTouchLoc = touch?.location(in: self)
             downTouchTime = Date()
             lastTouchLoc = downTouchLoc
-            currentTouchStatus = EnumTouchStatus.Down
             removeTouchedKeyView()
             findTouchedKeyView(downTouchLoc!)
             if let reallyTouched = touchedKeyView {
-                Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched)
+                //----------------------------------- A Down found.
+                currentTouchStatus = EnumTouchStatus.Down
+                Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!)
                 Timer.scheduledTimer(withTimeInterval: holdThresholdInSeconds, repeats: false) { timer in
                     if self.anyNewTouchEvent {
                         let now = Date()
                         let secondsBetween = now.timeIntervalSince(self.downTouchTime)
                         if !secondsBetween.isLess(than: self.holdThresholdInSeconds ) {
-                            //------------------------------- A Hold found.
-                            self.currentTouchStatus = EnumTouchStatus.DownHold
-                            Commander.reportTouchStatus(self.currentTouchStatus,kv:reallyTouched)
+                            if self.currentTouchStatus == EnumTouchStatus.Down {
+                                //------------------------------- A Hold found.
+                                self.currentTouchStatus = EnumTouchStatus.DownHold
+                                Commander.reportTouchStatus(self.currentTouchStatus,kv:reallyTouched, downLoc: self.downTouchLoc!)
+                            }
                         }
                     }
                     self.anyNewTouchEvent = false
@@ -195,7 +198,7 @@ class KeyboardView: UIView {
                 if currentTouchStatus == EnumTouchStatus.DownHold {
                     //----------------------------------- A Down Hold Move found.
                     currentTouchStatus = EnumTouchStatus.DownHoldMove
-                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, curLoc: moveTouchLoc!, downLoc: downTouchLoc! )
+                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: moveTouchLoc! )
                 }
             }
         } else if touch?.phase == UITouchPhase.ended {
@@ -204,15 +207,15 @@ class KeyboardView: UIView {
                 if currentTouchStatus == EnumTouchStatus.Down {
                     //----------------------------------- A Down Up found - Tap
                     currentTouchStatus = EnumTouchStatus.DownUp
-                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, curLoc: endTouchLoc!, downLoc: downTouchLoc! )
+                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: endTouchLoc! )
                 } else  if currentTouchStatus == EnumTouchStatus.DownHold {
                     //----------------------------------- A Down Hold Up found - Long Press
                     currentTouchStatus = EnumTouchStatus.DownHoldUp
-                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, curLoc: endTouchLoc!, downLoc: downTouchLoc! )
+                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: endTouchLoc!)
                 }  else  if currentTouchStatus == EnumTouchStatus.DownHoldMove {
                     //----------------------------------- A Down Hold Move Up found
                     currentTouchStatus = EnumTouchStatus.DownHoldMoveUp
-                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, curLoc: endTouchLoc!, downLoc: downTouchLoc! )
+                    Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: endTouchLoc!)
                 }
             }
             removeTouchedKeyView()

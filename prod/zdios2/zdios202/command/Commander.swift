@@ -16,11 +16,11 @@ class Commander {
     //===================================================
     // Report KeyView Touches
     
-    static func reportTouchStatus(_ touchStatus:EnumTouchStatus, kv:KeyView, curLoc: CGPoint=CGPoint.zero, downLoc:CGPoint=CGPoint.zero ) {
+    static func reportTouchStatus(_ touchStatus:EnumTouchStatus, kv:KeyView,  downLoc:CGPoint=CGPoint.zero, curLoc: CGPoint=CGPoint.zero ) {
         //print( touchStatus.toString() )
         switch touchStatus {
-        case .Down: onTouch_Down(kv)
-        case .DownHold: onTouch_DownHold(kv)
+        case .Down: onTouch_Down(kv,downLoc:downLoc)
+        case .DownHold: onTouch_DownHold(kv,downLoc:downLoc)
         case .DownHoldMove: onTouch_DownHoldMove(kv)
         case .DownHoldMoveUp: onTouch_DownHoldMoveUp(kv)
         case .DownUp: onTouch_DownUp(kv)
@@ -33,7 +33,7 @@ class Commander {
     }
     //===================================================
     //
-    static func onTouch_Down(_ keyView:KeyView?) {
+    static func onTouch_Down(_ keyView:KeyView?, downLoc:CGPoint=CGPoint.zero) {
         let systemSoundID: SystemSoundID = 1104
         AudioServicesPlaySystemSound(systemSoundID)
         if let pucvw = popUpContainerView {
@@ -42,10 +42,10 @@ class Commander {
             }
         }
     }
-    static func onTouch_DownHold(_ keyView:KeyView?) {
+    static func onTouch_DownHold(_ keyView:KeyView?, downLoc:CGPoint=CGPoint.zero) {
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
-                pucvw.showPopUp_SecondaryCells(kvw)
+                pucvw.showPopUp_SecondaryCells(kvw,touchDownX: downLoc.x )
             }
         }
     }
