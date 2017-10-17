@@ -18,7 +18,7 @@ class PopUpSettings {
     static var popUpCornerRadius = CGFloat(5.0)
     static var popUpHeight = CGFloat(40.0)
     
-    static var popUpCellWidth = CGFloat(30.0)
+    static var popUpUnitWidth = CGFloat(30.0)
     static var popUpCellGap = CGFloat(3.0)
     
     static var heightAboveKeyboardView:CGFloat {
@@ -91,8 +91,12 @@ class PopUpContainerView: UIView {
 			neededWidth = keyView.frame.width + 2 * PopUpSettings.minDelta
 		} else {
 			if let ky = keyView.keyDefinition { 
-				let cntCells = ky.keyCellArray.count - 1
-				neededWidth = CGFloat(cntCells) * (PopUpSettings.popUpCellWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
+				//let cntCells = ky.keyCellArray.count - 1
+				//neededWidth = CGFloat(cntCells) * (PopUpSettings.popUpUnitWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
+				let cells = ky.getSecondaryCells()
+				for cell:KeyCell in cells {
+					neededWidth += cell.widthInPopUpUnit * PopUpSettings.popUpUnitWidth + PopUpSettings.popUpCellGap
+				}
 				if neededWidth < 0 {
 					neededWidth = 0
 				}  
@@ -266,23 +270,97 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     // Pop-up for Secondary Cells
-    func showPopUp_SecondaryCells(_ keyView:KeyView){
+    var addedSecondaryCellViews:[UIView] = [UIView]()
+        
+    func showPopUp_SecondaryCells(_ keyView:KeyView, touchDownX : CGFloat){
         if let _ = keyView.keyDefinition {
             popUpKeyView = keyView
             isPopUpForMainCell = false
             buildPopUpRectForKeyView(keyView)
-            addToPopUp_SecondaryCells(keyView)
+            addToPopUp_SecondaryCells(keyView,touchDownX)
             self.setNeedsDisplay()
         }
     }
     
     
-  
+    var leftMax:CGFloat = CGFloat(0)
+ 	var leftMin:CGFloat = CGFloat(0)
+    var rightMax:CGFloat = CGFloat(0)
+    var rightMin:CGFloat = CGFloat(0)
+    var addedAtLeft : Bool = false        
     
-    func addToPopUp_SecondaryCells(_ keyView:KeyView) {
+    func addToPopUp_SecondaryCells(_ keyView:KeyView , touchDownX : CGFloat) {
+        // Clear sub views
+        for vw in self.subviews {
+            vw.removeFromSuperview()
+        }
+        addedSecondaryCellViews.removeAll()  
         
-        
+    	if let ky = keyView.keyDefinition, let cells = ky.getSecondaryCells(), let cell1 = cells[0], let popUpRect = keyView.popUpRect_SecondarCells {
+            
+            //-------------------------------------------------------------
+            // This part decided where in pop up width to start adding cell views, that is where to put the first cell view. 
+         	// The first cell will added as close as possible to downX  
+         	var cell1NeededWidth =  cell.widthInPopUpUnit * PopUpSettings.popUpUnitWidth        	 
+         	leftMax = popUpRect.minX
+         	leftMin = downX + cell1NeededWidth/2
+            rightMax = downX - cell1NeededWidth/2
+            rightMin = keyView.frame.minX
+         
+            //-------------------------------------------------------------          
+            for cell : KeyCell in cells {
+            	var cellNeededWidth =  cell.widthInPopUpUnit * PopUpSettings.popUpUnitWidth 
+            	var cellView = cell.buildView()            	            
+            	
+            	if addedAtLeft {
+            		if tryAdd_Right(cellView,cellNeededWidth) { continue }
+            		tryAdd_Left(cellView,cellNeededWidth)             		
+            	} else {
+            		if tryAdd_Left(cellView,cellNeededWidth) { continue }
+            		tryAdd_Right(cellView,cellNeededWidth)            		
+            	}            	
+            	// Here the current cell cannot be added in - no enough width - and so ignored.            	            		        	            
+            } //end of for
+            
+            //-------------------------------------------------------------
+        } // end of if let _ = keyView.keyDefinition             
     }
+    
+    func tryAdd_Left(cellView:UIView, cellNeededWidth:CGFloat)->Bool {
+    	var leftRemainingWidth = leftMin - leftMax
+    	if leftRemainingWidth>=cellNeededWidth {
+    		var rt = CGRect(x:leftMax- cellNeededWidth, y:popUpRect.y, width:cellNeededWidth, height: popUpRect.height)
+    		cellView.frame = rt
+    		self.addSubview(cellView)
+    		addedSecondaryCellViews.append(cellView)
+    		leftMin += cellNeededWidth + PopUpSettings.popUpCellGap 
+    		addedAtLeft = true           		
+    		return true
+    	} else {
+    		return false
+    	} 
+    }  
+    
+    func tryAdd_Right(cellView:UIView, cellNeededWidth:CGFloat)->Bool {
+    	
+    	var rightRemainingWidth = rightMax - rightMin
+    	if rightRemainingWidth>=cellNeededWidth {
+    		var rt = CGRect(x:rightMin + cellNeededWidth, y:popUpRect.y, width:cellNeededWidth, height: popUpRect.height)
+    		cellView.frame = rt
+    		self.addSubview(cellView)
+    		addedSecondaryCellViews.append(cellView)
+    		
+    		rightMin += cellNeededWidth + PopUpSettings.popUpCellGap
+    		
+    		addedAtLeft = false   
+    		return true
+    	} else {
+    		return false
+    	} 
+    
+    }
+    
+    
     
    
     func drawInPopUp_SecondaryCells(_ keyView:KeyView) {
@@ -292,26 +370,7 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     //
-    func addCellsToPopUp_SecondaryCells(_ keyView:KeyView){
-        if let ky = keyView.keyDefinition {
-            //-------------------------------------------------------------
-         	//var leftMax = keyView.popUpRect_SecondaryCells.minX
-         	//var leftMin = keyView.frame.center.x
-            //var rightMax = keyView.popUpRect_SecondaryCells.maxX
-            //var rightMin = keyView.frame.center.x
-            
-            
-            
-            
-            
-            
-            
-            
-            //-------------------------------------------------------------
-        } // end of if let _ = keyView.keyDefinition 
-    } // end of func
-   
-    
+     
     //=====================================================================
     //
    

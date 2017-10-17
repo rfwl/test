@@ -69,16 +69,31 @@ class KeyCell {
         
     func addToView(_ view :UIView, frame: CGRect) {
         if self.labelingType == .Text {
-            self.addToView_Text(view, frame: frame)
+            let lbl = self.buildView_Text()
+            lbl.frame=frame
+            self.keyCellView = lbl
+            view.addSubview(lbl)
         } else if self.labelingType == .Icon {
-            self.addToView_Image(view, frame: frame)
+            let iv = self.buildView_Icon()
+            iv.frame=frame
+            self.keyCellView = iv
+            view.addSubview(iv)
         }
     }
-    func addToView_Text(_ view:UIView, frame: CGRect) {
+    
+    func buildView()->UIView {
+        if self.labelingType == .Text {
+            return self.buildView_Text()
+        } else if self.labelingType == .Icon {
+ 			return self.buildView_Icon()
+        }
+    }
+    
+    func buildView_Text()->UIView {
         let lbl:UILabel = UILabel()
         //let labelInset: CGFloat = 2
         //lbl.frame = CGRect(x: labelInset, y: labelInset, width: frame.width - labelInset * 2, height: frame.height - labelInset * 2)
-        lbl.frame = frame
+        //lbl.frame = frame
         lbl.textAlignment = NSTextAlignment.center
         lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
         lbl.font = lbl.font.withSize(22)
@@ -87,18 +102,16 @@ class KeyCell {
         lbl.isUserInteractionEnabled = false
         lbl.numberOfLines = 1
         lbl.text = self.text
-        view.addSubview(lbl)
-        self.keyCellView = lbl
+        return lbl
+      
     }
     
-    func addToView_Image(_ view:UIView, frame: CGRect) {
+    func buildView_Image()->UIView {
         //FWL20171005: Using UIImageView as sub view.
         if let img = ImageLibrary.buildUIImage(self.icon!) {
-            let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast
-            iv.frame = frame
+            let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast            
             iv.contentMode = UIViewContentMode.scaleAspectFit
-            view.addSubview(iv)
-            self.keyCellView = iv
+            return iv
         }
     }
     
