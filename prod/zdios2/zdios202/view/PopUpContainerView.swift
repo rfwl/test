@@ -86,7 +86,7 @@ class PopUpContainerView: UIView {
         let maxWidth = self.frame.width - 2 * PopUpSettings.popUpBorderWidth
         let minWidth = keyView.frame.width
         //--------------------------------------------------------------
-        var neededWidth = CGFloat(0)
+        var neededWidth = CGFloat(0) + PopUpSettings.popUpCellGap
         if isPopUpForMainCell {
 			neededWidth = keyView.frame.width + 2 * PopUpSettings.minDelta
 		} else {
@@ -316,7 +316,7 @@ class PopUpContainerView: UIView {
             }
             
             self.rightMax = popUpRect.maxX
-         
+            print("\nAdd from \(self.leftMax) to \(self.rightMax ) start at \(touchDownX)")
             //-------------------------------------------------------------          
             for cell : KeyCell in cells {
             	let cellNeededWidth =  CGFloat(cell.widthInPopUpUnit) * PopUpSettings.popUpUnitWidth
@@ -340,12 +340,15 @@ class PopUpContainerView: UIView {
     
     func tryAdd_Left(_ cellView:UIView, width:CGFloat, y: CGFloat, height: CGFloat)->Bool {
     	let leftRemainingWidth = self.leftMin - self.leftMax
-    	if leftRemainingWidth>=width {
+    	if leftRemainingWidth>width{
+            print("Add at Left at \(self.leftMin - width) to \(self.leftMin)")
     		let rt = CGRect(x:self.leftMin - width, y:y, width:width, height: height)
     		cellView.frame = rt
     		self.addSubview(cellView)
     		addedSecondaryCellViews.append(cellView)
+            if self.leftMin>self.rightMin { self.rightMin = self.leftMin }
     		self.leftMin -= width + PopUpSettings.popUpCellGap
+            
     		addedAtLeft = true           		
     		return true
     	} else {
@@ -356,12 +359,13 @@ class PopUpContainerView: UIView {
     func tryAdd_Right(_ cellView:UIView, width:CGFloat, y:CGFloat, height: CGFloat)->Bool {
     	
     	let rightRemainingWidth = self.rightMax - self.rightMin
-    	if rightRemainingWidth>=width {
-    		let rt = CGRect(x:self.rightMin + width, y:y, width:width, height: height)
+    	if rightRemainingWidth>width {
+            print("Add at Right at \(self.rightMin) to \(self.rightMin + width)")
+    		let rt = CGRect(x:self.rightMin, y:y, width:width, height: height)
     		cellView.frame = rt
     		self.addSubview(cellView)
     		addedSecondaryCellViews.append(cellView)
-    		
+    		if self.leftMin>self.rightMin { self.leftMin = self.rightMin }
     		self.rightMin += width + PopUpSettings.popUpCellGap
     		
     		addedAtLeft = false   
@@ -371,7 +375,7 @@ class PopUpContainerView: UIView {
     	} 
     
     }
-    
+ 
     
     
    
