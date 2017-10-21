@@ -305,7 +305,7 @@ class PopUpContainerView: UIView {
             // This part decided where in pop up width to start adding cell views, that is where to put the first cell view. 
          	// The first cell will added as close as possible to downX  
          	let cell1NeededWidth =  CGFloat(cell1.widthInPopUpUnit) * PopUpSettings.popUpUnitWidth
-         	self.leftMax = popUpRect.minX
+         	self.leftMax = popUpRect.minX + PopUpSettings.popUpCellGap
          	self.leftMin = touchDownX + cell1NeededWidth/2
             if self.leftMin > popUpRect.maxX - PopUpSettings.popUpCellGap {
                self.leftMin = popUpRect.maxX - PopUpSettings.popUpCellGap
@@ -315,9 +315,11 @@ class PopUpContainerView: UIView {
                 self.rightMin = popUpRect.minX + PopUpSettings.popUpCellGap
             }
             
-            self.rightMax = popUpRect.maxX
+            self.rightMax = popUpRect.maxX - PopUpSettings.popUpCellGap
             print("\nAdd from \(self.leftMax) to \(self.rightMax ) start at \(touchDownX)")
-            //-------------------------------------------------------------          
+            //-------------------------------------------------------------
+            // Put first cell centerred at current finger location, then put others one afteer one at left, right, left, right...
+            // leftMax ... leftMin ..... rightMin ..... rightMax
             for cell : KeyCell in cells {
             	let cellNeededWidth =  CGFloat(cell.widthInPopUpUnit) * PopUpSettings.popUpUnitWidth
                 if let cellView = cell.buildView() {
@@ -344,11 +346,13 @@ class PopUpContainerView: UIView {
             } //end of for
             //-------------------------------------------------------------
             // All cells have been added in but cells might go beyond the border and
-            // now to move all the cells to let them fit in the pop up rect border by aligning at the left side.
+            // now to move all the cells to let them fit in the pop up rect border by aligning at the center range.
+            let dx = leftMin + PopUpSettings.popUpCellGap - leftMax
+            print("OffestX by \(-dx)")
             for cv:UIView in addedSecondaryCellViews {
-                let dx = leftMax - leftMin
-                cv.frame.offsetBy(dx: dx, dy: 0)
+                cv.frame = cv.frame.offsetBy(dx: -dx, dy: 0)
             }
+            self.setNeedsLayout()
             //-------------------------------------------------------------
         } // end of if let _ = keyView.keyDefinition             
     }
@@ -369,7 +373,8 @@ class PopUpContainerView: UIView {
         cellView.frame = rt
         self.addSubview(cellView)
         addedSecondaryCellViews.append(cellView)
-        if self.leftMin>self.rightMin { self.rightMin = self.leftMin }
+        let rightMin_min = self.leftMin + PopUpSettings.popUpCellGap
+        if self.rightMin<rightMin_min { self.rightMin = rightMin_min } // In case right min is smaller than left min.
         self.leftMin -= width + PopUpSettings.popUpCellGap
     }  
     
@@ -389,7 +394,9 @@ class PopUpContainerView: UIView {
         cellView.frame = rt
         self.addSubview(cellView)
         addedSecondaryCellViews.append(cellView)
-        if self.leftMin>self.rightMin { self.leftMin = self.rightMin }
+        let leftMin_max = self.rightMin - PopUpSettings.popUpCellGap
+        if self.leftMin>leftMin_max { self.leftMin=leftMin_max } // In case right min is smaller than left min.
+        if self.leftMin>self.rightMin { self.leftMin = self.rightMin + PopUpSettings.popUpCellGap} // In case right min is smaller than left min.
         self.rightMin += width + PopUpSettings.popUpCellGap
     }
  

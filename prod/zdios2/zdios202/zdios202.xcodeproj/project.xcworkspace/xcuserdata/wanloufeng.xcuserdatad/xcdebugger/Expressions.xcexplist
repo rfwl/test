@@ -3,14 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "KeyboardKey.calculatePopUpRect(_:height:):KeyboardKey.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "KeyView.showPopUp():KeyView.swift">
          <PersistentStrings>
             <PersistentString
@@ -35,6 +27,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "KeyboardView.reportTouches(_:with:):KeyboardView.swift">
+      </ContextState>
+      <ContextState
          contextName = "KeyView.point(inside:with:):KeyView.swift">
          <PersistentStrings>
             <PersistentString
@@ -43,7 +38,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "KeyboardView.reportTouches(_:with:):KeyboardView.swift">
+         contextName = "KeyboardKey.calculatePopUpRect(_:height:):KeyboardKey.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PopUpContainerView.addToPopUp_SecondaryCells(_:touchDownX:):PopUpContainerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cv.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

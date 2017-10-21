@@ -104,6 +104,7 @@ class KeyCell {
         lbl.isUserInteractionEnabled = false
         lbl.numberOfLines = 1
         lbl.text = self.text
+        lbl.backgroundColor = UIColor.brown
         return lbl
       
     }
@@ -113,6 +114,7 @@ class KeyCell {
         if let img = ImageLibrary.buildUIImage(self.icon!) {
             let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast            
             iv.contentMode = UIViewContentMode.scaleAspectFit
+            iv.backgroundColor = UIColor.brown
             return iv
         }
         return nil

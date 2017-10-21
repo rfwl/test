@@ -197,9 +197,18 @@ func defaultKeyboard() -> KeyboardDefinition {
         let kc1 = KeyCell("1")
         let kc2 = KeyCell("2")
         let kc3 = KeyCell("3")
+        let kc4 = KeyCell("study")
+        kc4.widthInPopUpUnit = 2
+        let kc5 = KeyCell("t")
+        kc5.widthInPopUpUnit = 3
+        let kc6 = KeyCell("will")
+        kc6.widthInPopUpUnit = 4
         ky.keyCellArray.append(kc1)
         ky.keyCellArray.append(kc2)
         ky.keyCellArray.append(kc3)
+        ky.keyCellArray.append(kc4)
+        ky.keyCellArray.append(kc5)
+        ky.keyCellArray.append(kc6)
         
     }
     
