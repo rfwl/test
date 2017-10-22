@@ -209,6 +209,9 @@ func defaultKeyboard() -> KeyboardDefinition {
         ky.keyCellArray.append(kc4)
         ky.keyCellArray.append(kc5)
         ky.keyCellArray.append(kc6)
+         ky.keyCellArray.append(kc6)
+         ky.keyCellArray.append(kc6)
+         ky.keyCellArray.append(kc6)
         
     }
     

@@ -337,10 +337,12 @@ class PopUpContainerView: UIView {
                     // The cell would be go beyond the border at one side.
                     let leftRemainingWidth = self.leftMin - self.leftMax
                     let rightRemainingWidth = self.rightMax - self.rightMin
-                    if rightRemainingWidth > leftRemainingWidth {
+                    if rightRemainingWidth > leftRemainingWidth && rightRemainingWidth>0 {
                         add_Right(cellView,width:cellNeededWidth, y: popUpRect.minY, height: popUpRect.height)
-                    } else {
+                    } else if rightRemainingWidth < leftRemainingWidth && leftRemainingWidth>0 {
                         add_Left(cellView,width:cellNeededWidth, y: popUpRect.minY, height: popUpRect.height)
+                    } else {
+                       // Here both remaining width is negative, So more cells can be added in.
                     }
                 }
             } //end of for
