@@ -288,6 +288,8 @@ class PopUpContainerView: UIView {
     var rightMax:CGFloat = CGFloat(0)
     var rightMin:CGFloat = CGFloat(0)
     var addedAtLeft : Bool = false        
+    var touchDownX : CGFloat = CGFloat(0)
+    var offsetX : CGFloat = CGFloat(0)
     
     func addToPopUp_SecondaryCells(_ keyView:KeyView , touchDownX : CGFloat) {
         // Clear sub views
@@ -300,7 +302,7 @@ class PopUpContainerView: UIView {
             if cells.count < 1 { return }
             let cell1 = cells[cells.startIndex]
             let popUpRect = keyView.popUpFrame_SecondaryCells
-            
+            self.touchDownX = touchDownX
             //-------------------------------------------------------------
             // This part decided where in pop up width to start adding cell views, that is where to put the first cell view. 
          	// The first cell will added as close as possible to downX  
@@ -342,17 +344,17 @@ class PopUpContainerView: UIView {
                     } else if rightRemainingWidth < leftRemainingWidth && leftRemainingWidth>0 {
                         add_Left(cellView,width:cellNeededWidth, y: popUpRect.minY, height: popUpRect.height)
                     } else {
-                       // Here both remaining width is negative, So more cells can be added in.
+                       // Here both remaining width is negative, So no more cells can be added in.
                     }
                 }
             } //end of for
             //-------------------------------------------------------------
             // All cells have been added in but cells might go beyond the border and
             // now to move all the cells to let them fit in the pop up rect border by aligning at the center range.
-            let dx = leftMin + PopUpSettings.popUpCellGap - leftMax
-            print("OffestX by \(-dx)")
+            offsetX = leftMin + PopUpSettings.popUpCellGap - leftMax
+            print("OffestX by \(-offsetX)")
             for cv:UIView in addedSecondaryCellViews {
-                cv.frame = cv.frame.offsetBy(dx: -dx, dy: 0)
+                cv.frame = cv.frame.offsetBy(dx: -offsetX, dy: 0)
             }
             self.setNeedsLayout()
             //-------------------------------------------------------------
@@ -412,7 +414,21 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     //
-     
+    var highlightedCellView:UIView?
+    func highlightCellView(_ keyView: KeyView, moveX: CGFloat, downX: CGFloat ) {
+        for cv:UIView in addedSecondaryCellViews {
+            let modifiedMoveX : CGFloat = moveX - offsetX
+            if modifiedMoveX >= cv.frame.minX && modifiedMoveX <= cv.frame.maxX {
+                if cv != highlightedCellView {
+                    if let oldCV = highlightedCellView {
+                        oldCV.backgroundColor = UIColor.brown
+                    }
+                    highlightedCellView = cv
+                    cv.backgroundColor = UIColor.green
+                }
+            }
+        }
+    }
     //=====================================================================
     //
    

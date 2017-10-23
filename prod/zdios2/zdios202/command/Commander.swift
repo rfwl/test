@@ -21,7 +21,7 @@ class Commander {
         switch touchStatus {
         case .Down: onTouch_Down(kv,downLoc:downLoc)
         case .DownHold: onTouch_DownHold(kv,downLoc:downLoc)
-        case .DownHoldMove: onTouch_DownHoldMove(kv)
+        case .DownHoldMove: onTouch_DownHoldMove(kv, moveX: curLoc.x, downX: downLoc.x)
         case .DownHoldMoveUp: onTouch_DownHoldMoveUp(kv)
         case .DownUp: onTouch_DownUp(kv)
         case .DownHoldUp: onTouch_DownHoldUp(kv)
@@ -46,6 +46,7 @@ class Commander {
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
                 pucvw.showPopUp_SecondaryCells(kvw,touchDownX: downLoc.x )
+                pucvw.highlightCellView(kvw,moveX: downLoc.x, downX: downLoc.x )
             }
         }
     }
@@ -58,8 +59,12 @@ class Commander {
         let systemSoundID: SystemSoundID = 1057
         AudioServicesPlaySystemSound (systemSoundID)
     }
-    static func onTouch_DownHoldMove(_ keyView:KeyView?) {
-    
+    static func onTouch_DownHoldMove(_ keyView:KeyView?, moveX: CGFloat, downX: CGFloat ) {
+        if let pucvw = popUpContainerView {
+            if let kvw = keyView {
+                pucvw.highlightCellView(kvw,moveX: moveX, downX: downX )
+            }
+        }
     }
     static func onTouch_DownHoldMoveUp(_ keyView:KeyView?) {
     

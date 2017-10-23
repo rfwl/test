@@ -195,7 +195,7 @@ class KeyboardView: UIView {
             let moveTouchLoc = touch?.location(in: self)
             lastTouchLoc = moveTouchLoc
             if let reallyTouched = touchedKeyView {
-                if currentTouchStatus == EnumTouchStatus.DownHold {
+                if currentTouchStatus == EnumTouchStatus.DownHold || currentTouchStatus == EnumTouchStatus.DownHoldMove {
                     //----------------------------------- A Down Hold Move found.
                     currentTouchStatus = EnumTouchStatus.DownHoldMove
                     Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: moveTouchLoc! )

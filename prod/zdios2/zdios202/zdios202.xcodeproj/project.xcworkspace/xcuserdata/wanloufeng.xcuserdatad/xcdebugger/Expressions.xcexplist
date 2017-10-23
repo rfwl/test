@@ -19,6 +19,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "PopUpContainerView.highlightCellView(_:moveX:downX:):PopUpContainerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cv.frame.maxX">
+            </PersistentString>
+            <PersistentString
+               value = "cv.frame.minX">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "KeyView.keyDefinition.didset:KeyView.swift">
          <PersistentStrings>
             <PersistentString
