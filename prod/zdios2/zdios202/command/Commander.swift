@@ -53,11 +53,16 @@ class Commander {
     static func onTouch_DownUp(_ keyView:KeyView?) {
         if let pucvw = popUpContainerView {
                 pucvw.hidePopUp()
+                pucvw.clearSubviews()
         }
     }
     static func onTouch_DownHoldUp(_ keyView:KeyView?) {
         let systemSoundID: SystemSoundID = 1057
         AudioServicesPlaySystemSound (systemSoundID)
+        if let pucvw = popUpContainerView {
+            pucvw.hidePopUp()
+            pucvw.clearSubviews()
+        }
     }
     static func onTouch_DownHoldMove(_ keyView:KeyView?, moveX: CGFloat, downX: CGFloat ) {
         if let pucvw = popUpContainerView {
@@ -67,7 +72,10 @@ class Commander {
         }
     }
     static func onTouch_DownHoldMoveUp(_ keyView:KeyView?) {
-    
+        if let pucvw = popUpContainerView {
+            pucvw.hidePopUp()
+            pucvw.clearSubviews()
+        }
     }
     //===================================================
     //

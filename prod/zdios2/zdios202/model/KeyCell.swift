@@ -17,12 +17,18 @@ class KeyCell {
     var text:String?
     var shape:String?
     var icon:String?
+    var fontSize:CGFloat?
     
     enum EnumLabelingType {
         case Text
         case Shape
         case Icon
     }
+    
+    static let Main_Cell_Font_Size:CGFloat = CGFloat(22)
+    static let Secondary_Cell_Font_Size:CGFloat = CGFloat(10)
+    static let PopUp_Cell_Font_Size:CGFloat = CGFloat(16)
+    
     //======================================================
     //
     init(_ char:String) {
@@ -31,6 +37,7 @@ class KeyCell {
         self.shape = nil
         self.icon = nil
         self.labelingType = EnumLabelingType.Text
+        self.fontSize = KeyCell.Main_Cell_Font_Size
     }
     
     init(text:String, output:String) {
@@ -39,6 +46,7 @@ class KeyCell {
         self.shape = nil
         self.icon = nil
         self.labelingType = EnumLabelingType.Text
+        self.fontSize = KeyCell.Main_Cell_Font_Size
     }
     
     init(shape:String, output:String) {
@@ -47,6 +55,7 @@ class KeyCell {
         self.shape = shape
         self.icon = nil
         self.labelingType = EnumLabelingType.Shape
+        self.fontSize = KeyCell.Main_Cell_Font_Size
     }
     
     init(icon:String, output:String) {
@@ -55,6 +64,7 @@ class KeyCell {
         self.shape = nil
         self.icon = icon
         self.labelingType = EnumLabelingType.Icon
+        self.fontSize = KeyCell.Main_Cell_Font_Size
     }
     //======================================================
     //
@@ -98,7 +108,7 @@ class KeyCell {
         //lbl.frame = frame
         lbl.textAlignment = NSTextAlignment.center
         lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
-        lbl.font = lbl.font.withSize(22)
+        lbl.font = lbl.font.withSize(self.fontSize!)
         lbl.adjustsFontSizeToFitWidth = true
         lbl.minimumScaleFactor = CGFloat(0.1)
         lbl.isUserInteractionEnabled = false

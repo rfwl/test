@@ -235,7 +235,11 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     // Pop-up for Main Cell
-
+    func clearSubviews() {
+        for vw in self.subviews {
+            vw.removeFromSuperview()
+        }
+    }
     func showPopUp_MainCell(_ keyView:KeyView){
         if let _ = keyView.keyDefinition {
             popUpKeyView = keyView
@@ -252,9 +256,7 @@ class PopUpContainerView: UIView {
         
         // Draw pop up border path
         // Clear sub views
-        for vw in self.subviews {
-            vw.removeFromSuperview()
-        }
+        clearSubviews()
         // Add sub views from cell
         if let kc = keyView.keyDefinition?.getMainCell() {
             kc.addToView(self, frame: keyView.popUpFrame_MainCell)
@@ -273,12 +275,14 @@ class PopUpContainerView: UIView {
     var addedSecondaryCellViews:[UIView] = [UIView]()
         
     func showPopUp_SecondaryCells(_ keyView:KeyView, touchDownX : CGFloat){
-        if let _ = keyView.keyDefinition {
+        if let ky = keyView.keyDefinition {
             popUpKeyView = keyView
             isPopUpForMainCell = false
-            buildPopUpRectForKeyView(keyView)
-            addToPopUp_SecondaryCells(keyView,touchDownX:touchDownX)
-            self.setNeedsDisplay()
+            if ky.hasSecondaryCell {
+                buildPopUpRectForKeyView(keyView)
+                addToPopUp_SecondaryCells(keyView,touchDownX:touchDownX)
+                self.setNeedsDisplay()
+            }
         }
     }
     

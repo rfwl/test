@@ -37,7 +37,7 @@ class KeyView: UIControl {
     // ocerrides
     public override func draw(_ frame: CGRect) {
         if let ky = self.keyDefinition {
-            if ky.hasSecondaryCell { return }
+            //if ky.hasSecondaryCell { return }
             let mainCell = ky.getMainCell()
             if mainCell.labelingType == .Shape {
                 mainCell.drawInView(self,frame: self.bounds)
@@ -57,6 +57,13 @@ class KeyView: UIControl {
             if let ky = self.keyDefinition {
                 if ky.hasSecondaryCell {
                     // Key has 2nd cell
+                    let cell1 = ky.keyCellArray[0]
+                    let cell2 = ky.keyCellArray[1]
+                    ky.calculateMainCellFrame()
+                    ky.calculateSecondaryCellFrame()
+                    cell1.addToView(self, frame: ky.mainCellFrame)
+                    cell2.addToView(self, frame: ky.secondaryCellFrame)
+                    
                 } else {
                     // Key has no secondary cell
                     let mainCell = ky.getMainCell()
