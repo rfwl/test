@@ -13,6 +13,8 @@ class KeyboardView: UIView {
         self.isUserInteractionEnabled = true
         self.isOpaque = false
         Commander.keyboardView = self
+        
+        prepareTapGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -122,6 +124,44 @@ class KeyboardView: UIView {
         }
     } //end of func
     
+    
+    //=============================================================================
+    //
+    func prepareTapGestureRecognizers() {
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector( onTap_Single))
+        singleTap.numberOfTapsRequired = 1
+        singleTap.numberOfTouchesRequired = 1
+        self.addGestureRecognizer(singleTap)
+        
+        let doubleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(onTap_Double))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTouchesRequired = 1
+        self.addGestureRecognizer(doubleTap)
+        
+        let tripleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(onTap_Triple))
+        tripleTap.numberOfTapsRequired = 3
+        tripleTap.numberOfTouchesRequired = 1
+        self.addGestureRecognizer(tripleTap)
+        
+        
+
+    } //end of func
+
+    @objc func onTap_Single(recognizer: UITapGestureRecognizer) {
+        if(recognizer.state == UIGestureRecognizerState.ended){
+            print("Single Tapped")
+        }
+    }
+    @objc func onTap_Double(recognizer: UITapGestureRecognizer) {
+        if(recognizer.state == UIGestureRecognizerState.ended){
+            print("Double Tapped")
+        }
+    }
+    @objc func onTap_Triple(recognizer: UITapGestureRecognizer) {
+        if(recognizer.state == UIGestureRecognizerState.ended){
+            print("Triple Tapped")
+        }
+    }
     //=============================================================================
     // Touche Event Handlers
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
