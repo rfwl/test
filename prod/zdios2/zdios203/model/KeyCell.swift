@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class KeyCell {
-    var output:String
+    var name:String
     var labelingType:EnumLabelingType
     var widthInPopUpUnit:CGFloat = CGFloat(1)
     
