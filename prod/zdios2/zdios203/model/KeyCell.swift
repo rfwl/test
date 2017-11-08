@@ -11,101 +11,56 @@ import UIKit
 
 class KeyCell {
     var name:String
-    var labelingType:EnumLabelingType
-    var widthInPopUpUnit:CGFloat = CGFloat(1)
     
     var text:String?
-    var shape:String?
-    var icon:String?
-    var fontSize:CGFloat?
+    var image:String?    
+    var labelingType:EnumLabelingType
     
+    var widthInPopUpUnit:CGFloat = CGFloat(1)
+        
     enum EnumLabelingType {
         case Text
-        case Shape
-        case Icon
-    }
-    
-    static let Main_Cell_Font_Size:CGFloat = CGFloat(22)
-    static let Secondary_Cell_Font_Size:CGFloat = CGFloat(10)
-    static let PopUp_Cell_Font_Size:CGFloat = CGFloat(16)
+        case image
+    }    
     
     //======================================================
     //
     init(_ char:String) {
-        self.output = char
+        self.name = char
         self.text = char
-        self.shape = nil
-        self.icon = nil
+        self.image = nil
         self.labelingType = EnumLabelingType.Text
-        self.fontSize = KeyCell.Main_Cell_Font_Size
+        self.fontSize = Settings.KeyCell.Main_Cell_Font_Size
     }
     
-    init(text:String, output:String) {
-        self.output = output
+    init(name:String, text:String) {
+        self.name = name
         self.text = text
-        self.shape = nil
-        self.icon = nil
+        self.image = nil
         self.labelingType = EnumLabelingType.Text
-        self.fontSize = KeyCell.Main_Cell_Font_Size
+        self.fontSize = Settings.KeyCell.Main_Cell_Font_Size
     }
     
-    init(shape:String, output:String) {
-        self.output = output
+    init(name:String, image:String) {
+        self.name = name
         self.text = nil
-        self.shape = shape
-        self.icon = nil
-        self.labelingType = EnumLabelingType.Shape
-        self.fontSize = KeyCell.Main_Cell_Font_Size
-    }
-    
-    init(icon:String, output:String) {
-        self.output = output
-        self.text = nil
-        self.shape = nil
-        self.icon = icon
-        self.labelingType = EnumLabelingType.Icon
-        self.fontSize = KeyCell.Main_Cell_Font_Size
+        self.image = image
+        self.labelingType = EnumLabelingType.image
+        self.fontSize = Settings.KeyCell.Main_Cell_Font_Size
     }
     //======================================================
     //
-    
-    func drawInView(_ view:UIView, frame: CGRect) {
-        if self.labelingType == .Shape {
-            if let shapeName = self.shape {
-                ShapeLibrary.drawShape(shapeName, bounds: frame, color: UIColor.blue)
-            }
-        }
-    }
-        
-    func addToView(_ view :UIView, frame: CGRect) {
-        if self.labelingType == .Text {
-            let lbl = self.buildView_Text()
-            lbl.frame=frame
-            self.keyCellView = lbl
-            view.addSubview(lbl)
-        } else if self.labelingType == .Icon {
-            if let iv = self.buildView_Icon() {
-                iv.frame=frame
-                self.keyCellView = iv
-                view.addSubview(iv)
-            }
-        }
-    }
-    
     func buildView()->UIView? {
         if self.labelingType == .Text {
             return self.buildView_Text()
-        } else if self.labelingType == .Icon {
- 			return self.buildView_Icon()
+        } else if self.labelingType == .image {
+ 			return self.buildView_image()
         }
         return nil
     }
     
     func buildView_Text()->UIView {
         let lbl:UILabel = UILabel()
-        //let labelInset: CGFloat = 2
-        //lbl.frame = CGRect(x: labelInset, y: labelInset, width: frame.width - labelInset * 2, height: frame.height - labelInset * 2)
-        //lbl.frame = frame
         lbl.textAlignment = NSTextAlignment.center
         lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
         lbl.font = lbl.font.withSize(self.fontSize!)
@@ -119,29 +74,15 @@ class KeyCell {
       
     }
     
-    func buildView_Icon()->UIView? {
-        //FWL20171005: Using UIImageView as sub view.
-        if let img = ImageLibrary.buildUIImage(self.icon!) {
+    func buildView_image()->UIView? {
+        if let img = ImageLibrary.buildUIImage(self.image!) {
             let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast            
             iv.contentMode = UIViewContentMode.scaleAspectFit
             iv.backgroundColor = UIColor.brown
             return iv
         }
         return nil
-    }
-    
-    func addToView_Image1(_ view:UIView, frame: CGRect) {
-        //FWL20171005: From web post, only using img as patternImage to backgroundColor will not show the image out.
-        // So have to draw and trhen to set the background color in pattern image.
-        // This way using background color in pattern image is slower than using UIImageView as sub view.
-        if let img = ImageLibrary.buildUIImage(self.icon!) {
-            UIGraphicsBeginImageContext(view.frame.size)
-            img.draw(in: frame)
-            let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            view.backgroundColor = UIColor(patternImage: image)
-        }
-    }
+    }    
     //======================================================
     // Transient Properties
     var keyCellView : UIView? 

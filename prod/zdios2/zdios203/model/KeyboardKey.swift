@@ -3,31 +3,62 @@ import UIKit
 
 class KeyboardKey {
  
-    var frame:CGRect = CGRect.zero
-    var widthInCells:Int
+    //================================================
+   	// Properties
+    var widthInRowUnits:Int = 1    
+   	var mainCellArray:[KeyCell]
+ 	var secondaryCellArray:[KeyCell]? = nil
+ 	var popUpCellArray:[KeyCell]? = nil    
+  	var frame:CGRect = CGRect.zero 
+    var view:KeyView?
+   
+    //================================================
+   	// Inits
+   	init(_ char:String) {
+		let cell = KeyCell(char)        
+		self.mainCellArray = [cell]        
+    }
     
-   	//================================================
-   	// Cell Configurations 
- 	var keyCellArray:[KeyCell]
- 	
-    var hasSecondaryCell:Bool {
+    init(_ name:String, text:String, width: Int=1) {
+		let cell = KeyCell(name: name, text: text)        
+		self.mainCellArray = [cell]
+        self.widthInRowUnits = width
+    }    
+  
+	init(_ name:String, image:String, width: Int=1) {
+		let cell = KeyCell(name: name, image: image)        
+		self.mainCellArray = [cell]
+        self.widthInRowUnits = width
+    }
+       	
+   	init(_ char1:String, char2:String) {
+		let cell1 = KeyCell(char1)       
+		let cell2 = KeyCell(char2)
+        cell2.fontSize = Settings.Secondary_Cell_Font_Size
+		self.mainCellArray = [cell1]
+		self.secondaryCellArray = [cell2]        
+    }
+    
+    //================================================
+   	// 	
+    var hasSecondaryCells:Bool {
         get {
-            return keyCellArray.count>1
+            return secondaryCellArray != nil && secondaryCellArray!.count>1
         }
     }
- 	var secondaryCell_HeightScale = CGFloat(0.4);
-    var secondaryCell_WidthScale = CGFloat(0.6);
- 	var cellConfiguration:EnumCellConfiguration = EnumCellConfiguration.SingleCell
- 	var secodaryCellLocation:EnumSecondaryCellLocation = EnumSecondaryCellLocation.BottomRight
- 	
-    enum EnumCellConfiguration {
-    	case SingleCell
-    	case SingleCellPlusPopUpCells
-    	case SecondaryCell
-        case SecondarCellPlusPopUpCells
     
+    var hasPopUpCells:Bool {
+        get {
+            return popUpCellArray != nil && popUpCellArray!.count>1
+        }
     }
-    
+      
+    //================================================
+   	// Secondary Cell Location
+ 	var secondaryCell_HeightScale = CGFloat(0.4);
+    var secondaryCell_WidthScale = CGFloat(0.6); 	
+ 	var secodaryCellLocation:EnumSecondaryCellLocation = EnumSecondaryCellLocation.BottomRight
+ 	    
     enum EnumSecondaryCellLocation {
     	case TopLeft
     	case TopRight
@@ -35,82 +66,23 @@ class KeyboardKey {
         case BottomRight    
     } 
     
-    func getMainCell() -> KeyCell {
-        return keyCellArray[0]
-    }
-    
-     func getSecondaryCells() -> ArraySlice<KeyCell>? {
-     	if keyCellArray.count>0 {
-     		return keyCellArray.dropFirst()
-     	} else {
-     		return nil
-     	}
-    }
-   
     //================================================
-   	// Inits
-   	init(_ char:String) {
-		let cell = KeyCell(char)
-        
-		self.keyCellArray = [cell]
-        widthInCells = 1
-    }
-    
-    init(_ text:String, output:String, width: Int=1) {
-		let cell = KeyCell(text: text, output: output)
-        
-		self.keyCellArray = [cell]
-        self.widthInCells = width
-    }    
-     
-    init(shape:String, output:String, width: Int=1) {
-		let cell = KeyCell(shape: shape, output: output)
-       
-		self.keyCellArray = [cell]
-        self.widthInCells = width
-    }
-	
-	init(icon:String, output:String, width: Int=1) {
-		let cell = KeyCell(icon: icon, output: output)
-        
-		self.keyCellArray = [cell]
-        self.widthInCells = width
-    }
-   	
-   	init(_ char1:String, char2:String) {
-		let cell1 = KeyCell(char1)
-       
-		let cell2 = KeyCell(char2)
-        cell2.fontSize = KeyCell.Secondary_Cell_Font_Size
-		self.keyCellArray = [cell1,cell2]
-        widthInCells = 1
-    }
-    
-    //================================================
-   	// Transient Properties
-    var view:KeyView?
-    
-    //================================================
-   	// Cells 
+   	// Cell Frames     
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
+    
    	func setMainAndSecondaryFrames(){
         mainCellFrame = CGRect.zero
         secondaryCellFrame = CGRect.zero
-   		switch self.cellConfiguration {
-   		case .SingleCell,.SingleCellPlusPopUpCells:
+   		if self.hasSecondaryCells {
+   			calculateMainCellFrame()
+  			calculateSecondaryCellFrame()  	
+   		} else {
    			mainCellFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
    			secondaryCellFrame = CGRect.zero
-   		case .SecondaryCell, .SecondarCellPlusPopUpCells:
-   			calculateMainCellFrame()
-  			calculateSecondaryCellFrame()
-   		//default:
-   			//mainCellFrame = CGRect.zero
-    		//secondaryCellFrame = CGRect.zero
-   		}
     } //end of func
    	
-   	 func calculateSecondaryCellFrame(){
+   	 private func calculateSecondaryCellFrame(){
     	let w = self.frame.width * self.secondaryCell_WidthScale
     	let h = self.frame.height * self.secondaryCell_HeightScale
         self.secondaryCellFrame = CGRect.zero
@@ -128,7 +100,7 @@ class KeyboardKey {
         }
     }
     
-    func calculateMainCellFrame(){
+    private func calculateMainCellFrame(){
     	let w = self.frame.width 
     	let sh = self.frame.height * self.secondaryCell_HeightScale
     	let h = self.frame.height - sh
@@ -143,9 +115,11 @@ class KeyboardKey {
         }
     }
     
+    //======================================================
+    // 
     
-    //================================================
-   	//
+    //======================================================
+   	
 } // end of class
  
 
