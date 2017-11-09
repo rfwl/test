@@ -31,8 +31,309 @@ React to Triple Click Key
 
 
 Actions:
+=========================================================================
+https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html
+enum, 
+case don't have default integer value, can have any value type being associated values
+
+struct Landmark: Codable {
+    var name: String
+    var foundingYear: Int
+    var location: Coordinate
+    var vantagePoints: [Coordinate]
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "title"
+        case foundingYear = "founding_date"
+        
+        case location
+        case vantagePoints
+    }
+}
+
+struct Coordinate {
+    var latitude: Double
+    var longitude: Double
+    var elevation: Double
+
+    enum CodingKeys: String, CodingKey {
+        case latitude
+        case longitude
+        case additionalInfo
+    }
+    
+    enum AdditionalInfoKeys: String, CodingKey {
+        case elevation
+    }
+}
+
+extension Coordinate: Decodable {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        latitude = try values.decode(Double.self, forKey: .latitude)
+        longitude = try values.decode(Double.self, forKey: .longitude)
+        
+        let additionalInfo = try values.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
+        elevation = try additionalInfo.decode(Double.self, forKey: .elevation)
+    }
+}
+
+extension Coordinate: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(latitude, forKey: .latitude)
+        try container.encode(longitude, forKey: .longitude)
+        
+        var additionalInfo = container.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
+        try additionalInfo.encode(elevation, forKey: .elevation)
+    }
+}
 
 
+
+=========================================================================
+
+
+// Swift 3
+func loadJson(filename fileName: String) -> [String: AnyObject]? {
+    if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+        do {
+            let data = try Data(contentsOf: url)
+            let object = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            if let dictionary = object as? [String: AnyObject] {
+                return dictionary
+            }
+        } catch {
+            print("Error!! Unable to parse  \(fileName).json")
+        }
+    }
+    return nil
+}
+
+=================================================
+Swift4 Decodable Tutorial
+https://medium.com/swiftly-swift/swift-4-decodable-beyond-the-basics-990cc48b7375
+* init(from: Decoder)
+* Decoder's Two functions:
+container<Key>(keyedBy: Key.Type): returns a keyed container, KeyedDecodingContainer: to reach the actual data
+singleValueContainer(): the returned, SingleValueDecodingContainer, is actually the data that we want!
+* KeyedDecodingContainer
+** Like a dictionary [Key: Any]. Different keys can held different types of data: which is why the container offers several decode(Type:forKey:) methods.
+This method is where the magic happens: by calling it, the container returns us our data’s value of the given type for the given key (examples below!).
+** Most importantly, the container offers the generic method
+decode<T>(T.Type, forKey: K) throws -> T where T: Decodable
+which means that any type, as long as it conforms to Decodable, can be used with this function! 🎉🎉
+
+* SingleValueDecodingContainer
+Everything works as above, just without any keys.
+
+* Steps for Implementing our init(from: Decoder)
+
+Step 1: Choosing The Right Decoder
+Step 2: Determining The Right Container
+Step 3: Extracting Our Data
+Step 4: Initializing our Struct/Class
+
+-------------------------------------------------
+import Foundation
+
+struct Swifter: Decodable {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+}
+
+let json = """
+{
+ "fullName": "Federico Zanetello",
+ "id": 123456,
+ "twitter": "http://twitter.com/zntfdr"
+}
+""".data(using: .utf8)! // our data in native (JSON) format
+let myStruct = try JSONDecoder().decode(Swifter.self, from: json) // Decoding our data
+print(myStruct) // decoded!!!!!
+-------------------------------------------------
+import Foundation
+
+struct Swifter {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+  
+  init(fullName: String, id: Int, twitter: URL) { // default struct initializer
+    self.fullName = fullName
+    self.id = id
+    self.twitter = twitter
+  }
+}
+
+extension Swifter: Decodable {
+  enum MyStructKeys: String, CodingKey { // declaring our keys 
+    case fullName = "fullName"
+    case id = "id"
+    case twitter = "twitter"
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
+    let fullName: String = try container.decode(String.self, forKey: .fullName) // extracting the data
+    let id: Int = try container.decode(Int.self, forKey: .id) // extracting the data
+    let twitter: URL = try container.decode(URL.self, forKey: .twitter) // extracting the data
+    
+    self.init(fullName: fullName, id: id, twitter: twitter) // initializing our struct
+  }
+}
+
+let json = """
+{
+ "fullName": "Federico Zanetello",
+ "id": 123456,
+ "twitter": "http://twitter.com/zntfdr"
+}
+""".data(using: .utf8)! // our native (JSON) data
+let myStruct = try JSONDecoder().decode(Swifter.self, from: json) // decoding our data
+print(myStruct) // decoded!
+-------------------------------------------------
+
+import Foundation
+
+struct Swifter: Decodable {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+}
+
+let json = """
+[{
+ "fullName": "Federico Zanetello",
+ "id": 123456,
+ "twitter": "http://twitter.com/zntfdr"
+},{
+ "fullName": "Federico Zanetello",
+ "id": 123456,
+ "twitter": "http://twitter.com/zntfdr"
+},{
+ "fullName": "Federico Zanetello",
+ "id": 123456,
+ "twitter": "http://twitter.com/zntfdr"
+}]
+""".data(using: .utf8)! // our data in native format
+let myStructArray = try JSONDecoder().decode([Swifter].self, from: json)
+
+myStructArray.forEach { print($0) } // decoded!!!!!
+
+-------------------------------------------------
+
+import Foundation
+
+struct Swifter: Codable {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+}
+
+let json = """
+{
+  "one": {
+    "fullName": "Federico Zanetello",
+    "id": 123456,
+    "twitter": "http://twitter.com/zntfdr"
+  },
+  "two": {
+    "fullName": "Federico Zanetello",
+    "id": 123456,
+    "twitter": "http://twitter.com/zntfdr"
+  },
+  "three": {
+    "fullName": "Federico Zanetello",
+    "id": 123456,
+    "twitter": "http://twitter.com/zntfdr"
+  }
+}
+""".data(using: .utf8)! // our data in native format
+let myStructDictionary = try JSONDecoder().decode([String: Swifter].self, from: json)
+
+myStructDictionary.forEach { print("\($0.key): \($0.value)") } // decoded!!!!!
+--------------------------------------------------------------
+
+import Foundation
+
+struct Swifter: Decodable {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+}
+
+enum SwifterOrBool: Decodable {
+  case swifter(Swifter)
+  case bool(Bool)
+}
+
+extension SwifterOrBool: Decodable {
+  enum CodingKeys: String, CodingKey {
+    case swifter, bool
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    if let swifter = try container.decodeIfPresent(Swifter.self, forKey: .swifter) {
+      self = .swifter(swifter)
+    } else {
+      self = .bool(try container.decode(Bool.self, forKey: .bool))
+    }
+  }
+}
+
+let json = """
+[{
+"swifter": {
+   "fullName": "Federico Zanetello",
+   "id": 123456,
+   "twitter": "http://twitter.com/zntfdr"
+  }
+},
+{ "bool": true },
+{ "bool": false },
+{
+"swifter": {
+   "fullName": "Federico Zanetello",
+   "id": 123456,
+   "twitter": "http://twitter.com/zntfdr"
+  }
+}]
+""".data(using: .utf8)! // our native (JSON) data
+let myEnumArray = try JSONDecoder().decode([SwifterOrBool].self, from: json) // decoding our data
+  
+myEnumArray.forEach { print($0) } // decoded!
+
+----------------------------------------------------------------------------
+import Foundation
+struct Swifter: Decodable {
+  let fullName: String
+  let id: Int
+  let twitter: URL
+}
+
+struct MoreComplexStruct: Decodable {
+  let swifter: Swifter
+  let lovesSwift: Bool
+}
+
+let json = """
+{
+	"swifter": {
+		"fullName": "Federico Zanetello",
+		"id": 123456,
+		"twitter": "http://twitter.com/zntfdr"
+	},
+	"lovesSwift": true
+}
+""".data(using: .utf8)! // our data in native format
+let myMoreComplexStruct = try JSONDecoder().decode(MoreComplexStruct.self, from: json)
+
+print(myMoreComplexStruct.swifter) // decoded!!!!!
+----------------------------------------------------------------------------
+=================================================
 
 
 

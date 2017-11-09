@@ -1,0 +1,85 @@
+import Foundation
+
+struct Coordinate {
+    var latitude: Double
+    var longitude: Double
+    var elevation: Double 
+	var names: [String]
+	var landType : EnumLandType 
+
+    enum CodingKeys: String, CodingKey {
+        case latitude 
+        case longitude
+        case additionalInfo  
+		case names
+		case landType
+    }
+    
+    enum AdditionalInfoKeys: String, CodingKey {
+        case elevation
+    }
+	
+	enum EnumLandType : String {
+        case City 
+        case Mountain
+        case Farm  
+		case Road
+		case Building
+    }
+    
+	
+	
+	
+	
+} //end of struct
+
+extension Coordinate: Decodable {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        latitude = try values.decode(Double.self, forKey: .latitude)
+        longitude = try values.decode(Double.self, forKey: .longitude)
+        
+        let additionalInfo = try values.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
+        elevation = try additionalInfo.decode(Double.self, forKey: .elevation)
+		
+		names = try values.decode([String].self, forKey: .names)
+		landType = try values.decode(String.self, forKey: .landType) // WRONG. String value cannot be sent to EnumLandType value.
+		
+    }
+}
+
+extension Coordinate: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(latitude, forKey: .latitude)
+        try container.encode(longitude, forKey: .longitude)
+        
+        //var additionalInfo = container.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
+        //try additionalInfo.encode(elevation, forKey: .elevation)
+    }
+}
+
+let json = """
+{
+	"latitude":  5460.90,
+	"longitude": 680.88,
+	"additionalInfo" : {"elevation": 32.45},
+	"names" : ["A","B","C","D","E"]
+}
+
+""".data(using: .utf8)! // our data in native format
+
+let coord = try JSONDecoder().decode(Coordinate.self, from: json)
+
+print("latitude=\(coord.latitude),   longitude=\(coord.longitude),   elevation=\(coord.elevation),   ")
+
+for i in 0 ..< coord.names.count {print(" \(coord.names[i])")}
+
+print("landType=\(coord.landType)")
+
+	  
+	  
+	  
+	  
+	  
+

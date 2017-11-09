@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class KeyCell {
+class KeyCell : Codable {
     var name:String
     
     var text:String?
