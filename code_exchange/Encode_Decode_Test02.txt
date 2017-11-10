@@ -1,0 +1,196 @@
+
+
+==============================================
+https://medium.com/@phillfarrugia/encoding-and-decoding-json-with-swift-4-3832bf21c9a8
+
+==============================================
+
+/// Creates Product requests and communicates with the Network. Serializes
+/// the response into models useable by the View Controller.
+internal struct ProductDataStore {
+    
+    /// Product Request
+    internal static let productRequest = HTTPClientEndpoint(.get, path: "/product")
+    
+    /// Performs a GET product request and calls the completionHandler
+    /// with a Product model or an error result.
+    ///
+    /// - Parameter completionHandler: called once request is finished
+    internal static func product(completionHandler: @escaping ProductRequestResultCompletion) {
+        NetworkHTTPClient.performRequest(productRequest) { (result) in
+            switch result {
+            case let .success(data):
+                do {
+                    let decoder = JSONDecoder()
+                    let product = try decoder.decode(Product.self, from: data)
+                    return completionHandler(.success(product))
+                } catch let error {
+                    print(error)
+                }
+            case let .failure(error):
+                return completionHandler(.failure(error))
+            }
+        }
+    }
+    
+}
+
+//-------------------------------------------------------
+/// Represents a Product model to be added,
+/// updated or removed from a shopping cart.
+struct Product: Codable {
+    
+    /// Overriding the property names, with custom property names
+    /// when the json field is different, requires defining a `CodingKeys`
+    /// enum and providing a case for each property. The case itself should
+    /// match the property, and its rawValue of type string, should correspond
+    /// to the JSON field name.
+    enum CodingKeys: String, CodingKey {
+        case identifier = "product_id"
+        case skuId = "sku_id"
+        case name = "product_name"
+        case price
+        case color
+        case isInStock
+        case imageURLs
+        case shortDescription
+    }
+    
+    /// Product ID
+    let identifier: String
+    
+    /// SKU ID
+    let skuId: String
+    
+    /// Name
+    let name: String
+    
+    /// Price
+    let price: Float
+    
+    /// Color
+    let color: Color?
+    
+    /// Is In Stock
+    let isInStock: Bool
+    
+    /// ImageIds
+    let imageURLs: [String]?
+    
+    /// Short Description
+    let shortDescription: String?
+    
+}
+//-------------------------------------------------------
+{
+  "product": {
+	"productId": "109",
+	"name": "Lorem Ipsum",
+	"imageURLs": [
+	  "http://placehold.it/40x40",
+	  "http://placehold.it/80x80"
+	],
+	"skuId": "2510",
+	"shortDescription": "Lorem Ipsum Dolor Sit Amet.",
+	"isInStock": false,
+	"color": {
+	  "label": "Light",
+	  "hex": "8A7164"
+	},
+	"price": 20
+  }
+}
+//-------------------------------------------------------
+/// Represents a Product model to be added,
+/// updated or removed from a shopping cart.
+struct Product: Codable {
+    
+    /// Overriding the property names, with custom property names
+    /// when the json field is different, requires defining a `CodingKeys`
+    /// enum and providing a case for each property. The case itself should
+    /// match the property, and its rawValue of type string, should correspond
+    /// to the JSON field name.
+    enum CodingKeys: String, CodingKey {
+        case identifier = "product_id"
+        case skuId = "sku_id"
+        case name = "product_name"
+        case price
+        case color
+        case isInStock
+        case imageURLs
+        case shortDescription
+    }
+    
+    /// Nested Fields require defining a custom CodingKey enum
+    /// for each nested field, to allow you to manually pull out
+    /// the values from the key in the `Decodable` initializer.
+    enum ProductKeys: String, CodingKey {
+        case product
+    }
+    
+    /// Nested Properties inside a keypath
+    /// such as "products" key containing all of the
+    /// properties for a product, requires overriding the
+    /// `Decodable` protocol's initializer and manually
+    /// pulling out the values from the top level key, and then
+    /// manually decoding each value and providing their type.
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ProductKeys.self)
+        let productValues = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .product)
+        identifier = try productValues.decode(String.self, forKey: .identifier)
+        skuId = try productValues.decode(String.self, forKey: .skuId)
+        name = try productValues.decode(String.self, forKey: .name)
+        price = try productValues.decode(Float.self, forKey: .price)
+        color = try productValues.decodeIfPresent(Color.self, forKey: .color)
+        isInStock = try productValues.decode(Bool.self, forKey: .isInStock)
+        imageURLs = try productValues.decodeIfPresent([String].self, forKey: .imageURLs)
+        shortDescription = try productValues.decodeIfPresent(String.self, forKey: .shortDescription)
+    }
+    
+    /// Product ID
+    let identifier: String
+    
+    /// SKU ID
+    let skuId: String
+    
+    /// Name
+    let name: String
+    
+    /// Price
+    let price: Float
+    
+    /// Color
+    let color: Color?
+    
+    /// Is In Stock
+    let isInStock: Bool
+    
+    /// ImageIds
+    let imageURLs: [String]?
+    
+    /// Short Description
+    let shortDescription: String?
+    
+}
+//-------------------------------------------------------
+/// Custom Transformations can be performed within the `Decodable` protocol's
+/// initializer before setting the value on the property.
+public init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: ProductKeys.self)
+    let productValues = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .product)
+    identifier = try productValues.decode(String.self, forKey: .identifier)
+    skuId = try productValues.decode(String.self, forKey: .skuId)
+    name = try productValues.decode(String.self, forKey: .name)
+    price = try productValues.decode(Float.self, forKey: .price)
+    color = try productValues.decodeIfPresent(Color.self, forKey: .color)
+    isInStock = try productValues.decode(Bool.self, forKey: .isInStock)
+    imageURLs = try productValues.decodeIfPresent([String].self, forKey: .imageURLs)
+    shortDescription = try productValues.decodeIfPresent(String.self, forKey: .shortDescription)
+
+    // Custom Date Transformation
+    let creationDateString = try productValues.decode(String.self, forKey: .creationDate)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM-DD-YYYY"
+    creationDate = dateFormatter.date(from: creationDateString)
+}
+
