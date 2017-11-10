@@ -6,13 +6,15 @@ struct Coordinate {
     var elevation: Double 
 	var names: [String]
 	var landType : EnumLandType 
+	var visited:Bool
 
     enum CodingKeys: String, CodingKey {
         case latitude 
         case longitude
         case additionalInfo  
 		case names
-		case landType
+		case landTypeString
+		case visited
     }
     
     enum AdditionalInfoKeys: String, CodingKey {
@@ -25,12 +27,34 @@ struct Coordinate {
         case Farm  
 		case Road
 		case Building
+		case Unknown
+		static func fromString(_ str:String)->EnumLandType{
+			switch str {
+				case "City": return EnumLandType.City
+				case "Mountain": return EnumLandType.Mountain
+				case "Farm": return EnumLandType.Farm
+				case "Road": return EnumLandType.Road
+				case "Building": return EnumLandType.Building
+				default: return EnumLandType.Unknown
+			}
+		}
     }
     
+	func toString() -> String {
+	
+		var str = "latitude=\(self.latitude),   longitude=\(self.longitude),   elevation=\(self.elevation), visited=\(self.visited)  \n"
+        str += "names=[ " 
+        for i in 0 ..< self.names.count { 
+			str += " \(self.names[i]), "
+		}
+        str += "]\n"
+        str += "landType=\(self.landType)\n"
+        return str
+	}
 	
 	
 	
-	
+	 
 } //end of struct
 
 extension Coordinate: Decodable {
@@ -43,7 +67,10 @@ extension Coordinate: Decodable {
         elevation = try additionalInfo.decode(Double.self, forKey: .elevation)
 		
 		names = try values.decode([String].self, forKey: .names)
-		landType = try values.decode(String.self, forKey: .landType) // WRONG. String value cannot be sent to EnumLandType value.
+		let lts = try values.decode(String.self, forKey: .landTypeString)
+		landType = EnumLandType.fromString(lts)
+		visited = try values.decode(Bool.self, forKey: .visited)
+		
 		
     }
 }
@@ -53,9 +80,13 @@ extension Coordinate: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
+		try container.encode(visited, forKey: .visited)
+		
+		try container.encode(names, forKey: .names)
+		try container.encode(landType.rawValue, forKey: .landTypeString)
         
-        //var additionalInfo = container.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
-        //try additionalInfo.encode(elevation, forKey: .elevation)
+        var additionalInfo = container.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
+        try additionalInfo.encode(elevation, forKey: .elevation)
     }
 }
 
@@ -64,22 +95,48 @@ let json = """
 	"latitude":  5460.90,
 	"longitude": 680.88,
 	"additionalInfo" : {"elevation": 32.45},
-	"names" : ["A","B","C","D","E"]
+	"names" : ["A","B","C","D","E"],
+	"landTypeString" : "City",
+	"visited" : true
 }
 
 """.data(using: .utf8)! // our data in native format
 
 let coord = try JSONDecoder().decode(Coordinate.self, from: json)
 
-print("latitude=\(coord.latitude),   longitude=\(coord.longitude),   elevation=\(coord.elevation),   ")
+//print("latitude=\(coord.latitude),   longitude=\(coord.longitude),   elevation=\(coord.elevation), visited=\(coord.visited)  ")
 
-for i in 0 ..< coord.names.count {print(" \(coord.names[i])")}
+//for i in 0 ..< coord.names.count {print(" \(coord.names[i])")}
 
-print("landType=\(coord.landType)")
+//print("landType=\(coord.landType)")
 
-	  
-	  
-	  
+
+print(coord.toString())
+
+var obj = coord
+obj.latitude = 3999.10
+obj.longitude = 2999.10
+obj.elevation = 99.10
+obj.landType = Coordinate.EnumLandType.Building
+obj.names = ["AA","BB","CC","DD","EE"]
+obj.visited = false
+
+let jsonEncoder = JSONEncoder()
+do {
+    let jsonData = try jsonEncoder.encode(obj)
+    let jsonString = String(data: jsonData, encoding: .utf8) // Quick way to present json to string.
+    print("JSON String : " + jsonString! + "\n\n")
+	
+	let coord1 = try JSONDecoder().decode(Coordinate.self, from: jsonData)
+	print(coord1.toString())
+}
+catch {
+}
+
+
+
+ 
+	   
 	  
 	  
 

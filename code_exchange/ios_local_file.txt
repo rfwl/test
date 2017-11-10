@@ -31,6 +31,57 @@ React to Triple Click Key
 
 
 Actions:
+
+==========================================================================
+https://medium.com/@ashishkakkad8/use-of-codable-with-jsonencoder-and-jsondecoder-in-swift-4-71c3637a6c65
+
+struct Movie: Codable {
+    enum MovieGenere: String, Codable {
+        case horror, skifi, comedy, adventure, animation
+    }
+    
+    var name : String
+    var moviesGenere : [MovieGenere]
+    var rating : Int
+}
+
+
+let upMovie = Movie(name: "Up", moviesGenere: [.comedy , .adventure, .animation], rating : 4)
+
+// Encode data
+let jsonEncoder = JSONEncoder()
+do {
+    let jsonData = try jsonEncoder.encode(upMovie)
+    let jsonString = String(data: jsonData, encoding: .utf8)
+    print("JSON String : " + jsonString!)
+}
+catch {
+}
+
+JSONEncoder will give us the JSON data which is used to retrieve JSON string.
+Output string will be like :
+{
+  "name": "Up",
+  "moviesGenere": [
+    "comedy",
+    "adventure",
+    "animation"
+  ],
+  "rating": 4
+}
+// Decode
+JSONDecoder is an object that decodes instances of a data type from JSON objects. We can get the object back from the JSON string.
+do {
+    // Decode data to object
+    
+    let jsonDecoder = JSONDecoder()
+    let upMovie = try jsonDecoder.decode(Movie.self, from: jsonData)
+    print("Name : \(upMovie.name)")
+    print("Rating : \(upMovie.rating)")
+}
+catch {
+}
+
 =========================================================================
 https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html
 enum, 
