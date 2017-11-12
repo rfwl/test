@@ -17,6 +17,7 @@
 		C335A3671FA9EAE5001B18D6 /* PopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3611FA9EAE5001B18D6 /* PopUpContainerView.swift */; };
 		C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */; };
 		C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */; };
+		C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCAF291FB5ABCD001A4100 /* Settings.swift */; };
 		C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321511FA8A02800108C40 /* AppDelegate.swift */; };
 		C3D321541FA8A02800108C40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321531FA8A02800108C40 /* ViewController.swift */; };
 		C3D321571FA8A02800108C40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D321551FA8A02800108C40 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		C335A3611FA9EAE5001B18D6 /* PopUpContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpContainerView.swift; sourceTree = "<group>"; };
 		C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLibrary.swift; sourceTree = "<group>"; };
+		C3CCAF291FB5ABCD001A4100 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C3D3214E1FA8A02700108C40 /* zdios203.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zdios203.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D321511FA8A02800108C40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3D321531FA8A02800108C40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		C3D321651FA8A07400108C40 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				C3CCAF291FB5ABCD001A4100 /* Settings.swift */,
 				C335A35A1FA9EAD0001B18D6 /* KeyboardDefintion.swift */,
 				C335A3581FA9EAD0001B18D6 /* KeyboardKey.swift */,
 				C335A3591FA9EAD0001B18D6 /* KeyCell.swift */,
@@ -197,6 +200,7 @@
 				C335A35B1FA9EAD1001B18D6 /* KeyboardKey.swift in Sources */,
 				C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */,
 				C335A3651FA9EAE5001B18D6 /* ShapeLibrary.swift in Sources */,
+				C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */,
 				C335A3641FA9EAE5001B18D6 /* KeyView.swift in Sources */,
 				C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */,
 				C335A35C1FA9EAD1001B18D6 /* KeyCell.swift in Sources */,

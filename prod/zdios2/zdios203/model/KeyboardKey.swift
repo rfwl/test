@@ -1,14 +1,15 @@
 import Foundation
 import UIKit
 
-class KeyboardKey {
+class KeyboardKey : Codable {
  
     //================================================
    	// Properties
-    var widthInRowUnits:Int = 1    
    	var mainCellArray:[KeyCell]
  	var secondaryCellArray:[KeyCell]? = nil
- 	var popUpCellArray:[KeyCell]? = nil    
+ 	var popUpCellArray:[KeyCell]? = nil
+    
+    var widthInRowUnits:Int = 1
   	var frame:CGRect = CGRect.zero 
     var view:KeyView?
    
@@ -59,7 +60,7 @@ class KeyboardKey {
     var secondaryCell_WidthScale = CGFloat(0.6); 	
  	var secodaryCellLocation:EnumSecondaryCellLocation = EnumSecondaryCellLocation.BottomRight
  	    
-    enum EnumSecondaryCellLocation {
+    enum EnumSecondaryCellLocation : String {
     	case TopLeft
     	case TopRight
     	case BottomLeft
@@ -70,17 +71,6 @@ class KeyboardKey {
    	// Cell Frames     
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
-    
-   	func setMainAndSecondaryFrames(){
-        mainCellFrame = CGRect.zero
-        secondaryCellFrame = CGRect.zero
-   		if self.hasSecondaryCells {
-   			calculateMainCellFrame()
-  			calculateSecondaryCellFrame()  	
-   		} else {
-   			mainCellFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-   			secondaryCellFrame = CGRect.zero
-    } //end of func
    	
    	 private func calculateSecondaryCellFrame(){
     	let w = self.frame.width * self.secondaryCell_WidthScale
@@ -95,8 +85,6 @@ class KeyboardKey {
     		self.secondaryCellFrame = CGRect(x: 0, y: self.frame.height-h, width: w, height: h)
         case .BottomRight:
     		self.secondaryCellFrame = CGRect(x: self.frame.width-w, y: self.frame.height-h, width: w, height: h)
-        //default:
-        	//self.secondaryCellFrame = CGRect.zero
         }
     }
     
@@ -110,17 +98,103 @@ class KeyboardKey {
     		self.mainCellFrame = CGRect(x: 0, y: sh, width: w, height: h )
     	case .BottomLeft, .BottomRight:
     		self.mainCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
-        //default:
-        	//self.mainCellFrame = CGRect.zero
         }
     }
     
+    func setMainAndSecondaryFrames(){
+        mainCellFrame = CGRect.zero
+        secondaryCellFrame = CGRect.zero
+        if self.hasSecondaryCells {
+            calculateMainCellFrame()
+            calculateSecondaryCellFrame()
+        } else {
+            mainCellFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            secondaryCellFrame = CGRect.zero
+        }
+    } //end of func
     //======================================================
-    // 
+    //
     
+    
+    enum CodingKeys: String, CodingKey {
+        case mainCellArray
+        case secondaryCellArray
+        case popUpCellArray
+        case widthInRowUnits
+      
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        mainCellArray = try values.decode([KeyCell].self, forKey: .mainCellArray)
+        secondaryCellArray = try values.decode([KeyCell].self, forKey: .secondaryCellArray)
+        popUpCellArray = try values.decode([KeyCell].self, forKey: .popUpCellArray)
+        widthInRowUnits = try values.decode(Int.self, forKey: .widthInRowUnits)
+        
+        
+    }
     //======================================================
-   	
+    
 } // end of class
+
+
+    let ca = """
+    {"name":"P1A","text":"A"}
+    """.data(using: .utf8)!
+    let cb = """
+{"name":"P1B","text":"B"}
+""".data(using: .utf8)!
+    let cc = """
+{"name":"P1C","text":"C"}
+""".data(using: .utf8)!
+    let cd = """
+{"name":"P1D","text":"D"}
+""".data(using: .utf8)!
+    let ce = """
+{"name":"P1E","text":"E"}
+""".data(using: .utf8)!
+    let cf = """
+{"name":"P1F","text":"F"}
+""".data(using: .utf8)!
+    let cg = """
+{"name":"P1G","text":"G"}
+""".data(using: .utf8)!
+    let ch = """
+{"name":"P1H","text":"H"}
+""".data(using: .utf8)!
+    let ci = """
+{"name":"P1I","text":"I"}
+""".data(using: .utf8)!
+    let cj = """
+{"name":"P1J","text":"J"}
+""".data(using: .utf8)!
+    
+    let ky = """
+{"mainCellArray" : [ca,cb,cc], "secondaryCellArray" : [cd,ce,cf], "popUpCellArray" : [cg,ch,ci,cj], widthInRowUnits : 1}
+""".data(using: .utf8)!
+    
+    func decodeTest() {
+        let jsonDecoder3 = JSONDecoder()
+        let obj = try? jsonDecoder3.decode(KeyboardKey.self, from: ky)
+        obj?.widthInRowUnits = 9
+        
+        let jsonEncoder2 = JSONEncoder()
+        jsonEncoder2.outputFormatting = .prettyPrinted
+        
+        if let json2 = try? jsonEncoder2.encode(obj) {
+            if let jsonString = String(data: json2, encoding: .utf8) {
+                print(jsonString)
+            }
+        }
+    } //end of func
+    
+    
+    
+    
+    
+    
+    
+
  
 
 
