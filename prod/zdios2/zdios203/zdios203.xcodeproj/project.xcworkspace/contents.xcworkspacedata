@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:zdios203.xcodeproj">
+      location = "group:/Users/wanloufeng/Desktop/git3/prod/zdios2/zdios203/model/KeyboardDefintionJsonBuilder.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

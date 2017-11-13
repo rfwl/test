@@ -112,30 +112,90 @@ let p3r4 = """
  			"keys" : [
 """
 //============================================
-let p1r1 = """
+let p4r1 = """
  		{
- 			"name" : "P1R1",
- 			"text" : "Page 1 Row 1",
+ 			"name" : "P4R1",
+ 			"text" : "Page 4 Row 1",
  			"keys" : [
 """
-let p1r2 = """
+let p4r2 = """
  		{
- 			"name" : "P1R2",
- 			"text" : "Page 1 Row 2",
+ 			"name" : "P4R2",
+ 			"text" : "Page 4 Row 2",
  			"keys" : [
 """
-let p1r3 = """
+let p4r3 = """
  		{
- 			"name" : "P1R3",
- 			"text" : "Page 1 Row 3",
+ 			"name" : "P4R3",
+ 			"text" : "Page 4 Row 3",
  			"keys" : [
 """
-let p1r4 = """
+let p4r4 = """
  		{
- 			"name" : "P1R4",
- 			"text" : "Page 1 Row 4",
+ 			"name" : "P4R4",
+ 			"text" : "Page 4 Row 4",
  			"keys" : [
 """
+//============================================
+let template_keyDefChar1 = """
+{
+"name" : "Key*",
+"text" : "Key *",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"*","text":"*"}],
+"secondaryCellArray" : [{"name":"*0","text":"*0"}],
+"popUpCellArray" : [{"name":"*1","text":"*1"},{"name":"*2","text":"*2"},{"name":"*3","text":"*3"},{"name":"*4","text":"*4"},{"name":"*5","text":"*5"}]
+}
+"""
+
+let template_keyDefChar2 = """
+{
+"name" : "Key*#",
+"text" : "Key * and #",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"*","text":"*"}],
+"secondaryCellArray" : [{"name":"#","text":"#"}],
+"popUpCellArray" : [{"name":"*1","text":"*1"},{"name":"*2","text":"*2"},{"name":"*3","text":"*3"},{"name":"*4","text":"*4"},{"name":"*5","text":"*5"}]
+}
+"""
+
+func keyDef(_ char1:String) -> String {
+    return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
+}
+
+func keyDef(_ char1:String, char2:String) -> String {
+    return template_keyDefChar2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+}
+
+func rowDef(_ char1s:String) -> String {
+    var def = ""
+    for c in char1s {
+        def += keyDef(String(c))
+    }
+    return def
+}
+
+func rowDef(_ char1s:String,char2s:String) -> String {
+    var def = ""
+    for i in 0 ..< min(char1s.count, char2s.count) {
+        let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+        let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+        let c1 = char1s[idx1]
+        let c2 = char1s[idx2]
+        def += keyDef(String(c1),char2: String(c2))
+    }
+    return def
+}
+
+//============================================
+
+
+//============================================
+
+
+//============================================
+
+
 //============================================
 
 
@@ -143,51 +203,47 @@ let p1r4 = """
 
 
 
-let 
-{
-	"name" : "DefaultKeyboardDefinition",
-	"text" : "Minimal English Keyboard",
-	"pages" : 
-	[
-
- 		{
- 			"name" : "P1",
- 			"text" : "Page Uppercase",
- 			"rows" : [
-   				"name" : "P1R1",
-   				"text" : "Row 1",
-   				"keys" : [
-
-   							{
-								"name" : "A", 
-								"text" : "A", 
-								"mainCellArray" : [
-ca,cb,cc
-], 
-"secondaryCellArray" : [
-
-cd,ce,cf], 
-
-"popUpCellArray" : [cg,ch,ci,cj], widthInRowUnits : 1}
-
-{ {"name":"P1J","text":"J"}
-
-},
 
 
-]
-
-},
-{
-
-},
-
-{ 
 
 
-}
 
-]
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//============================================
+
+
+
+//============================================
+
+
+
+//============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
 

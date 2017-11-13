@@ -66,28 +66,7 @@ class KeyCell : Codable {
         }
     }
     
-    //======================================================
-    // Transient Properties
-    let json1 = """
-    {
-        "name":"P1A",
-        "text":"A"
-    }
-    """.data(using: .utf8)!
-    func decodeTest() {
-        let jsonDecoder3 = JSONDecoder()
-        let obj = try? jsonDecoder3.decode(KeyCell.self, from: json1)
-        obj?.image = "img001"
-        
-        let jsonEncoder2 = JSONEncoder()
-        jsonEncoder2.outputFormatting = .prettyPrinted
-        
-        if let json2 = try? jsonEncoder2.encode(obj) {
-            if let jsonString = String(data: json2, encoding: .utf8) {
-                print(jsonString)
-            }
-        }
-    } //end of func
+   
 
     //======================================================
     
