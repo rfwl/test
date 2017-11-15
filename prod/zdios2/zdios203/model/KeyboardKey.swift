@@ -5,14 +5,23 @@ class KeyboardKey : Codable {
  
     //================================================
    	// Properties
+   	var name:String
+    var text:String?    
    	var mainCellArray:[KeyCell]
+   	
  	var secondaryCellArray:[KeyCell]? = nil
- 	var popUpCellArray:[KeyCell]? = nil
+ 	var popUpCellArray:[KeyCell]? = nil    
+    var widthInRowUnit:Int = 1
     
-    var widthInRowUnits:Int = 1
-  	var frame:CGRect = CGRect.zero 
-    var view:KeyView?
-   
+  	enum CodingKeys: String, CodingKey {
+        case name 
+        case text
+        case mainCellArray
+        case secondaryCellArray
+        case popUpCellArray
+        case widthInRowUnit
+     
+    }
     //================================================
    	// Inits
    	init(_ char:String) {
@@ -69,6 +78,7 @@ class KeyboardKey : Codable {
     
     //================================================
    	// Cell Frames     
+    var frame:CGRect = CGRect.zero    
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
    	
@@ -115,14 +125,12 @@ class KeyboardKey : Codable {
     //======================================================
     //
     
+    //======================================================
     
-    enum CodingKeys: String, CodingKey {
-        case mainCellArray
-        case secondaryCellArray
-        case popUpCellArray
-        case widthInRowUnits
-      
-    }
+} // end of class
+
+
+ /*   
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -133,11 +141,7 @@ class KeyboardKey : Codable {
         
         
     }
-    //======================================================
     
-} // end of class
-
-
     let ca = """
     {"name":"P1A","text":"A"}
     """.data(using: .utf8)!
@@ -188,6 +192,7 @@ class KeyboardKey : Codable {
         }
     } //end of func
     
+  */
     
     
     

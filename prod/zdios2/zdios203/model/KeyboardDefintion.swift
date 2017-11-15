@@ -13,6 +13,10 @@ class KeyboardRow {
     
     //================================================
     // Data
+    var name:String
+    var text:String?  
+    var keyArray:[KeyboardKey]
+    
     var cellTotal:CGFloat=10
     var height:CGFloat = 1
     var paddingTop:CGFloat = 0.1
@@ -20,9 +24,12 @@ class KeyboardRow {
     var paddingLeft:CGFloat = 0.1
     var paddingRight:CGFloat = 0.1
     var gap:CGFloat = 0.1
-    var keys:[KeyboardKey]!
     
-    
+    enum CodingKeys: String, CodingKey {
+        case name 
+        case text
+        case keyArray     
+    }
     //================================================
     // Init
     init() {
@@ -66,8 +73,10 @@ class KeyboardRow {
     
     //================================================
     //
-    var frame:CGRect
+    var frame:CGRect = CGRect.zero
     
+    //================================================
+    //
     
 } //end of class
 
@@ -75,13 +84,14 @@ class KeyboardPage {
     
     //================================================
     // Data
-    var rows: [KeyboardRow]
+    var name:String
+    var text:String?  
+    var rowArray: [KeyboardRow]
     //================================================
     // Init
     
-    init(_ keyboardRows:[KeyboardRow]){
-        self.rows = keyboardRows
-        
+    init(_ rows:[KeyboardRow]){
+        self.rows = rows        
     }
     
     //================================================
@@ -92,18 +102,20 @@ class KeyboardDefinition {
     
     //================================================
     // Data
-    var pages: [KeyboardPage]
+    var name:String
+    var text:String?  
+    var pageArray: [KeyboardPage]
     
     //================================================
-    // Init
-    init(_ keyboardPages:[KeyboardPage]){
-        self.pages = keyboardPages
-        
+    // Init    
+    init(_ pages:[KeyboardPage]){
+        self.pages = pages        
     }
     
     //================================================
 } //end of class
 
+/*
 
 func defaultKeyboard() -> KeyboardDefinition {
     
@@ -223,5 +235,5 @@ func defaultKeyboard() -> KeyboardDefinition {
 } // end of func
 
 
-
+*/
 

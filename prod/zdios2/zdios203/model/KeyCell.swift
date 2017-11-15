@@ -12,11 +12,17 @@ import UIKit
 class KeyCell : Codable {
     
     var name:String
-    
     var text:String?
     var image:String?
     var widthInPopUpUnit:CGFloat = CGFloat(1)
     var fontSize:CGFloat = Settings.Main_Cell_Font_Size
+    
+    enum CodingKeys: String, CodingKey {
+        case name 
+        case text
+        case image  
+		case widthInPopUpUnit	
+    }
     //======================================================
     //
     init(_ char:String) {
