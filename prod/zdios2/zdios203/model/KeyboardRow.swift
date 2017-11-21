@@ -1,14 +1,5 @@
-//
-//  KeyCell.swift
-//  zdios203
-//
-//  Created by Wanlou Feng on 27/9/17.
-//  Copyright © 2017 Wanlou Feng. All rights reserved.
-//
-import Foundation
-import UIKit
 
-class KeyboardRow {
+class KeyboardRow : Codable {
     
     //================================================
     // Data
@@ -16,7 +7,7 @@ class KeyboardRow {
     var text:String?  
     var keyArray:[KeyboardKey]
     
-    var RowUnitTotal:CGFloat=10
+    var rowUnitTotal:CGFloat=10
     var height:CGFloat = 1
     
     var paddingTop:CGFloat = 0.1
@@ -29,19 +20,21 @@ class KeyboardRow {
         case name 
         case text
         case keyArray  
-        case rowUnitTotal
-        case height
-        case paddingTop
-        case paddingBottom
-        case paddingLeft
-        case paddingRight
-        case gap
+        //case rowUnitTotal
+        //case height
+        //case paddingTop
+        //case paddingBottom
+        //case paddingLeft
+        //case paddingRight
+        //case gap
            
     }
     //================================================
     // Init
     init() {
-        self.keys = [KeyboardKey]()
+		self.name = ""
+		self.text = ""
+        self.keyArray = [KeyboardKey]()
         self.frame = .zero
     }
     
@@ -56,50 +49,52 @@ class KeyboardRow {
     
     convenience init(keys:[KeyboardKey]){
         self.init()
-        self.keys = keys
+        self.keyArray = keys
     }
     
     func addCharArray(_ charArray: [Character]){
         for c in charArray {
             let k = KeyboardKey(String(c))
-            self.keys.append(k)
+            self.keyArray.append(k)
         }
     }
     func addCharString(_ charString: String){
         for c in charString.characters {
             let k = KeyboardKey(String(c))
-            self.keys.append(k)
+            self.keyArray.append(k)
         }
     }
     func addFirstKey(_ key: KeyboardKey) {
-        self.keys.insert(key,at: 0);
+        self.keyArray.insert(key,at: 0);
     }
     
     func addLastKey(_ key: KeyboardKey) {
-        self.keys.append(key);
+        self.keyArray.append(key);
     }
     
     //================================================
     //
     var frame:CGRect = CGRect.zero // Set from KeyboardPage
     var heightScale:CGFloat = CGFloat(1.0)
-    
+    /*
     func layoutKeys() { 
     	if(self.frame.width==0) {return}
         let rowWidthInUnit = self.rowUnitTotal + self.paddingLeft + self.paddingRight + ( self.rowUnitTotal - CGFloat(1.0) ) * self.gap
         let oneUnitWidth = self.frame.width / rowWidthInUnit
         if(oneUnitWidth==0) {return}
         var xOffset:CGFloat = self.paddingLeft * oneUnitWidth
-        for key in self.keys {
+        for key in self.keyArray {
             key.frame.origin.y = self.frame.origin.y + self.paddingTop * self.heightScale
             key.frame.size.height = self.frame.height - (self.paddingTop + self.paddingBottom) * self.heightScale
             key.frame.origin.x = xOffset
-            key.frame.size.width = (CGFloat(key.widthInUnit) + CGFloat((key.rowWidthInUnit-1)) * row.gap) * oneUnitWidth
+            key.frame.size.width = (CGFloat(key.widthInUnit) + CGFloat((key.rowWidthInUnit-1)) * self.gap) * oneUnitWidth
             xOffset += key.frame.width + self.gap * oneUnitWidth
         }
     }
-    
+    */
     //================================================
     //
     
 } //end of class
+
+

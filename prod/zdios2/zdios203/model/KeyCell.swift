@@ -1,14 +1,3 @@
-//
-//  KeyCell.swift
-//  zdios203
-//
-//  Created by Wanlou Feng on 27/9/17.
-//  Copyright © 2017 Wanlou Feng. All rights reserved.
-//
-
-import Foundation
-import UIKit
-
 class KeyCell : Codable {
     
     var name:String
@@ -44,6 +33,8 @@ class KeyCell : Codable {
     }
     //======================================================
     //
+	
+    /*
     var textView:UIView {
         get {
             let lbl:UILabel = UILabel()
@@ -71,9 +62,11 @@ class KeyCell : Codable {
             return nil
         }
     }
-    
+
+    */
    
 
     //======================================================
     
 } // end of class
+
