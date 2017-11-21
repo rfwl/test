@@ -4,7 +4,7 @@ class KeyboardDefinitionJsonBuilder {
 	
 	//============================================
 	// Key Level: Only Main Cell
-	let template_keyDefChar1 = """
+	static let template_keyDefChar1 = """
 	{
 	"name" : "Key*",
 	"text" : "Key *",
@@ -19,13 +19,13 @@ class KeyboardDefinitionJsonBuilder {
 	]
 	}
 	"""
-	func keyDef(_ char1:String) -> String {
+	static func keyDef(_ char1:String) -> String {
 	    return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
 	}
 	
 	//============================================
 	// Key Level: Only Main Cell
-	let template_keyDefChar2 = """
+	static let template_keyDefChar2 = """
 	{
 	"name" : "Key*#",
 	"text" : "Key * and #",
@@ -42,7 +42,7 @@ class KeyboardDefinitionJsonBuilder {
 	}
 	"""
 	
-	func keyDef(_ char1:String, char2:String) -> String {
+	static func keyDef(_ char1:String, char2:String) -> String {
 	    if String(char1)==" " { return " "} 
 	    if String(char2)==" " {
 	    	return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
@@ -53,19 +53,19 @@ class KeyboardDefinitionJsonBuilder {
 	
 	//============================================
 	// Row Level: Main Cell Only
-	let template_close = """
+	static let template_close = """
 		]
 	}
 	"""
-	let template_rowDef = """
+	static let template_rowDef = """
 	{
 	"name" : "{NAME}",
 	"text" : "{TEXT}",
 	"keyArray" : [
 	"""
-	let str1 = row1 + rowDef(upLetterPageR0, char2s:upLetterPageR0S) + close
+	static let str1 = row1 + rowDef(upLetterPageR0, char2s:upLetterPageR0S) + close
 	
-	func rowDef(_ char1s:String, name: String, text: String) -> String {
+	static func rowDef(_ char1s:String, name: String, text: String) -> String {
 	    var strKeys = ""
 	    for c in char1s {
 			if strKeys.count>0 {
@@ -78,7 +78,7 @@ class KeyboardDefinitionJsonBuilder {
 	    return temp2 + "\n" + strKeys + "\n" + template_close  	    
 	}
 
-	func rowDef(_ char1s:String,char2s:String, name: String, text: String) -> String {
+	static func rowDef(_ char1s:String,char2s:String, name: String, text: String) -> String {
 	    var strKeys = "" 
 	    for i in 0 ..< min(char1s.count, char2s.count) {
 	        let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
@@ -97,13 +97,13 @@ class KeyboardDefinitionJsonBuilder {
 	
 	//============================================
 	// Page Level
-	let template_pageDef = """
+	static let template_pageDef = """
 	{
 	"name" : "{NAME}",
 	"text" : "{TEXT}",
 	"rowArray" : [
 	"""
-	func pageDef(_ strRows:String, name: String, text: String) -> String {
+	static func pageDef(_ strRows:String, name: String, text: String) -> String {
 	    var temp1 = template_rowDef.replacingOccurrences(of: "{NAME}", with: name)
 	    var temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
 	    return temp2 + "\n" + strRows + "\n" + template_close  
@@ -111,14 +111,14 @@ class KeyboardDefinitionJsonBuilder {
 	
 	//============================================
 	// Keyboard Level
-	let template_keyboardDef = """
+	static let template_keyboardDef = """
 	{
 	"name" : "{NAME}",
 	"text" : "{TEXT}",
 	"pageArray" : [
 	"""
 	
-	func keyboardDef(_ strPages:String, name: String, text: String) -> String {
+	static func keyboardDef(_ strPages:String, name: String, text: String) -> String {
 	    var temp1 = template_rowDef.replacingOccurrences(of: "{NAME}", with: name)
 	    var temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
 	    return temp2 + "\n" + strPages + "\n" + template_close  
@@ -126,32 +126,32 @@ class KeyboardDefinitionJsonBuilder {
 	
 	//============================================
 	//
-	let p1r1m = "qwertyuiop"
-	let p1r1s = "1234567890"
-	let p1r2m = "asdfghjkl"
-	let p1r2s = "-+*/"':;?"
-	let p1r3m = "zxcvbnm,."
-	let p1r3s = "()[]{}<>"
+	static let p1r1m = "qwertyuiop"
+	static let p1r1s = "1234567890"
+	static let p1r2m = "asdfghjkl"
+	static let p1r2s = "-+*/"':;?"
+	static let p1r3m = "zxcvbnm,."
+	static let p1r3s = "()[]{}<>"
 	
-	let p2r1m = "QWERTYUIOP"
-	let p2r1s = "1234567890"
-	let p2r2m = "ASDFGHJKL"
-	let p2r2s = "-+*/"':;?"
-	let p2r3m = "ZXCVBNM,."
-	let p2r3s = "()[]{}<>"
+	static let p2r1m = "QWERTYUIOP"
+	static let p2r1s = "1234567890"
+	static let p2r2m = "ASDFGHJKL"
+	static let p2r2s = "-+*/"':;?"
+	static let p2r3m = "ZXCVBNM,."
+	static let p2r3s = "()[]{}<>"
 	
-	let p3r1m = "1234567890"
-	let p3r2m = "-+*/"':;?"
-	let p3r3m = "()[]{}<>"
+	static let p3r1m = "1234567890"
+	static let p3r2m = "-+*/"':;?"
+	static let p3r3m = "()[]{}<>"
 	
-	let p4r1m = "!@#$%^&*()"
-	let p4r2m = "-+*/"':;?"
-	let p4r3m = "()[]{}<>"
+	static let p4r1m = "!@#$%^&*()"
+	static let p4r2m = "-+*/"':;?"
+	static let p4r3m = "()[]{}<>"
 	
     
 	//============================================
 	// 
-	func buildDefaultKeyboard() {
+	static func buildDefaultKeyboard() {
 		let p1r1 = rowDef(p1r1m,p1r1s, name: "p1r1", text: "Page 1 Row 1")
 		let p1r2 = rowDef(p1r2m,p1r2s, name: "p1r2", text: "Page 1 Row 2")
 		let p1r3 = rowDef(p1r3m,p1r3s, name: "p1r3", text: "Page 1 Row 3")

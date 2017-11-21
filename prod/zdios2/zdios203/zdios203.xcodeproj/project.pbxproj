@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C33049721FB98540002884F5 /* KeyboardDefintionJsonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33049711FB98540002884F5 /* KeyboardDefintionJsonBuilder.swift */; };
+		C325AB1C1FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */; };
+		C325AB1D1FC2E6AD00D354FC /* KeyboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */; };
+		C325AB1E1FC2E6AD00D354FC /* KeyboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */; };
 		C335A3571FA9EAC2001B18D6 /* Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3561FA9EAC2001B18D6 /* Commander.swift */; };
 		C335A35B1FA9EAD1001B18D6 /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3581FA9EAD0001B18D6 /* KeyboardKey.swift */; };
 		C335A35C1FA9EAD1001B18D6 /* KeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3591FA9EAD0001B18D6 /* KeyCell.swift */; };
@@ -26,7 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C33049711FB98540002884F5 /* KeyboardDefintionJsonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardDefintionJsonBuilder.swift; path = /Users/wanloufeng/Desktop/git3/prod/zdios2/zdios203/model/KeyboardDefintionJsonBuilder.swift; sourceTree = "<absolute>"; };
+		C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDefintionJsonBuilder.swift; sourceTree = "<group>"; };
+		C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPage.swift; sourceTree = "<group>"; };
+		C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardRow.swift; sourceTree = "<group>"; };
 		C335A3561FA9EAC2001B18D6 /* Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commander.swift; sourceTree = "<group>"; };
 		C335A3581FA9EAD0001B18D6 /* KeyboardKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 		C335A3591FA9EAD0001B18D6 /* KeyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCell.swift; sourceTree = "<group>"; };
@@ -104,7 +108,9 @@
 		C3D321651FA8A07400108C40 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				C33049711FB98540002884F5 /* KeyboardDefintionJsonBuilder.swift */,
+				C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */,
+				C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */,
+				C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */,
 				C3CCAF291FB5ABCD001A4100 /* Settings.swift */,
 				C335A35A1FA9EAD0001B18D6 /* KeyboardDefintion.swift */,
 				C335A3581FA9EAD0001B18D6 /* KeyboardKey.swift */,
@@ -195,17 +201,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3D321541FA8A02800108C40 /* ViewController.swift in Sources */,
+				C325AB1C1FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift in Sources */,
 				C335A3571FA9EAC2001B18D6 /* Commander.swift in Sources */,
 				C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */,
 				C335A35B1FA9EAD1001B18D6 /* KeyboardKey.swift in Sources */,
 				C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */,
 				C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */,
+				C325AB1D1FC2E6AD00D354FC /* KeyboardPage.swift in Sources */,
 				C335A3641FA9EAE5001B18D6 /* KeyView.swift in Sources */,
+				C325AB1E1FC2E6AD00D354FC /* KeyboardRow.swift in Sources */,
 				C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */,
 				C335A35C1FA9EAD1001B18D6 /* KeyCell.swift in Sources */,
 				C335A35D1FA9EAD1001B18D6 /* KeyboardDefintion.swift in Sources */,
 				C335A3671FA9EAE5001B18D6 /* PopUpContainerView.swift in Sources */,
-				C33049721FB98540002884F5 /* KeyboardDefintionJsonBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
