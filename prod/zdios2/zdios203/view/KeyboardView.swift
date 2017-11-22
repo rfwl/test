@@ -1,6 +1,15 @@
 
 import UIKit
 
+extension UIView {
+ 	func clearSubviews() {
+ 	
+        for vw in self.subviews {
+            vw.removeFromSuperview()
+        }
+    }
+}
+
 class KeyboardView: UIView {
     
     //=============================================================================
@@ -33,13 +42,31 @@ class KeyboardView: UIView {
         }
     }
     
+    //=============================================================================
+    //
+    func layoutKeys(){
+        
+        for pg in keyboardDefinition.pages {
+        	pg.frame = self.bounds
+            pg.layoutRows()
+        }
+        
+        
+    } //end of func
+ 
+    
+    
+    //=============================================================================
+    //
+ 
     func buildKeyViews(){
         
         for pg in keyboardDefinition.pages {
             buildKeyViewsForPage(pg)
         }
     }
-    
+ 
+ 
     func buildKeyViewsForPage(_ page:KeyboardPage){
         
         // Calculate vertical scale

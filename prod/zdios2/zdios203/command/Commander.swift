@@ -10,9 +10,33 @@ import Foundation
 import AVFoundation
 
 class Commander {
-    
+    //===================================================
+    // Workers    
     static var keyboardView:KeyboardView?
     static var popUpContainerView : PopUpContainerView?
+    
+    //===================================================
+    // Start-up
+    static func startUp(){
+    	// Read in the keyboard definition file into string
+   	    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+		let localUrl = documentDirectory.appendingPathComponent("DefaultKeyboardDefinition.json")
+		if FileManager.default.fileExists(atPath: localUrl.path){
+    	if let fileContents = NSData(contentsOfFile: localUrl.path) {
+        	guard let data = fileContents as Data else {throw "Wrong format in file resource"}
+        	do {
+        	
+        		// Decode into Keyboard Definition object.
+            	let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
+            	// Load the keyboard definition onto the keyboard view.            	
+            	keyboardView.keyboardDefinition = kbdDef
+            	
+	        } catch let jsonErr {
+	           	print("Error serializing json", jsonErr)
+	        }
+    	}    
+    }
+    
     //===================================================
     // Report KeyView Touches
     

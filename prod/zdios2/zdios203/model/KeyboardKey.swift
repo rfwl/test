@@ -130,6 +130,36 @@ class KeyboardKey : Codable {
 	*/
     //======================================================
     //
+    var keyView:KeyView?
+    var currentMainCellIndex:Int = 0 
+    var currentSecondaryCellIndex:Int = 0
+     
+    func buildKeyView() {
+    	keyView = KeyView(self.frame)    	
+    	addCellViews(mainCellIndex: 0, secondaryCellIndex: 0)
+    }
+    
+    func addCellViews(mainCellIndex : Int, secondaryCellIndex : Int){
+    	 guard let kv = self.keyView else { return}
+    	 kv.clearSubViews()
+    	     	 
+    	 guard mainCellIndex<0 || mainCellIndex >= self.mainCellArray.count else {return}
+  		 var mcl = self.mainCellArray[mainCellIndex]	 
+    	 if let mcl = mcl, mclV = mcl.cellView {
+    	 	mclV.frame = self.mainCellFrame
+    	 	kv.addSubView(mclV)    	 		
+    	 }
+    	 guard self.hasSecondaryCells {return}
+    	 guard secondaryCellIndex<0 || secondaryCellIndex >= self.secondaryCellArray.count else {return}
+  		 var scl = self.secondaryCellArray[secondaryCellIndex]	 
+    	 if let scl = scl, sclV = scl.cellView {
+    	 	sclV.frame = self.secondaryCellFrame
+    	 	kv.addSubView(sclV)    	 		
+    	 }
+    }
+    
+    func changeMainCellView(){
+    }
     
     //======================================================
     

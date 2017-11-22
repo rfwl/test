@@ -35,8 +35,24 @@ class KeyCell : Codable {
     //
 	
     /*
-    var textView:UIView {
-        get {
+    var textView:UIView?
+    var imageView:UIImageView?
+    var cellView : UIView {
+    	get {
+    		return self.imageView != nil? self.imageView! : textView!
+    	}
+    }
+        
+    func buildCellViews(){
+        if let imgName = self.image {
+        	if let img = ImageLibrary.buildUIImage(self.image!) {
+                let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast
+                iv.contentMode = UIViewContentMode.scaleAspectFit
+                iv.backgroundColor = UIColor.brown
+                slef.textView = nil
+                self.imageView = iv
+            
+        } else { 
             let lbl:UILabel = UILabel()
             lbl.textAlignment = NSTextAlignment.center
             lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
@@ -47,22 +63,11 @@ class KeyCell : Codable {
             lbl.numberOfLines = 1
             lbl.text = self.text
             lbl.backgroundColor = UIColor.brown
-            return lbl
+            self.textView = lbl
+            self.imageView = nil            
         }
     }
     
-    var imageView:UIImageView? {
-        get {
-            if let img = ImageLibrary.buildUIImage(self.image!) {
-                let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast
-                iv.contentMode = UIViewContentMode.scaleAspectFit
-                iv.backgroundColor = UIColor.brown
-                return iv
-            }
-            return nil
-        }
-    }
-
     */
    
 
