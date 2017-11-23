@@ -34,7 +34,7 @@ class KeyView: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     //=====================================================================
-    // ocerrides
+    // overrides
     public override func draw(_ frame: CGRect) {
         if let ky = self.keyDefinition {
             //if ky.hasSecondaryCell { return }
@@ -54,7 +54,7 @@ class KeyView: UIControl {
     // KeyDefinition
     var keyDefinition:KeyboardKey? = nil {
         didSet {
-            if let ky = self.keyDefinition {
+            if let ky = self.keyDefinition {                
                 if ky.hasSecondaryCell {
                     // Key has 2nd cell
                     let cell1 = ky.keyCellArray[0]
@@ -85,7 +85,40 @@ class KeyView: UIControl {
         
     }
     
-  
+    //======================================================
+    //
+    var keyView:KeyView?
+    var currentMainCellIndex : Int = 0 
+    var currentSecondaryCellIndex : Int = 0
+    
+    func addCurrentCellViews(){
+    	addCellViews(mainCellIndex : currentMainCellIndex, secondaryCellIndex : currentSecondaryCellIndex)   
+    }
+        
+    func addCellViews(mainCellIndex : Int, secondaryCellIndex : Int){    	 
+    	 self.clearSubViews()
+    	     	 
+    	 guard mainCellIndex<0 || mainCellIndex >= self.keyDefinition.mainCellArray.count else {return}
+  		 var mcl = self.keyDefinition.mainCellArray[mainCellIndex]	 
+    	 if let mcl = mcl, mclV = mcl.cellView {
+    	 	mclV.frame = self.keyDefinition.mainCellFrame
+    	 	self.addSubView(mclV)    	 		
+    	 }
+    	 guard self.keyDefinition.hasSecondaryCells {return}
+    	 guard secondaryCellIndex<0 || secondaryCellIndex >= self.keyDefinition.secondaryCellArray.count else {return}
+  		 var scl = self.keyDefinition.secondaryCellArray[secondaryCellIndex]	 
+    	 if let scl = scl, sclV = scl.cellView {
+    	 	sclV.frame = self.keyDefinition.secondaryCellFrame
+    	 	self.addSubView(sclV)    	 		
+    	 }
+    }
+    //=====================================================================
+    // Operations
+    func changeMainCellView(){
+    }
+    
+    func changeSecondaryCellView(){
+    }
     //=====================================================================
     // Transient Properties
     var popUpFrame_MainCell:CGRect = CGRect.zero // the Rect is calculated in pop up container view
