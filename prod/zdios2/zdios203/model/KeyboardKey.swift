@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 class KeyboardKey : Codable {
  
     //================================================
@@ -86,7 +89,7 @@ class KeyboardKey : Codable {
     var frame:CGRect = CGRect.zero    
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
-   	/*
+   
    	 private func calculateSecondaryCellFrame(){ 
     	let w = self.frame.width * self.secondaryCell_WidthScale
     	let h = self.frame.height * self.secondaryCell_HeightScale
@@ -127,8 +130,9 @@ class KeyboardKey : Codable {
             secondaryCellFrame = CGRect.zero
         }
     } //end of func
-	*/
-    
+    //======================================================
+    //
+    var keyView:KeyView? = nil
     //======================================================
     
 } // end of class

@@ -20,6 +20,43 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
-}
+    @IBOutlet weak var textViewMessage: UITextView!
+    
+    @IBOutlet weak var viewMainArea: UIView!
+    
+    @IBAction func button1(_ sender: Any) {
+    }
+    
+    @IBAction func button2(_ sender: Any) {
+    }
+    
+    var keyboardView:KeyboardView?
+    var popUpContainerView:PopUpContainerView?
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let frm = CGRect(x:0, y:0, width:self.viewMainArea.bounds.width, height:self.viewMainArea.bounds.height)
+        Commander.keyboardView = KeyboardView(frame: frm)
+        viewMainArea.addSubview(Commander.keyboardView!)
+        
+        let frm1 = CGRect(x: frm.minX, y: frm.minY - PopUpSettings.heightAboveKeyboardView, width: frm.width, height: frm.height)
+        Commander.popUpContainerView = PopUpContainerView(frame:frm1)
+        viewMainArea.addSubview(Commander.popUpContainerView!)
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.layoutIfNeeded()
+        Commander.startUp()
+        
+    }
+    
+    
+    
+    
+} //end of class
 

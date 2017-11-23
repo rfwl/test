@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 class KeyboardPage : Codable {
     
     //================================================
@@ -22,7 +25,7 @@ class KeyboardPage : Codable {
     //================================================
     //
     var frame:CGRect = CGRect.zero // Set from KeyboardPage
-    /*
+
     // Assign frame and height scale to each row  
     func layoutRows() { 
         if(self.frame.height==0) { return }        
@@ -43,7 +46,7 @@ class KeyboardPage : Codable {
             yOffset += row.frame.height
         }
     } 
-	*/
+
     //================================================
     
 } //end of class

@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 class KeyCell : Codable {
     
     var name:String
@@ -34,24 +37,25 @@ class KeyCell : Codable {
     //======================================================
     //
 	
-    /*
-    var textView:UIView?
-    var imageView:UIImageView?
+  
+    var textView:UIView? = nil
+    var imageView:UIImageView? = nil
+    
     var cellView : UIView {
     	get {
-    		return self.imageView != nil? self.imageView! : textView!
+    		return self.imageView ?? textView!
     	}
     }
         
     func buildCellViews(){
         if let imgName = self.image {
-        	if let img = ImageLibrary.buildUIImage(self.image!) {
+        	if let img = ImageLibrary.buildUIImage(imgName) {
                 let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast
                 iv.contentMode = UIViewContentMode.scaleAspectFit
                 iv.backgroundColor = UIColor.brown
-                slef.textView = nil
+                self.textView = nil
                 self.imageView = iv
-            
+            }
         } else { 
             let lbl:UILabel = UILabel()
             lbl.textAlignment = NSTextAlignment.center
@@ -66,9 +70,9 @@ class KeyCell : Codable {
             self.textView = lbl
             self.imageView = nil            
         }
-    }
+    } //end of func
     
-    */
+
    
 
     //======================================================

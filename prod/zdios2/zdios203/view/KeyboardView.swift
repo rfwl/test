@@ -1,15 +1,6 @@
 
 import UIKit
 
-extension UIView {
- 	func clearSubviews() {
- 	
-        for vw in self.subviews {
-            vw.removeFromSuperview()
-        }
-    }
-}
-
 class KeyboardView: UIView {
     
     //=============================================================================
@@ -38,8 +29,6 @@ class KeyboardView: UIView {
         }
         set {
             _keyboardDefinition = newValue
-            _keyboardDefinition.frame = self.bound
-            _keyboardDefinition.layoutPages()
             self.buildKeyViews()
         }
     }
@@ -49,10 +38,11 @@ class KeyboardView: UIView {
  
     func buildKeyViews(){
         
-        for pg in keyboardDefinition.pages {
-        	for row in pg.rows {
-            	 for ky in row.keys {
-            	 	var kv = KeyView(ky.frame)
+        for pg in keyboardDefinition.pageArray {
+            pg.frame = self.bounds
+        	for row in pg.rowArray {
+            	 for ky in row.keyArray {
+                    let kv = KeyView(frame:ky.frame)
             	 	kv.addCurrentCellViews()
             	 }       
         	}
@@ -68,16 +58,14 @@ class KeyboardView: UIView {
         for vw in self.subviews {
             vw.removeFromSuperview()
         }
-        for row in page.rows {
-            for ky in row.keys {
-                if ky.view==nil {
+        for row in page.rowArray {
+            for ky in row.keyArray {
+                if ky.keyView==nil {
                     let kv = KeyView(frame: ky.frame)
                     kv.keyDefinition = ky
-                    //kv.draw(ky.frame)
-                    
-                    ky.view = kv
+                    ky.keyView = kv
                 }
-                self.addSubview(ky.view!)
+                self.addSubview(ky.keyView!)
             }
         }
     } //end of func
@@ -228,9 +216,9 @@ class KeyboardView: UIView {
     func findTouchedKeyView(_ pt:CGPoint ){
         touchedKeyView = nil
         if let page = self.drawnKeyboardPage {
-            for row in page.rows {
-                for ky in row.keys {
-                    if let kv = ky.view {
+            for row in page.rowArray {
+                for ky in row.keyArray {
+                    if let kv = ky.keyView {
                         if ky.frame.contains(pt) {
                             touchedKeyView = kv
                         }

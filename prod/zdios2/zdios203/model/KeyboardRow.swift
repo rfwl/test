@@ -1,3 +1,5 @@
+import Foundation
+import UIKit
 
 class KeyboardRow : Codable {
     
@@ -59,10 +61,10 @@ class KeyboardRow : Codable {
         }
     }
     func addCharString(_ charString: String){
-        for c in charString.characters {
-            let k = KeyboardKey(String(c))
-            self.keyArray.append(k)
-        }
+        //for c in charString.characters {
+        //    let k = KeyboardKey(String(c))
+        //    self.keyArray.append(k)
+        //}
     }
     func addFirstKey(_ key: KeyboardKey) {
         self.keyArray.insert(key,at: 0);
@@ -76,7 +78,7 @@ class KeyboardRow : Codable {
     //
     var frame:CGRect = CGRect.zero // Set from KeyboardPage
     var heightScale:CGFloat = CGFloat(1.0)
-    /*
+   
     func layoutKeys() { 
     	if(self.frame.width==0) {return}
         let rowWidthInUnit = self.rowUnitTotal + self.paddingLeft + self.paddingRight + ( self.rowUnitTotal - CGFloat(1.0) ) * self.gap
@@ -87,11 +89,11 @@ class KeyboardRow : Codable {
             key.frame.origin.y = self.frame.origin.y + self.paddingTop * self.heightScale
             key.frame.size.height = self.frame.height - (self.paddingTop + self.paddingBottom) * self.heightScale
             key.frame.origin.x = xOffset
-            key.frame.size.width = (CGFloat(key.widthInUnit) + CGFloat((key.rowWidthInUnit-1)) * self.gap) * oneUnitWidth
+            key.frame.size.width = (CGFloat(key.widthInRowUnit) + CGFloat((rowWidthInUnit-1)) * self.gap) * oneUnitWidth
             xOffset += key.frame.width + self.gap * oneUnitWidth
         }
     }
-    */
+
     //================================================
     //
     

@@ -60,14 +60,14 @@ class PopUpContainerView: UIView {
     //=====================================================================
     // Overrides
     public override func draw(_ frame: CGRect) {
-        if let kv = self.popUpKeyView {
+        /*if let kv = self.popUpKeyView {
             let ctx = UIGraphicsGetCurrentContext()
             ctx?.saveGState()
             //ctx?.translateBy(x: 0, y: PopUpSettings.heightAboveKeyboardView)
-            isPopUpForMainCell ? drawInPopUp_MainCell(kv) : drawInPopUp_SecondaryCells(kv)
+            //isPopUpForMainCell ? drawInPopUp_MainCell(kv) : drawInPopUp_SecondaryCells(kv)
             ctx?.restoreGState()
         }
-        
+        */
     } //end of func
     
     //=====================================================================
@@ -90,7 +90,7 @@ class PopUpContainerView: UIView {
         if isPopUpForMainCell {
 			neededWidth = keyView.frame.width + 2 * PopUpSettings.minDelta
 		} else {
-			if let ky = keyView.keyDefinition, let cells = ky.getSecondaryCells() {
+			if let ky = keyView.keyDefinition, let cells = ky.popUpCellArray {
 				//let cntCells = ky.keyCellArray.count - 1
 				//neededWidth = CGFloat(cntCells) * (PopUpSettings.popUpUnitWidth + PopUpSettings.popUpCellGap) - PopUpSettings.popUpCellGap
 				
@@ -236,11 +236,7 @@ class PopUpContainerView: UIView {
     
     //=====================================================================
     // Pop-up for Main Cell
-    func clearSubviews() {
-        for vw in self.subviews {
-            vw.removeFromSuperview()
-        }
-    }
+    
     func showPopUp_MainCell(_ keyView:KeyView){
         if let _ = keyView.keyDefinition {
             popUpKeyView = keyView
@@ -259,23 +255,18 @@ class PopUpContainerView: UIView {
         // Clear sub views
         clearSubviews()
         // Add sub views from cell
-        if let kc = keyView.keyDefinition?.getMainCell() {
-            let cellRect = keyView.popUpFrame_MainCell
-            let cellViewX = cellRect.minX + PopUpSettings.popUpBorderWidth
-            let cellViewY = cellRect.minY + PopUpSettings.popUpBorderWidth
-            let cellViewWidth = cellRect.width - 2 * PopUpSettings.popUpBorderWidth
-            let cellViewHeight = cellRect.height - 2 * PopUpSettings.popUpBorderWidth
-            let rt = CGRect(x:cellViewX, y: cellViewY, width: cellViewWidth,height: cellViewHeight)
-            
-            kc.addToView(self, frame: rt)
+        let cellRect = keyView.popUpFrame_MainCell
+        let cellViewX = cellRect.minX + PopUpSettings.popUpBorderWidth
+        let cellViewY = cellRect.minY + PopUpSettings.popUpBorderWidth
+        let cellViewWidth = cellRect.width - 2 * PopUpSettings.popUpBorderWidth
+        let cellViewHeight = cellRect.height - 2 * PopUpSettings.popUpBorderWidth
+        let rt = CGRect(x:cellViewX, y: cellViewY, width: cellViewWidth,height: cellViewHeight)
+        
+        if let kcv = keyView.getMainCellView() {
+            kcv.frame = rt
+            self.addSubview(kcv)
         }
-    }
-    
-    func drawInPopUp_MainCell(_ keyView:KeyView) {
-        drawPopUpBorderPath(keyView)
-        if let kc = keyView.keyDefinition?.getMainCell() {
-            kc.drawInView(self, frame: keyView.popUpFrame_MainCell) // This is useless if KeyCellType = Shape is removed
-        }
+       
     }
     
     //=====================================================================
@@ -286,7 +277,7 @@ class PopUpContainerView: UIView {
         if let ky = keyView.keyDefinition {
             popUpKeyView = keyView
             isPopUpForMainCell = false
-            if ky.hasSecondaryCell {
+            if ky.hasSecondaryCells {
                 buildPopUpRectForKeyView(keyView)
                 addToPopUp_SecondaryCells(keyView,touchDownX:touchDownX)
                 self.setNeedsDisplay()
@@ -310,7 +301,7 @@ class PopUpContainerView: UIView {
         }
         addedSecondaryCellViews.removeAll()  
         
-        if let ky = keyView.keyDefinition, let cells = ky.getSecondaryCells() {
+        if let ky = keyView.keyDefinition, let cells = ky.popUpCellArray {
             if cells.count < 1 { return }
             let cell1 = cells[cells.startIndex]
             let popUpRect = keyView.popUpFrame_SecondaryCells
@@ -338,8 +329,8 @@ class PopUpContainerView: UIView {
             	let cellNeededWidth =  CGFloat(cell.widthInPopUpUnit) * PopUpSettings.popUpUnitWidth
                 let cellY = popUpRect.minY + PopUpSettings.popUpBorderWidth
                 let cellHeight = popUpRect.height - 2 * PopUpSettings.popUpBorderWidth
-                if let cellView = cell.buildView() {
-                    
+ 
+                    let cellView = cell.cellView
                     if addedAtLeft {
                         if tryAdd_Right(cellView,width:cellNeededWidth, y: cellY, height: cellHeight) { continue }
                         if tryAdd_Left(cellView,width:cellNeededWidth, y: cellY, height: cellHeight) { continue }
@@ -360,7 +351,7 @@ class PopUpContainerView: UIView {
                     } else {
                        // Here both remaining width is negative, So no more cells can be added in.
                     }
-                }
+              
             } //end of for
             //-------------------------------------------------------------
             // All cells have been added in but cells might go beyond the border and

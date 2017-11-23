@@ -8,6 +8,15 @@
 
 import Foundation
 import AVFoundation
+import UIKit
+
+extension UIView {
+    func clearSubviews() {
+        for vw in self.subviews {
+            vw.removeFromSuperview()
+        }
+    }
+}
 
 class Commander {
     //===================================================
@@ -18,12 +27,26 @@ class Commander {
     //===================================================
     // Start-up
     static func startUp(){
+        let bldr = KeyboardDefinitionJsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard()
+        
+        do {
+            let kbdDef = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
+            // Load the keyboard definition onto the keyboard view.
+            keyboardView?.keyboardDefinition = kbdDef
+        } catch let jsonErr {
+            print("Error serializing json", jsonErr)
+        }
+        
+    } //end of func
+    
+    /*static func startUp1(){
     	// Read in the keyboard definition file into string
    	    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-		let localUrl = documentDirectory.appendingPathComponent("DefaultKeyboardDefinition.json")
+		let localUrl = documentDirectory?.appendingPathComponent("DefaultKeyboardDefinition.json")
 		if FileManager.default.fileExists(atPath: localUrl.path){
     	if let fileContents = NSData(contentsOfFile: localUrl.path) {
-        	guard let data = fileContents as Data else {throw "Wrong format in file resource"}
+        	guard let data = fileContents as Data else {return}
         	do {
         	
         		// Decode into Keyboard Definition object.
@@ -35,8 +58,9 @@ class Commander {
 	           	print("Error serializing json", jsonErr)
 	        }
     	}    
-    }
-    
+        }
+    } //end of func
+    */
     //===================================================
     // Report KeyView Touches
     

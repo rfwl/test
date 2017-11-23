@@ -35,27 +35,14 @@ class KeyView: UIControl {
     }
     //=====================================================================
     // overrides
-    public override func draw(_ frame: CGRect) {
-        if let ky = self.keyDefinition {
-            //if ky.hasSecondaryCell { return }
-            let mainCell = ky.getMainCell()
-            if mainCell.labelingType == .Shape {
-                mainCell.drawInView(self,frame: self.bounds)
-            }
-        } // end of if let ky = self.keyDefinition
-    } //end of func
-    
-    
-    //override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-    //    return true // self.bounds.contains(point)
-    //}
+   
   
     //=====================================================================
     // KeyDefinition
     var keyDefinition:KeyboardKey? = nil {
         didSet {
-            if let ky = self.keyDefinition {                
-                if ky.hasSecondaryCell {
+            /*if let ky = self.keyDefinition {
+                if ky.hasSecondaryCells {
                     // Key has 2nd cell
                     let cell1 = ky.keyCellArray[0]
                     let cell2 = ky.keyCellArray[1]
@@ -70,7 +57,7 @@ class KeyView: UIControl {
                     mainCell.addToView(self, frame: self.bounds)
                 }
                 self.setNeedsDisplay()
-            }
+            }*/
         }
     }
     
@@ -96,24 +83,36 @@ class KeyView: UIControl {
     }
         
     func addCellViews(mainCellIndex : Int, secondaryCellIndex : Int){    	 
-    	 self.clearSubViews()
-    	     	 
-    	 guard mainCellIndex<0 || mainCellIndex >= self.keyDefinition.mainCellArray.count else {return}
-  		 var mcl = self.keyDefinition.mainCellArray[mainCellIndex]	 
-    	 if let mcl = mcl, mclV = mcl.cellView {
-    	 	mclV.frame = self.keyDefinition.mainCellFrame
-    	 	self.addSubView(mclV)    	 		
-    	 }
-    	 guard self.keyDefinition.hasSecondaryCells {return}
-    	 guard secondaryCellIndex<0 || secondaryCellIndex >= self.keyDefinition.secondaryCellArray.count else {return}
-  		 var scl = self.keyDefinition.secondaryCellArray[secondaryCellIndex]	 
-    	 if let scl = scl, sclV = scl.cellView {
-    	 	sclV.frame = self.keyDefinition.secondaryCellFrame
-    	 	self.addSubView(sclV)    	 		
-    	 }
-    }
+        self.clearSubviews()
+        if let keyDef = self.keyDefinition {
+            //guard mainCellIndex<0 || mainCellIndex >= self.keyDefinition.mainCellArray.count else {return}
+            let mcl = keyDef.mainCellArray[mainCellIndex]
+            let mclV = mcl.cellView
+            mclV.frame = keyDef.mainCellFrame
+            self.addSubview(mclV)
+            
+            if keyDef.hasSecondaryCells {
+                 //guard secondaryCellIndex<0 || secondaryCellIndex >= keyDef.secondaryCellArray.count else {return}
+                 let scl = keyDef.secondaryCellArray?[secondaryCellIndex]
+                 if let scl = scl {
+                    let sclV = scl.cellView
+                    sclV.frame = keyDef.secondaryCellFrame
+                    self.addSubview(sclV)
+                 }
+            }
+        }
+    } //end of func
     //=====================================================================
     // Operations
+    func getMainCellView() -> UIView? {
+        if let keyDef = self.keyDefinition {
+            let mcl = keyDef.mainCellArray[currentMainCellIndex]
+            let mclV = mcl.cellView
+            return mclV
+        }
+        return nil
+    }
+    
     func changeMainCellView(){
     }
     
@@ -125,7 +124,7 @@ class KeyView: UIControl {
     var popUpFrame_SecondaryCells:CGRect = CGRect.zero
     var isLeftMostInPopUp:Bool = false
     var isRightMostInPopUp:Bool = false
-    
+   
     //=====================================================================
     //
     
