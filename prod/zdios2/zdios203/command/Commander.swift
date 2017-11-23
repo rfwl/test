@@ -34,6 +34,9 @@ class Commander {
             let kbdDef = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
             // Load the keyboard definition onto the keyboard view.
             keyboardView?.keyboardDefinition = kbdDef
+            
+            keyboardView?.drawPageAt(0)
+            
         } catch let jsonErr {
             print("Error serializing json", jsonErr)
         }

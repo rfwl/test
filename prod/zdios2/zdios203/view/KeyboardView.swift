@@ -43,16 +43,27 @@ class KeyboardView: UIView {
         	for row in pg.rowArray {
             	 for ky in row.keyArray {
                     let kv = KeyView(frame:ky.frame)
-            	 	kv.addCurrentCellViews()
+                    kv.keyDefinition = ky
+                    ky.keyView = kv
+                    kv.addCurrentCellViews()
+                    
             	 }       
         	}
         }
         
     } // end of func
  
+    
+   
     //=============================================================================
     // Operations
     var drawnKeyboardPage : KeyboardPage?
+    
+    func drawPageAt(_ index:Int){
+        let pg = keyboardDefinition.pageArray[index]
+        drawPage(pg)
+    }
+    
     func drawPage(_ page:KeyboardPage) {
         drawnKeyboardPage = page
         for vw in self.subviews {
