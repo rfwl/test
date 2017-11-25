@@ -71,7 +71,7 @@ class KeyView: UIControl {
     func removeHighlight() {
         
     }
-    
+   
     //======================================================
     //
     var keyView:KeyView?
@@ -96,7 +96,6 @@ class KeyView: UIControl {
                  let scl = keyDef.secondaryCellArray?[secondaryCellIndex]
                  if let scl = scl {
                     let sclV = scl.cellView
-                    sclV.frame = keyDef.secondaryCellFrame
                     self.addSubview(sclV)
                  }
             }

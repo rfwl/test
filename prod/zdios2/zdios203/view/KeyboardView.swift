@@ -34,22 +34,25 @@ class KeyboardView: UIView {
     }
     
     //=============================================================================
-    //
- 
+    // Calculate and pass frames to and build view for all pages, all rows, up to all keys.
     func buildKeyViews(){
         
         for pg in keyboardDefinition.pageArray {
             pg.frame = self.bounds
+            pg.layoutRows();
         	for row in pg.rowArray {
+                row.layoutKeys()
             	 for ky in row.keyArray {
+                    ky.calculateCellFrames()
+                    ky.buildCellViews()
                     let kv = KeyView(frame:ky.frame)
                     kv.keyDefinition = ky
                     ky.keyView = kv
                     kv.addCurrentCellViews()
                     
-            	 }       
-        	}
-        }
+            	 } // end of for ky
+        	} // end of for row
+        } // end of for pg
         
     } // end of func
  

@@ -89,11 +89,24 @@ class KeyboardRow : Codable {
             key.frame.origin.y = self.frame.origin.y + self.paddingTop * self.heightScale
             key.frame.size.height = self.frame.height - (self.paddingTop + self.paddingBottom) * self.heightScale
             key.frame.origin.x = xOffset
-            key.frame.size.width = (CGFloat(key.widthInRowUnit) + CGFloat((rowWidthInUnit-1)) * self.gap) * oneUnitWidth
+            key.frame.size.width = (CGFloat(key.widthInRowUnit) + CGFloat(key.widthInRowUnit-1) * self.gap) * oneUnitWidth
             xOffset += key.frame.width + self.gap * oneUnitWidth
         }
     }
-
+    /*
+    if(self.bounds.width==0) {return}
+    let rowWidthInCells = row.cellTotal + row.paddingLeft + row.paddingRight + ( row.cellTotal - CGFloat(1.0) ) * row.gap
+    let oneCellWidth = self.bounds.width / rowWidthInCells
+    if(oneCellWidth==0) {return}
+    var xOffset:CGFloat = row.paddingLeft * oneCellWidth
+    for key in row.keys {
+    key.frame.origin.y = row.frame.origin.y + row.paddingTop * heightScale
+    key.frame.size.height = row.frame.height - (row.paddingTop + row.paddingBottom) * heightScale
+    key.frame.origin.x = xOffset
+    key.frame.size.width = (CGFloat(key.widthInCells) + CGFloat((key.widthInCells-1)) * row.gap) * oneCellWidth
+    //buildKeyViewForKey(key)
+    xOffset += key.frame.width + row.gap * oneCellWidth
+ */
     //================================================
     //
     

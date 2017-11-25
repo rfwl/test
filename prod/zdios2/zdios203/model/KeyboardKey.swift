@@ -118,8 +118,8 @@ class KeyboardKey : Codable {
     		self.mainCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
         }
     }
-    
-    func setMainAndSecondaryFrames(){
+    // Must be called after self.frame is set.
+    func calculateCellFrames(){
         mainCellFrame = CGRect.zero
         secondaryCellFrame = CGRect.zero
         if self.hasSecondaryCells {
@@ -133,6 +133,19 @@ class KeyboardKey : Codable {
     //======================================================
     //
     var keyView:KeyView? = nil
+    // Must be called after calculateCellFrames
+    func buildCellViews(){
+        for cl in self.mainCellArray{
+            cl.buildCellViews()
+            cl.cellView.frame = self.mainCellFrame
+        }
+        if self.hasSecondaryCells {
+            for cl in self.secondaryCellArray!{
+                cl.buildCellViews()
+                cl.cellView.frame = self.mainCellFrame
+            }
+        }
+    } //end of func
     //======================================================
     
 } // end of class
