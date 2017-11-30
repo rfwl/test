@@ -19,6 +19,7 @@
 		C335A3671FA9EAE5001B18D6 /* PopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3611FA9EAE5001B18D6 /* PopUpContainerView.swift */; };
 		C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */; };
 		C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */; };
+		C34AD9BD1FD032C400D0C999 /* DefaultKeyboardDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = C34AD9BC1FD032C400D0C999 /* DefaultKeyboardDefinition.json */; };
 		C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCAF291FB5ABCD001A4100 /* Settings.swift */; };
 		C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321511FA8A02800108C40 /* AppDelegate.swift */; };
 		C3D321541FA8A02800108C40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321531FA8A02800108C40 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 		C335A3611FA9EAE5001B18D6 /* PopUpContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpContainerView.swift; sourceTree = "<group>"; };
 		C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLibrary.swift; sourceTree = "<group>"; };
+		C34AD9BC1FD032C400D0C999 /* DefaultKeyboardDefinition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = DefaultKeyboardDefinition.json; path = model/DefaultKeyboardDefinition.json; sourceTree = "<group>"; };
 		C3CCAF291FB5ABCD001A4100 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C3D3214E1FA8A02700108C40 /* zdios203.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zdios203.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D321511FA8A02800108C40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		C3D321451FA8A02700108C40 = {
 			isa = PBXGroup;
 			children = (
+				C34AD9BC1FD032C400D0C999 /* DefaultKeyboardDefinition.json */,
 				C3D321661FA8A0D500108C40 /* command */,
 				C3D321651FA8A07400108C40 /* model */,
 				C3D321641FA8A06200108C40 /* view */,
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3D3215C1FA8A02800108C40 /* LaunchScreen.storyboard in Resources */,
+				C34AD9BD1FD032C400D0C999 /* DefaultKeyboardDefinition.json in Resources */,
 				C335A3661FA9EAE5001B18D6 /* key_icons in Resources */,
 				C3D321591FA8A02800108C40 /* Assets.xcassets in Resources */,
 				C3D321571FA8A02800108C40 /* Main.storyboard in Resources */,

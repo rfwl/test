@@ -63,6 +63,7 @@ class KeyboardView: UIView {
     var drawnKeyboardPage : KeyboardPage?
     
     func drawPageAt(_ index:Int){
+        guard index>=0 || index<keyboardDefinition.pageArray.count else { return }
         let pg = keyboardDefinition.pageArray[index]
         drawPage(pg)
     }

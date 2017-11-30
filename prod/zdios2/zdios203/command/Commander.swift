@@ -26,7 +26,7 @@ class Commander {
     
     //===================================================
     // Start-up
-    static func startUp(){
+    static func startUp1(){
         let bldr = KeyboardDefinitionJsonBuilder()
         let strKBD = bldr.buildDefaultKeyboard()
         
@@ -43,27 +43,43 @@ class Commander {
         
     } //end of func
     
-    /*static func startUp1(){
+    static func startUp(){
     	// Read in the keyboard definition file into string
    	    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-		let localUrl = documentDirectory?.appendingPathComponent("DefaultKeyboardDefinition.json")
-		if FileManager.default.fileExists(atPath: localUrl.path){
-    	if let fileContents = NSData(contentsOfFile: localUrl.path) {
-        	guard let data = fileContents as Data else {return}
-        	do {
-        	
-        		// Decode into Keyboard Definition object.
-            	let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
-            	// Load the keyboard definition onto the keyboard view.            	
-            	keyboardView.keyboardDefinition = kbdDef
-            	
-	        } catch let jsonErr {
-	           	print("Error serializing json", jsonErr)
-	        }
-    	}    
+        print(documentDirectory!)
+        
+        let resPath = Bundle.main.resourcePath
+        print(resPath!)
+        
+        let resUrl = Bundle.main.resourceURL
+        
+        let localUrl = resUrl?.appendingPathComponent("DefaultKeyboardDefinition.json")
+		if FileManager.default.fileExists(atPath: localUrl!.path){
+            if let fileContents = NSData(contentsOfFile: localUrl!.path) {
+                //guard
+                let data = fileContents as Data //else {return}
+                do {
+                
+                    // Decode into Keyboard Definition object.
+                    let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
+                    // Load the keyboard definition onto the keyboard view.
+                    keyboardView?.keyboardDefinition = kbdDef
+                     keyboardView?.drawPageAt(0)
+                } catch let jsonErr {
+                    print("Error serializing json", jsonErr)
+                }
+            }
         }
     } //end of func
-    */
+    
+    
+    //===================================================
+    //
+    static func drawPageAt(_ index:Int){
+       keyboardView?.drawPageAt(index)
+    }
+    
+    
     //===================================================
     // Report KeyView Touches
     

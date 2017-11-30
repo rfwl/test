@@ -61,13 +61,13 @@ class KeyboardKey : Codable {
    	// 	
     var hasSecondaryCells:Bool {
         get {
-            return secondaryCellArray != nil && secondaryCellArray!.count>1
+            return secondaryCellArray != nil && secondaryCellArray!.count>0
         }
     }
     
     var hasPopUpCells:Bool {
         get {
-            return popUpCellArray != nil && popUpCellArray!.count>1
+            return popUpCellArray != nil && popUpCellArray!.count>0
         }
     }
       
@@ -142,7 +142,13 @@ class KeyboardKey : Codable {
         if self.hasSecondaryCells {
             for cl in self.secondaryCellArray!{
                 cl.buildCellViews()
-                cl.cellView.frame = self.mainCellFrame
+                cl.cellView.frame = self.secondaryCellFrame
+            }
+        }
+        if self.hasPopUpCells {
+            for cl in self.popUpCellArray!{
+                cl.buildCellViews()
+                //cl.cellView.frame = self.secondaryCellFrame
             }
         }
     } //end of func

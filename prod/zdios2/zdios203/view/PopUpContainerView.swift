@@ -60,18 +60,17 @@ class PopUpContainerView: UIView {
     //=====================================================================
     // Overrides
     public override func draw(_ frame: CGRect) {
-        /*if let kv = self.popUpKeyView {
+        if let kv = self.popUpKeyView {
             let ctx = UIGraphicsGetCurrentContext()
             ctx?.saveGState()
-            //ctx?.translateBy(x: 0, y: PopUpSettings.heightAboveKeyboardView)
-            //isPopUpForMainCell ? drawInPopUp_MainCell(kv) : drawInPopUp_SecondaryCells(kv)
+            /////ctx?.translateBy(x: 0, y: PopUpSettings.heightAboveKeyboardView)
+            isPopUpForMainCell ? drawInPopUp_MainCell(kv) : drawInPopUp_SecondaryCells(kv)
             ctx?.restoreGState()
         }
-        */
     } //end of func
     
     //=====================================================================
-    // Pop-up
+    // Pop-up q
     
     var popUpKeyView : KeyView?
     var isPopUpForMainCell : Bool = false
@@ -268,7 +267,9 @@ class PopUpContainerView: UIView {
         }
        
     }
-    
+    func drawInPopUp_MainCell(_ keyView:KeyView) {
+        drawPopUpBorderPath(keyView)
+    }
     //=====================================================================
     // Pop-up for Secondary Cells
     var addedSecondaryCellViews:[UIView] = [UIView]()

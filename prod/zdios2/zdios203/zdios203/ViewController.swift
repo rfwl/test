@@ -25,10 +25,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var viewMainArea: UIView!
     
     @IBAction func button1(_ sender: Any) {
+        Commander.drawPageAt(0)
     }
     
     @IBAction func button2(_ sender: Any) {
+        Commander.drawPageAt(1)
     }
+    
+    @IBAction func button3(_ sender: Any) {
+        Commander.drawPageAt(2)
+    }
+    
+    @IBAction func button4(_ sender: Any) {
+        Commander.drawPageAt(3)
+    }
+    
     
     var keyboardView:KeyboardView?
     var popUpContainerView:PopUpContainerView?

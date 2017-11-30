@@ -43,8 +43,8 @@ class KeyboardDefinitionJsonBuilder {
     """
         
     func keyDef(_ char1:String, char2:String) -> String {
-        if String(char1)==" " { return " "}
-        if String(char2)==" " {
+        if String(char1)=="" { return " "}
+        if String(char2)=="" {
             return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
         } else {
             return template_keyDefChar2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
