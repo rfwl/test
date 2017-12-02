@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.view.layoutIfNeeded()
-        Commander.startUp()
+        try! Commander.startUp()
         
     }
     

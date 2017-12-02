@@ -43,8 +43,19 @@ class Commander {
         
     } //end of func
     
-    static func startUp(){
-    	// Read in the keyboard definition file into string
+    static func startUp() throws{
+        //---------------------------------------------
+    	// Build a json string, write to a file
+        let bldr = KeyboardDefinitionJsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard()
+        //---------------------------------------------
+        // Write a json string to a file
+        let res_url = Bundle.main.resourceURL
+        let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition1.json")
+        try strKBD.write(to: localUrl!, atomically: true, encoding: String.Encoding.utf8)
+
+        //---------------------------------------------
+        // Retrieve the directories
    	    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         print(documentDirectory!)
         
@@ -52,8 +63,12 @@ class Commander {
         print(resPath!)
         
         let resUrl = Bundle.main.resourceURL
+        if let resUrl = resUrl { print(resUrl) }
         
-        let localUrl = resUrl?.appendingPathComponent("DefaultKeyboardDefinition.json")
+        //---------------------------------------------
+        // Read in the keyboard definition file into string
+        //let res_url = Bundle.main.resourceURL
+        //let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition1.json")
 		if FileManager.default.fileExists(atPath: localUrl!.path){
             if let fileContents = NSData(contentsOfFile: localUrl!.path) {
                 //guard
@@ -151,4 +166,77 @@ class Commander {
     
 } // end of class
 
+/* File operation codes
+ var fileManager = NSFileManager()
+ var tmpDir = NSTemporaryDirectory()
+ let fileName = "sample.txt"
+ 
+ func enumerateDirectory() -> String? {
+ var error: NSError?
+ let filesInDirectory =  fileManager.contentsOfDirectoryAtPath(tmpDir, error: &error) as? [String]
+ 
+ if let files = filesInDirectory {
+ if files.count > 0 {
+ if files[0] == fileName {
+ println("sample.txt found")
+ return files[0]
+ } else {
+ println("File not found")
+ return nil
+ }
+ }
+ }
+ return nil
+ }
+ 
+ @IBAction func createFile(sender: AnyObject) {
+ let path = tmpDir.stringByAppendingPathComponent(fileName)
+ let contentsOfFile = "Sample Text"
+ var error: NSError?
+ 
+ // Write File
+ if contentsOfFile.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: &error) == false {
+ if let errorMessage = error {
+ println("Failed to create file")
+ println("\(errorMessage)")
+ }
+ } else {
+ println("File sample.txt created at tmp directory")
+ }
+ }
+ 
+ 
+ @IBAction func listDirectory(sender: AnyObject) {
+ // List Content of Path
+ let isFileInDir = enumerateDirectory() ?? "Empty"
+ println("Contents of Directory =  \(isFileInDir)")
+ }
+ 
+ @IBAction func viewFileContent(sender: AnyObject) {
+ let isFileInDir = enumerateDirectory() ?? ""
+ 
+ let path = tmpDir.stringByAppendingPathComponent(isFileInDir)
+ let contentsOfFile = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)
+ 
+ if let content = contentsOfFile {
+ println("Content of file = \(content)")
+ } else {
+ println("No file found")
+ }
+ }
+ 
+ @IBAction func deleteFile(sender: AnyObject) {
+ var error: NSError?
+ 
+ if let isFileInDir = enumerateDirectory() {
+ let path = tmpDir.stringByAppendingPathComponent(isFileInDir)
+ fileManager.removeItemAtPath(path, error: &error)
+ } else {
+ println("No file found")
+ }
+ }
+ 
+
+ 
+ */
 

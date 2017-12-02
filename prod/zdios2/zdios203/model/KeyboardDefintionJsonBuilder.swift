@@ -125,13 +125,13 @@ class KeyboardDefinitionJsonBuilder {
         
         //============================================
         // CAUTION: DOUBLE QUOTE Character can not be included in the strings.
-        let p1r1m = "qwertyuiop"
-        let p1r1s = "1234567890"
+        let p1r1s = "qwertyuiop"
+        let p1r1m = "1234567890"
         let p1r2m = "asdfghjkl"
         let p1r2s = "-+*/':;?"
         let p1r3m = "zxcvbnm,."
         let p1r3s = "()[]{}<>"
-        
+   
         let p2r1m = "QWERTYUIOP"
         let p2r1s = "1234567890"
         let p2r2m = "ASDFGHJKL"
@@ -147,7 +147,7 @@ class KeyboardDefinitionJsonBuilder {
         let p4r2m = "-+*/':;?"
         let p4r3m = "()[]{}<>"
         
-        
+        // how to change the width for the UILabel's width 
         //============================================
         //
         func buildDefaultKeyboardRow() -> String {

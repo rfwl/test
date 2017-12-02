@@ -85,53 +85,132 @@ class KeyboardKey : Codable {
     } 
     
     //================================================
-   	// Cell Frames     
-    var frame:CGRect = CGRect.zero    
+   	// Cell Frames
+    // There are four frames required for a key: mainCellFrame_KeySurface secondaryCellFrame_KeySurface, mainCellPopUpFrame_PopUp, and popUpCellFrame_PopUp.
+    //
+    var frame:CGRect = CGRect.zero
+    var pageFrame:CGRect = CGRect.zero
+    
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
-   
-   	 private func calculateSecondaryCellFrame(){ 
-    	let w = self.frame.width * self.secondaryCell_WidthScale
-    	let h = self.frame.height * self.secondaryCell_HeightScale
-        self.secondaryCellFrame = CGRect.zero
-    	switch self.secodaryCellLocation {
-    	case .TopLeft:
-    		self.secondaryCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
-    	case .TopRight:
-    		self.secondaryCellFrame = CGRect(x: self.frame.width-w, y: 0, width: w, height: h)
-    	case .BottomLeft:
-    		self.secondaryCellFrame = CGRect(x: 0, y: self.frame.height-h, width: w, height: h)
-        case .BottomRight:
-    		self.secondaryCellFrame = CGRect(x: self.frame.width-w, y: self.frame.height-h, width: w, height: h)
-        }
-    }
     
-    private func calculateMainCellFrame(){
-    	let w = self.frame.width 
-    	let sh = self.frame.height * self.secondaryCell_HeightScale
-    	let h = self.frame.height - sh
-        self.mainCellFrame = CGRect.zero
-    	switch self.secodaryCellLocation {
-    	case .TopLeft, .TopRight:
-    		self.mainCellFrame = CGRect(x: 0, y: sh, width: w, height: h )
-    	case .BottomLeft, .BottomRight:
-    		self.mainCellFrame = CGRect(x: 0, y: 0, width: w, height: h)
-        }
-    }
+    var mainCellPopUpFrame:CGRect = CGRect.zero
+    var popUpCellFrame:CGRect = CGRect.zero
+    
     // Must be called after self.frame is set.
     func calculateCellFrames(){
-        mainCellFrame = CGRect.zero
-        secondaryCellFrame = CGRect.zero
-        if self.hasSecondaryCells {
-            calculateMainCellFrame()
-            calculateSecondaryCellFrame()
-        } else {
-            mainCellFrame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-            secondaryCellFrame = CGRect.zero
-        }
+        mainCellFrame = calculateMainCellFrame()
+        secondaryCellFrame = calculateSecondaryCellFrame()
+        mainCellPopUpFrame = calculateMainCellPopUpFrame()
+        popUpCellFrame = calculatePopUpCellFrame()
+
     } //end of func
+    
+    private func calculateMainCellFrame() -> CGRect {
+        var rect = CGRect.zero
+        if self.hasSecondaryCells {
+            let w = self.frame.width
+            let sh = self.frame.height * self.secondaryCell_HeightScale
+            let h = self.frame.height - sh
+            switch self.secodaryCellLocation {
+            case .TopLeft, .TopRight:
+                rect = CGRect(x: 0, y: sh, width: w, height: h )
+            case .BottomLeft, .BottomRight:
+                rect = CGRect(x: 0, y: 0, width: w, height: h)
+            }
+        } else {
+            rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        }
+        return rect
+    }
+    
+    private func calculateSecondaryCellFrame() -> CGRect {
+    	let w = self.frame.width * self.secondaryCell_WidthScale
+    	let h = self.frame.height * self.secondaryCell_HeightScale
+        var rect = CGRect.zero
+        if self.hasSecondaryCells {
+            switch self.secodaryCellLocation {
+            case .TopLeft:
+                rect = CGRect(x: 0, y: 0, width: w, height: h)
+            case .TopRight:
+                rect = CGRect(x: self.frame.width-w, y: 0, width: w, height: h)
+            case .BottomLeft:
+                rect = CGRect(x: 0, y: self.frame.height-h, width: w, height: h)
+            case .BottomRight:
+                rect = CGRect(x: self.frame.width-w, y: self.frame.height-h, width: w, height: h)
+            }
+        }
+        return rect
+    }
+    
+    private func calculateMainCellPopUpFrame() -> CGRect {
+        var rect = CGRect.zero
+        var askedWidth = CGFloat(0)
+        askedWidth = self.frame.width + 2 * PopUpSettings.minDelta
+        rect = calculatePopUpRectForAskedWidth(askedWidth)
+        return rect
+    }
+    
+    private func calculatePopUpCellFrame() -> CGRect {
+        var rect = CGRect.zero
+        var askedWidth = CGFloat(0)
+        if self.hasPopUpCells {
+            for cell:KeyCell in self.popUpCellArray! {
+                askedWidth += cell.widthInPopUpUnit * PopUpSettings.popUpUnitWidth + PopUpSettings.popUpCellGap
+            }
+            rect = calculatePopUpRectForAskedWidth(askedWidth)
+        }
+        return rect
+    }
+    
+    private func calculatePopUpRectForAskedWidth(_ askedWidth:CGFloat) -> CGRect {
+        let maxX = pageFrame.width - PopUpSettings.popUpBorderWidth/2
+        let maxWidth = pageFrame.width - 2 * PopUpSettings.popUpBorderWidth
+        let minWidth = self.frame.width
+        
+        // Calculate available width
+        var availableWidth = askedWidth
+        if availableWidth < 0 {
+            availableWidth = 0
+        }
+        if availableWidth > maxWidth { // Limit the needed width so some cells will not be added into pop up rect for avoiding going beyond.
+            availableWidth = maxWidth
+        } else if availableWidth < minWidth {
+            availableWidth = minWidth
+        }
+        // calculate delta - shift from the horizontal center of the key, like center-offset.
+        var delta = (availableWidth - self.frame.width)/2
+        if delta < PopUpSettings.minDelta { delta = 0 }
+        
+        // calculate x = minX of the target popup rect
+        var x = PopUpSettings.popUpBorderWidth/2
+        
+        if self.frame.minX < PopUpSettings.minDelta { // Possible first key
+            x = self.frame.minX
+        } else if self.frame.maxX > maxX - PopUpSettings.minDelta {
+            x = self.frame.maxX - availableWidth
+        } else {
+            x = self.frame.minX - delta
+            if x<PopUpSettings.popUpBorderWidth/2 { // beyond left side view border
+                x = PopUpSettings.popUpBorderWidth/2
+            } else if x+availableWidth+PopUpSettings.popUpBorderWidth/2  > maxX { // beyond right view border
+                x -= x+availableWidth+PopUpSettings.popUpBorderWidth/2 - maxX
+            }
+        }
+        // Calculate y
+        let y = self.frame.minY - PopUpSettings.popUpGap - PopUpSettings.popUpHeight + PopUpSettings.heightAboveKeyboardView
+        // KeyView's Pop-Up Rect's Coordinates in PopUpContainerView.
+        let popUpFrame:CGRect = CGRect(x:x,y:y,width:availableWidth,height: PopUpSettings.popUpHeight)
+        
+        return popUpFrame
+        
+    } //end of func
+    
+ 
     //======================================================
-    //
+    // view components
+    // There are four types of cell views: main cell view on surface, secondary cell view on surface, main cell view in main cell PopUp, and popUp cell views in PopUp
+    
     var keyView:KeyView? = nil
     // Must be called after calculateCellFrames
     func buildCellViews(){
