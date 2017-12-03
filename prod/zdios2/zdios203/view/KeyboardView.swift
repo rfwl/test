@@ -43,8 +43,12 @@ class KeyboardView: UIView {
         	for row in pg.rowArray {
                 row.layoutKeys()
             	 for ky in row.keyArray {
+                    ky.pageFrame = pg.frame
                     ky.calculateCellFrames()
                     ky.buildCellViews()
+                    ky.calculateCellFrames()
+                    ky.buildPopUpBorderPaths()
+                    
                     let kv = KeyView(frame:ky.frame)
                     kv.keyDefinition = ky
                     ky.keyView = kv
@@ -52,7 +56,7 @@ class KeyboardView: UIView {
                     
             	 } // end of for ky
         	} // end of for row
-        } // end of for pg
+        } // end of for pgs
         
     } // end of func
  

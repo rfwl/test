@@ -39,7 +39,7 @@ class PopUpContainerView: UIView {
     //=====================================================================
     // Overrides
     public override func draw(_ frame: CGRect) {
-        if let kv = self.popUpKeyView,ky = kv.keyDefinition {
+        if let kv = self.popUpKeyView, let ky = kv.keyDefinition {
             let ctx = UIGraphicsGetCurrentContext()
             ctx?.saveGState()
             //ctx?.translateBy(x: 0, y: PopUpSettings.heightAboveKeyboardView)
@@ -54,9 +54,11 @@ class PopUpContainerView: UIView {
         if isPopUpForMainCell {
             key.mainCell_PopUpBorderPath_Upper?.fill()
             key.mainCell_PopUpBorderPath_Upper?.stroke()
+            key.mainCell_PopUpBorderPath_Lower?.stroke()
         } else {
             key.popUpCells_PopUpBorderPath_Upper?.fill()
             key.popUpCells_PopUpBorderPath_Upper?.stroke()
+            key.mainCell_PopUpBorderPath_Lower?.stroke()
         }
     }
     //=====================================================================
@@ -77,7 +79,6 @@ class PopUpContainerView: UIView {
             popUpKeyView = keyView
             isPopUpForMainCell = true
             // Calculate width
-            buildPopUpRectForKeyView(keyView)
             addToPopUp_MainCell(keyView)
             self.setNeedsDisplay()
         }
@@ -88,7 +89,6 @@ class PopUpContainerView: UIView {
             popUpKeyView = keyView
             isPopUpForMainCell = false
             if ky.hasSecondaryCells {
-                buildPopUpRectForKeyView(keyView)
                 addToPopUp_SecondaryCells(keyView,touchDownX:touchDownX)
                 self.setNeedsDisplay()
             }
@@ -97,31 +97,14 @@ class PopUpContainerView: UIView {
  
     //=====================================================================
     // Pop-up for Main Cell
-    
-    
-   
     func addToPopUp_MainCell(_ keyView:KeyView) {
-        
-        // Draw pop up border path
         // Clear sub views
         clearSubviews()
-        // Add sub views from cell
-        let cellRect = keyView.popUpFrame_MainCell
-        let cellViewX = cellRect.minX + PopUpSettings.popUpBorderWidth
-        let cellViewY = cellRect.minY + PopUpSettings.popUpBorderWidth
-        let cellViewWidth = cellRect.width - 2 * PopUpSettings.popUpBorderWidth
-        let cellViewHeight = cellRect.height - 2 * PopUpSettings.popUpBorderWidth
-        let rt = CGRect(x:cellViewX, y: cellViewY, width: cellViewWidth,height: cellViewHeight)
-        
-        if let kcv = keyView.getMainCellView() {
-            kcv.frame = rt
+        if let kcv = keyView.getMainCellView_PopUp() {
             self.addSubview(kcv)
         }
-       
     }
-    func drawInPopUp_MainCell(_ keyView:KeyView) {
-        drawPopUpBorderPath(keyView)
-    }
+   
     //=====================================================================
     // Pop-up for Secondary Cells
     
@@ -145,7 +128,7 @@ class PopUpContainerView: UIView {
         if let ky = keyView.keyDefinition, let cells = ky.popUpCellArray {
             if cells.count < 1 { return }
             let cell1 = cells[cells.startIndex]
-            let popUpRect = keyView.popUpFrame_SecondaryCells
+            let popUpRect = ky.popUpCells_PopUpFrame
             self.touchDownX = touchDownX
             //-------------------------------------------------------------
             // This part decided where in pop up width to start adding cell views, that is where to put the first cell view. 
@@ -204,8 +187,9 @@ class PopUpContainerView: UIView {
             }
             self.setNeedsLayout()
             //-------------------------------------------------------------
-        } // end of if let _ = keyView.keyDefinition             
-    }
+        } // end of if let _ = keyView.keyDefinition
+        
+    } // end of func
     
     func tryAdd_Left(_ cellView:UIView, width:CGFloat, y: CGFloat, height: CGFloat)->Bool {
     	// Try to add the cell view at the left side if there is enough remaining width.

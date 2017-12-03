@@ -160,6 +160,7 @@ class KeyboardKey : Codable {
             for cell:KeyCell in self.popUpCellArray! {
                 askedWidth += cell.widthInPopUpUnit * PopUpSettings.popUpUnitWidth + PopUpSettings.popUpCellGap
             }
+            askedWidth += PopUpSettings.popUpBorderWidth
             rect = calculatePopUpRectForAskedWidth(askedWidth)
         }
         return rect
@@ -309,17 +310,17 @@ class KeyboardKey : Codable {
     } //end of func
     
     //======================================================
-    // view components
+    // cell view components
     // There are four types of cell views: main cell view on surface, secondary cell view on surface, main cell view in main cell PopUp, and popUp cell views in PopUp
     // Main cell surface view and secodary cell view will be sub view of the KeyView.
-    
-  
-    
     // Must be called after calculateCellFrames
     func buildCellViews(){
         for cl in self.mainCellArray{
             cl.buildCellViews()
             cl.cellView.frame = self.mainCellFrame
+            cl.buildCellViews_PopUp()
+            let mainCell_InPopUp_Frame = buildFrame_MainCell_InPopUp()
+            cl.cellView_PopUp.frame = mainCell_InPopUp_Frame
         }
         if self.hasSecondaryCells {
             for cl in self.secondaryCellArray!{
@@ -330,13 +331,24 @@ class KeyboardKey : Codable {
         if self.hasPopUpCells {
             for cl in self.popUpCellArray!{
                 cl.buildCellViews()
-                //cl.cellView.frame = self.secondaryCellFrame
+                // Based on touch down location, the cells here will get slightly different locations inside popUpCell_PopUp Frame.
+                // So we cannot determine frame for popUp cell here.
+                
             }
         }
     } //end of func
     
-    
-    
+    //======================================================
+    // Frames for main cell pop up and pop up cells
+    private func buildFrame_MainCell_InPopUp() -> CGRect {
+        let cellRect = self.mainCell_PopUpFrame
+        let cellViewX = cellRect.minX + PopUpSettings.popUpBorderWidth
+        let cellViewY = cellRect.minY + PopUpSettings.popUpBorderWidth
+        let cellViewWidth = cellRect.width - 2 * PopUpSettings.popUpBorderWidth
+        let cellViewHeight = cellRect.height - 2 * PopUpSettings.popUpBorderWidth
+        let rt = CGRect(x:cellViewX, y: cellViewY, width: cellViewWidth,height: cellViewHeight)
+        return rt
+    }
     
     
     

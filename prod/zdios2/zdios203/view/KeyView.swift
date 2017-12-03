@@ -112,6 +112,14 @@ class KeyView: UIControl {
         return nil
     }
     
+    func getMainCellView_PopUp() -> UIView? {
+        if let keyDef = self.keyDefinition {
+            let mcl = keyDef.mainCellArray[currentMainCellIndex]
+            let mclV = mcl.cellView_PopUp
+            return mclV
+        }
+        return nil
+    }
     func changeMainCellView(){
     }
     
