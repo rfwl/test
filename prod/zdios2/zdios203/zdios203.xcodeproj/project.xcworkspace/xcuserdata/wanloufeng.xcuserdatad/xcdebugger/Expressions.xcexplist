@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "KeyboardKey.calculatePopUpRectForAskedWidth(_:):KeyboardKey.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "PopUpSettings.minDelta">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KeyboardKey.calculateMainCellPopUpFrame():KeyboardKey.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

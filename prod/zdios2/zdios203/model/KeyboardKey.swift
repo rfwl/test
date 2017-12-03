@@ -182,8 +182,8 @@ class KeyboardKey : Codable {
             availableWidth = minWidth
         }
         // calculate delta - shift from the horizontal center of the key, like center-offset.
-        var delta = (availableWidth - self.frame.width)/2
-        if delta < PopUpSettings.minDelta { delta = 0 }
+        let delta = (availableWidth - self.frame.width)/2
+        //if delta < PopUpSettings.minDelta { delta = 0 } //Made all popUp cell for main cell look like the first, left=-most, one.
         
         // calculate x = minX of the target popup rect
         var x = PopUpSettings.popUpBorderWidth/2
