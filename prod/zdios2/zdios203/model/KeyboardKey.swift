@@ -70,7 +70,12 @@ class KeyboardKey : Codable {
             return popUpCellArray != nil && popUpCellArray!.count>0
         }
     }
-      
+    
+    //================================================
+    //
+    var frame:CGRect = CGRect.zero
+    var pageFrame:CGRect = CGRect.zero
+    var keyView:KeyView? = nil
     //================================================
    	// Secondary Cell Location
  	var secondaryCell_HeightScale = CGFloat(0.4);
@@ -88,21 +93,18 @@ class KeyboardKey : Codable {
    	// Cell Frames
     // There are four frames required for a key: mainCellFrame_KeySurface secondaryCellFrame_KeySurface, mainCellPopUpFrame_PopUp, and popUpCellFrame_PopUp.
     //
-    var frame:CGRect = CGRect.zero
-    var pageFrame:CGRect = CGRect.zero
-    
     var mainCellFrame:CGRect = CGRect.zero
     var secondaryCellFrame:CGRect = CGRect.zero
     
-    var mainCellPopUpFrame:CGRect = CGRect.zero
-    var popUpCellFrame:CGRect = CGRect.zero
+    var mainCell_PopUpFrame:CGRect = CGRect.zero
+    var popUpCells_PopUpFrame:CGRect = CGRect.zero
     
     // Must be called after self.frame is set.
     func calculateCellFrames(){
         mainCellFrame = calculateMainCellFrame()
         secondaryCellFrame = calculateSecondaryCellFrame()
-        mainCellPopUpFrame = calculateMainCellPopUpFrame()
-        popUpCellFrame = calculatePopUpCellFrame()
+        mainCell_PopUpFrame = calculateMainCellPopUpFrame()
+        popUpCells_PopUpFrame = calculatePopUpCellFrame()
 
     } //end of func
     
@@ -205,13 +207,114 @@ class KeyboardKey : Codable {
         return popUpFrame
         
     } //end of func
+    //======================================================
+    // PopUp Border Path : There are two border path: main cell and popup cells.
+    var mainCell_PopUpBorderPath_Upper:UIBezierPath? = nil
+    var mainCell_PopUpBorderPath_Lower:UIBezierPath? = nil
+    var popUpCells_PopUpBorderPath_Upper:UIBezierPath? = nil
+    var popUpCells_PopUpBorderPath_Lower:UIBezierPath? = nil
     
- 
+    func buildPopUpBorderPaths() {
+        var frm = self.mainCell_PopUpFrame
+        let pathPair = buildPopUpBorderPathPair(frm)
+        mainCell_PopUpBorderPath_Upper = pathPair.upper
+        mainCell_PopUpBorderPath_Lower = pathPair.lower
+        if self.hasPopUpCells {
+            frm = self.popUpCells_PopUpFrame
+            let pathPair1 = buildPopUpBorderPathPair(frm)
+            popUpCells_PopUpBorderPath_Upper = pathPair1.upper
+            popUpCells_PopUpBorderPath_Lower = pathPair1.lower
+        }
+    }
+    
+    
+    func buildPopUpBorderPathPair(_ frm :CGRect) -> (upper:UIBezierPath, lower:UIBezierPath){
+        //-------------------------------------------------
+        // useful points and values
+        let x1 = frm.minX
+        let x2 = self.frame.minX
+        let x3 = self.frame.maxX
+        let x4 = frm.maxX
+        
+        let y1 = frm.minY
+        let y2 = frm.maxY
+        //keyView.frame is relative to KeyView's Surface
+        let y3 = self.frame.minY + PopUpSettings.heightAboveKeyboardView
+        let y4 = self.frame.maxY + PopUpSettings.heightAboveKeyboardView
+        
+        let r1 = PopUpSettings.popUpCornerRadius
+        let r2 = PopUpSettings.popUpGap
+        let r3 = PopUpSettings.popUpCornerRadius
+        
+        let p1 = CGPoint(x:x1, y:y1), p2 = CGPoint(x:x4, y:y1), p3 = CGPoint(x:x1, y:y2), p4 = CGPoint(x:x4, y:y2)
+        let p1c = p1.shift(x:r1, y:r1), p2c = p2.shift(x:-r1, y:r1), p3c = p3.shift(x:r1, y:-r1), p4c = p4.shift(x:-r1, y:-r1)
+        let p1a = p1.shift(x:r1, y:0), p2a = p2.shift(x:0, y:r1), p3a = p3.shift(x:0, y:-r1), p4a = p4.shift(x:-r1, y:0)
+        
+        let q1 = CGPoint(x:x2, y:y3), q2 = CGPoint(x:x3, y:y3)
+        let q3 = CGPoint(x:x2, y:y4), q4 = CGPoint(x:x3, y:y4)
+        //let q1c = q1.shift(x:r2, y:r2),
+        //let q2c = q2.shift(x:-r2, y:r2),
+        let q3c = q3.shift(x:r3, y:-r3), q4c = q4.shift(x:-r3, y:-r3)
+        //let q1a = q1.shift(x:r2, y:0),
+        //let q2a = q2.shift(x:0, y:r2),
+        let q3a = q3.shift(x:0, y:-r3), q4a = q4.shift(x:-r3, y:0)
+        
+        let s1 = CGPoint(x:x2, y:y2), s2 = CGPoint(x:x3, y:y2)
+        let s1c = s1.shift(x:-r2,y:r2), s2c = s2.shift(x:r2,y:r2)
+        let s1a = s1.shift(x:-r2,y:0), s2a = s2.shift(x:0,y:r2)
+        
+        //-------------------------------------------------
+        let path:UIBezierPath = UIBezierPath()
+        path.lineWidth = PopUpSettings.popUpBorderWidth
+        path.move(to: p1a)
+        path.addArc(withCenter: p1c, radius: r1, startAngle: ArcAngles.up, endAngle: ArcAngles.left, clockwise: false)
+        
+        if abs(x1-x2) > r1+r2 {
+            path.addLine(to:p3a)
+            path.addArc(withCenter: p3c, radius: r1, startAngle: ArcAngles.left, endAngle: ArcAngles.down, clockwise: false)
+            
+            path.addLine(to:s1a)
+            path.addArc(withCenter: s1c, radius: r2, startAngle: ArcAngles.up, endAngle: ArcAngles.right, clockwise: true)
+        } else {
+            path.addLine(to:q1)
+        }
+        
+        if abs(x3-x4) > r1+r2 {
+            path.addLine(to:s2a)
+            path.addArc(withCenter: s2c, radius: r2, startAngle: ArcAngles.left, endAngle: ArcAngles.up, clockwise: true)
+            
+            path.addLine(to:p4a)
+            path.addArc(withCenter: p4c, radius: r1, startAngle: ArcAngles.down, endAngle: ArcAngles.right, clockwise: false)
+        } else {
+            path.addLine(to:q2)
+        }
+        path.addLine(to:p2a)
+        path.addArc(withCenter: p2c, radius: r1, startAngle: ArcAngles.right, endAngle: ArcAngles.up, clockwise: false)
+        
+        path.close()
+        //-------------------------------------------------
+        let path1:UIBezierPath = UIBezierPath()
+        path1.lineWidth = PopUpSettings.popUpBorderWidth
+        path1.move(to:q1)
+        
+        path1.addLine(to:q3a)
+        path1.addArc(withCenter: q3c, radius: r3, startAngle: ArcAngles.left, endAngle: ArcAngles.down, clockwise: false)
+        
+        path1.addLine(to:q4a)
+        path1.addArc(withCenter: q4c, radius: r3, startAngle: ArcAngles.down, endAngle: ArcAngles.right, clockwise: false)
+        path1.addLine(to:q2)
+        //-------------------------------------------------
+        return (upper: path, lower: path1)
+        
+    } //end of func
+    
     //======================================================
     // view components
     // There are four types of cell views: main cell view on surface, secondary cell view on surface, main cell view in main cell PopUp, and popUp cell views in PopUp
+    // Main cell surface view and secodary cell view will be sub view of the KeyView.
     
-    var keyView:KeyView? = nil
+  
+    
     // Must be called after calculateCellFrames
     func buildCellViews(){
         for cl in self.mainCellArray{
@@ -231,6 +334,21 @@ class KeyboardKey : Codable {
             }
         }
     } //end of func
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //======================================================
     
 } // end of class
