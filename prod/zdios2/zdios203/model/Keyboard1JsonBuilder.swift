@@ -1,6 +1,6 @@
 import Foundation
 
-class KeyboardDefinitionJsonBuilder {
+class Keyboard1JsonBuilder {
         
     //============================================
     // Key Level: Only Main Cell

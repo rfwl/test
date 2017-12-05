@@ -27,7 +27,7 @@ class Commander {
     //===================================================
     // Start-up
     static func startUp1(){
-        let bldr = KeyboardDefinitionJsonBuilder()
+        let bldr = Keyboard1JsonBuilder()
         let strKBD = bldr.buildDefaultKeyboard()
         
         do {
@@ -46,7 +46,7 @@ class Commander {
     static func startUp() throws{
         //---------------------------------------------
     	// Build a json string, write to a file
-        let bldr = KeyboardDefinitionJsonBuilder()
+        let bldr = Keyboard2JsonBuilder()
         let strKBD = bldr.buildDefaultKeyboard()
         //---------------------------------------------
         // Write a json string to a file
@@ -113,9 +113,9 @@ class Commander {
         
        
     }
-    //===================================================
-    //
+
     static func onTouch_Down(_ keyView:KeyView?, downLoc:CGPoint=CGPoint.zero) {
+        //print("Down")
         let systemSoundID: SystemSoundID = 1104
         AudioServicesPlaySystemSound(systemSoundID)
         if let pucvw = popUpContainerView {
@@ -125,20 +125,23 @@ class Commander {
         }
     }
     static func onTouch_DownHold(_ keyView:KeyView?, downLoc:CGPoint=CGPoint.zero) {
+        //print("DownHold")
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
-                pucvw.showPopUp_SecondaryCells(kvw,touchDownX: downLoc.x )
+                pucvw.showPopUp_PopUpCells(kvw,touchDownX: downLoc.x )
                 pucvw.highlightCellView(kvw,moveX: downLoc.x, downX: downLoc.x )
             }
         }
     }
     static func onTouch_DownUp(_ keyView:KeyView?) {
+        //print("DownUp")
         if let pucvw = popUpContainerView {
                 pucvw.hidePopUp()
                 pucvw.clearSubviews()
         }
     }
     static func onTouch_DownHoldUp(_ keyView:KeyView?) {
+        //print("DownHoldUp")
         let systemSoundID: SystemSoundID = 1057
         AudioServicesPlaySystemSound (systemSoundID)
         if let pucvw = popUpContainerView {
@@ -147,6 +150,7 @@ class Commander {
         }
     }
     static func onTouch_DownHoldMove(_ keyView:KeyView?, moveX: CGFloat, downX: CGFloat ) {
+        //print("DownHoldMove")
         if let pucvw = popUpContainerView {
             if let kvw = keyView {
                 pucvw.highlightCellView(kvw,moveX: moveX, downX: downX )
@@ -154,6 +158,7 @@ class Commander {
         }
     }
     static func onTouch_DownHoldMoveUp(_ keyView:KeyView?) {
+        //print("DownHoldMoveUp")
         if let pucvw = popUpContainerView {
             pucvw.hidePopUp()
             pucvw.clearSubviews()

@@ -65,7 +65,7 @@ class PopUpContainerView: UIView {
     // Transient data area
     var popUpKeyView : KeyView?
     var isPopUpForMainCell : Bool = false
-    var addedSecondaryCellViews:[UIView] = [UIView]()
+    var addedPopUpCellViews:[UIView] = [UIView]()
     
     //=====================================================================
     // Operations
@@ -84,12 +84,12 @@ class PopUpContainerView: UIView {
         }
     }
     
-    func showPopUp_SecondaryCells(_ keyView:KeyView, touchDownX : CGFloat){
+    func showPopUp_PopUpCells(_ keyView:KeyView, touchDownX : CGFloat){
         if let ky = keyView.keyDefinition {
             popUpKeyView = keyView
             isPopUpForMainCell = false
-            if ky.hasSecondaryCells {
-                addToPopUp_SecondaryCells(keyView,touchDownX:touchDownX)
+            if ky.hasPopUpCells {
+                addToPopUp_PopUpCells(keyView,touchDownX:touchDownX)
                 self.setNeedsDisplay()
             }
         }
@@ -106,7 +106,7 @@ class PopUpContainerView: UIView {
     }
    
     //=====================================================================
-    // Pop-up for Secondary Cells
+    // Pop-up for PopUp Cells
     
     
     
@@ -118,12 +118,12 @@ class PopUpContainerView: UIView {
     var touchDownX : CGFloat = CGFloat(0)
     var offsetX : CGFloat = CGFloat(0)
     
-    func addToPopUp_SecondaryCells(_ keyView:KeyView , touchDownX : CGFloat) {
+    func addToPopUp_PopUpCells(_ keyView:KeyView , touchDownX : CGFloat) {
         // Clear sub views
         for vw in self.subviews {
             vw.removeFromSuperview()
         }
-        addedSecondaryCellViews.removeAll()  
+        addedPopUpCellViews.removeAll()
         
         if let ky = keyView.keyDefinition, let cells = ky.popUpCellArray {
             if cells.count < 1 { return }
@@ -182,7 +182,7 @@ class PopUpContainerView: UIView {
             // now to move all the cells to let them fit in the pop up rect border by aligning at the center range.
             offsetX = leftMin + PopUpSettings.popUpCellGap - leftMax
             //print("OffestX by \(-offsetX)")
-            for cv:UIView in addedSecondaryCellViews {
+            for cv:UIView in addedPopUpCellViews {
                 cv.frame = cv.frame.offsetBy(dx: -offsetX, dy: 0)
             }
             self.setNeedsLayout()
@@ -206,7 +206,7 @@ class PopUpContainerView: UIView {
         let rt = CGRect(x:self.leftMin - width, y:y, width:width, height: height)
         cellView.frame = rt
         self.addSubview(cellView)
-        addedSecondaryCellViews.append(cellView)
+        addedPopUpCellViews.append(cellView)
         let rightMin_min = self.leftMin + PopUpSettings.popUpCellGap
         if self.rightMin<rightMin_min { self.rightMin = rightMin_min } // In case right min is smaller than left min.
         self.leftMin -= width + PopUpSettings.popUpCellGap
@@ -227,7 +227,7 @@ class PopUpContainerView: UIView {
         let rt = CGRect(x:self.rightMin, y:y, width:width, height: height)
         cellView.frame = rt
         self.addSubview(cellView)
-        addedSecondaryCellViews.append(cellView)
+        addedPopUpCellViews.append(cellView)
         let leftMin_max = self.rightMin - PopUpSettings.popUpCellGap
         if self.leftMin>leftMin_max { self.leftMin=leftMin_max } // In case right min is smaller than left min.
         if self.leftMin>self.rightMin { self.leftMin = self.rightMin + PopUpSettings.popUpCellGap} // In case right min is smaller than left min.
@@ -240,7 +240,7 @@ class PopUpContainerView: UIView {
     //
     var highlightedCellView:UIView?
     func highlightCellView(_ keyView: KeyView, moveX: CGFloat, downX: CGFloat ) {
-        for cv:UIView in addedSecondaryCellViews {
+        for cv:UIView in addedPopUpCellViews {
             let modifiedMoveX : CGFloat = moveX - offsetX
             if modifiedMoveX >= cv.frame.minX && modifiedMoveX <= cv.frame.maxX {
                 if cv != highlightedCellView {

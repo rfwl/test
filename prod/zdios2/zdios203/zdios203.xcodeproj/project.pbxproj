@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C325AB1C1FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */; };
+		C325AB1C1FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB191FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift */; };
 		C325AB1D1FC2E6AD00D354FC /* KeyboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */; };
 		C325AB1E1FC2E6AD00D354FC /* KeyboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */; };
 		C335A3571FA9EAC2001B18D6 /* Commander.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3561FA9EAC2001B18D6 /* Commander.swift */; };
@@ -20,6 +20,7 @@
 		C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */; };
 		C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */; };
 		C34AD9BD1FD032C400D0C999 /* DefaultKeyboardDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = C34AD9BC1FD032C400D0C999 /* DefaultKeyboardDefinition.json */; };
+		C34AD9BF1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34AD9BE1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift */; };
 		C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CCAF291FB5ABCD001A4100 /* Settings.swift */; };
 		C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321511FA8A02800108C40 /* AppDelegate.swift */; };
 		C3D321541FA8A02800108C40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D321531FA8A02800108C40 /* ViewController.swift */; };
@@ -29,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDefintionJsonBuilder.swift; sourceTree = "<group>"; };
+		C325AB191FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard1JsonBuilder.swift; sourceTree = "<group>"; };
 		C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardPage.swift; sourceTree = "<group>"; };
 		C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardRow.swift; sourceTree = "<group>"; };
 		C335A3561FA9EAC2001B18D6 /* Commander.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commander.swift; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		C335A3621FA9EAE5001B18D6 /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		C335A3631FA9EAE5001B18D6 /* ImageLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLibrary.swift; sourceTree = "<group>"; };
 		C34AD9BC1FD032C400D0C999 /* DefaultKeyboardDefinition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = DefaultKeyboardDefinition.json; path = model/DefaultKeyboardDefinition.json; sourceTree = "<group>"; };
+		C34AD9BE1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard2JsonBuilder.swift; sourceTree = "<group>"; };
 		C3CCAF291FB5ABCD001A4100 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C3D3214E1FA8A02700108C40 /* zdios203.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zdios203.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D321511FA8A02800108C40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +113,8 @@
 		C3D321651FA8A07400108C40 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				C325AB191FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift */,
+				C325AB191FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift */,
+				C34AD9BE1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift */,
 				C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */,
 				C325AB1B1FC2E6AD00D354FC /* KeyboardRow.swift */,
 				C3CCAF291FB5ABCD001A4100 /* Settings.swift */,
@@ -205,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3D321541FA8A02800108C40 /* ViewController.swift in Sources */,
-				C325AB1C1FC2E6AD00D354FC /* KeyboardDefintionJsonBuilder.swift in Sources */,
+				C325AB1C1FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift in Sources */,
 				C335A3571FA9EAC2001B18D6 /* Commander.swift in Sources */,
 				C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */,
 				C335A35B1FA9EAD1001B18D6 /* KeyboardKey.swift in Sources */,
@@ -214,6 +217,7 @@
 				C325AB1D1FC2E6AD00D354FC /* KeyboardPage.swift in Sources */,
 				C335A3641FA9EAE5001B18D6 /* KeyView.swift in Sources */,
 				C325AB1E1FC2E6AD00D354FC /* KeyboardRow.swift in Sources */,
+				C34AD9BF1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift in Sources */,
 				C3D321521FA8A02800108C40 /* AppDelegate.swift in Sources */,
 				C335A35C1FA9EAD1001B18D6 /* KeyCell.swift in Sources */,
 				C335A35D1FA9EAD1001B18D6 /* KeyboardDefintion.swift in Sources */,

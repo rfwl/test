@@ -14,7 +14,7 @@ class KeyboardView: UIView {
         self.isOpaque = false
         Commander.keyboardView = self
         
-        prepareTapGestureRecognizers()
+        //prepareTapGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -91,7 +91,8 @@ class KeyboardView: UIView {
     
     
     //=============================================================================
-    //
+    // GestureRecognisers are in conflict against the local reportTouches method.
+    // Touch_Ended status cannot be reached anymore.
     func prepareTapGestureRecognizers() {
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector( onTap_Single))
         singleTap.numberOfTapsRequired = 1
@@ -114,17 +115,17 @@ class KeyboardView: UIView {
 
     @objc func onTap_Single(recognizer: UITapGestureRecognizer) {
         if(recognizer.state == UIGestureRecognizerState.ended){
-            print("Single Tapped")
+            //print("Single Tapped")
         }
     }
     @objc func onTap_Double(recognizer: UITapGestureRecognizer) {
         if(recognizer.state == UIGestureRecognizerState.ended){
-            print("Double Tapped")
+            //print("Double Tapped")
         }
     }
     @objc func onTap_Triple(recognizer: UITapGestureRecognizer) {
         if(recognizer.state == UIGestureRecognizerState.ended){
-            print("Triple Tapped")
+            //print("Triple Tapped")
         }
     }
     //=============================================================================
