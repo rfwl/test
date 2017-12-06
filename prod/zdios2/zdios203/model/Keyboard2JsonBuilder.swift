@@ -137,9 +137,12 @@ class Keyboard2JsonBuilder {
     let p1r1s = "qwertyuiop"
     let p1r1m = "1234567890"
     let p1r2m = "asdfghjkl"
-    let p1r2s = "-+*/':;?"
-    let p1r3m = "zxcvbnm,."
-    let p1r3s = "()[]{}<>"
+    let p1r2s = "\-(:)&#*\""
+    let p1r3m = "zxcvbnm"
+    let p1r3s = "@/-'!?;"
+    
+    
+    
     
     let p2r1m = "QWERTYUIOP"
     let p2r1s = "1234567890"

@@ -1,0 +1,71 @@
+=================================
+
+
+
+
+=================================
+
+
+
+
+
+=================================
+
+
+
+
+
+=================================
+
+
+---------------------------------
+https://stackoverflow.com/questions/28465153/uitextdocumentproxy-adjusttextpositionbycharacteroffset-issue
+UITextDocumentProxy adjustTextPositionByCharacterOffset Issue
+
+
+
+
+
+
+---------------------------------
+https://stackoverflow.com/questions/41127673/parsing-a-uitextdocumentproxy-in-swift-3
+Parsing a UITextDocumentProxy in Swift 3
+
+documentContextBeforeInput, as its name mentions, only returns the text before the input. To get the full text string, you should do something like:
+
+let entireText = (proxy.documentContextBeforeInput ?? "") + (proxy.documentContextAfterInput ?? "")
+
+if let chars = entireText.characters {
+    for letter in chars {
+        //DO something useful
+    }
+}
+---------------------------------
+https://stackoverflow.com/questions/31701152/how-to-get-the-current-word-being-typed
+To get the last word typing:
+
+override func textWillChange(textInput: UITextInput) {
+
+    var tokens = (self.textDocumentProxy as! UITextDocumentProxy).documentContextBeforeInput .componentsSeparatedByString(" ") as NSArray
+    var lastWord = tokens.lastObject as! String
+    println(lastWord)
+    bannerView?.btn1.setTitle(lastWord, forState: .Normal)
+ }
+ 
+
+let proxy = self.textDocumentProxy as! UITextDocumentProxy
+
+To get the word being typed, I would suggest something like this:
+
+var lastWordTyped: String? {
+    if let documentContext = proxy.documentContextBeforeInput as NSString? {
+        let length = documentContext.length
+        if length > 0 && NSCharacterSet.letterCharacterSet().characterIsMember(documentContext.characterAtIndex(length - 1)) {
+            let components = documentContext.componentsSeparatedByCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet) as! [String]
+            return components[components.endIndex - 1]
+        }
+    }
+    return nil
+}
+    
+=================================
