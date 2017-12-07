@@ -47,7 +47,7 @@ class Commander {
         //---------------------------------------------
     	// Build a json string, write to a file
         let bldr = Keyboard2JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard()
+        let strKBD = bldr.buildDefaultKeyboard2()
         //---------------------------------------------
         // Write a json string to a file
         let res_url = Bundle.main.resourceURL
@@ -241,7 +241,7 @@ class Commander {
  }
  }
  
-
+strKBD    String    "{\n\"name\" : \"default2\",\n\"text\" : \"Default Keyboard 2\",\n\"pageArray\" : [{\n\"name\" : \"page1\",\n\"text\" : \"Page 1\",\n\"rowArray\" : [{\n\"name\" : \"row11\",\n\"text\" : \"Page 1 Row 1\",\n\"keyArray\" : [{\n\"name\" : \"Key_L_q\",\n\"text\" : \"Letter q\",\n\"widthInRowUnit\" : 1,\n\"mainCellArray\" : [{\"name\":\"L_q\",\"text\":\"q\", \"widthInPopUpUnit\":1},{\"name\":\"#\",\"text\":\"#\", \"widthInPopUpUnit\":1}],\n\"secondaryCellArray\" : [{\"name\":\"S_1\",\"text\":\"1\", \"widthInPopUpUnit\":1}],\n}, \n{\n\"name\" : \"Key_L_w\",\n\"text\" : \"Letter w\",\n\"widthInRowUnit\" : 1,\n\"mainCellArray\" : [{\"name\":\"L_w\",\"text\":\"w\", \"widthInPopUpUnit\":1},{\"name\":\"#\",\"text\":\"#\", \"widthInPopUpUnit\":1}],\n\"secondaryCellArray\" : [{\"name\":\"S_2\",\"text\":\"2\", \"widthInPopUpUnit\":1}],\n}, \n{\n\"name\" : \"Key_L_e\",\n\"text\" : \"Letter e\",\n\"widthInRowUnit\" : 1,\n\"mainCellArray\" : [{\"name\":\"L_e\",\"text\":\"e\", \"widthInPopUpUnit\":1},{\"name\":\"#\",\"text\":\"#\", \"widthInPopUpUnit\":1}],\n\"secondaryCellArray\" : [{\"name\":\"S_3\",\"text\":\"3\", \"widthInPopUpUnit\":1}],\n}, \n{\n\"name\" : \"Key_L_r\",\n\"text\" : \"Letter r\",\n\"widthInRowUnit\" : 1,\n\"mai"...
  
  */
 

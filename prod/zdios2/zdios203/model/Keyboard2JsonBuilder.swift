@@ -12,203 +12,273 @@ import Foundation
 class Keyboard2JsonBuilder {
     
     //============================================
-    // Key Level: Only Main Cell
-    let template_keyDefChar1 = """
-    {
-    "name" : "Key*",
-    "text" : "Key *",
-    "widthInRowUnit" : 1,
-    "mainCellArray" : [{"name":"*","text":"*", "widthInPopUpUnit":1}],
-    "popUpCellArray" : [
-    {"name":"*1","text":"*1", "widthInPopUpUnit" : 1},
-    {"name":"*2","text":"*2", "widthInPopUpUnit" : 1},
-    {"name":"*3","text":"*3", "widthInPopUpUnit" : 1},
-    {"name":"*4","text":"*4", "widthInPopUpUnit" : 1},
-    {"name":"*5","text":"*5", "widthInPopUpUnit" : 1}
-    ]
+    // Letter key has Upper, Lower and 2nd Character
+    let template_LetterKey = """
+{
+"name" : "Key_L_*",
+"text" : "Letter *",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"L_*","text":"*", "widthInPopUpUnit":1},{"name":"#","text":"#", "widthInPopUpUnit":1}],
+"secondaryCellArray" : [{"name":"S_@","text":"@", "widthInPopUpUnit":1}],
+}
+"""
+    
+    func buildLetterKey(_ letter:String, char2:String) -> String {
+        return template_LetterKey.replacingOccurrences(of: "*", with: letter)
+            .replacingOccurrences(of: "*", with: letter)
+            .replacingOccurrences(of: "@", with: char2)
     }
-    """
-    func keyDef(_ char1:String) -> String {
-        return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
+    //============================================
+    // Digit key has one main cell only
+    let template_DigitKey = """
+{
+"name" : "Key_D_*",
+"text" : "Digit *",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"D_*","text":"*", "widthInPopUpUnit":1}]
+}
+"""
+    func buildDigitKey(_ digit:String) -> String {
+        return template_DigitKey.replacingOccurrences(of: "*", with: digit)
     }
     
     //============================================
-    // Key Level: Only Main Cell
-    let template_keyDefChar2 = """
-    {
-    "name" : "Key*#",
-    "text" : "Key * and #",
-    "widthInRowUnit" : 1,
-    "mainCellArray" : [{"name":"*","text":"*", "widthInPopUpUnit":1}],
-    "secondaryCellArray" : [{"name":"#","text":"#", "widthInPopUpUnit":1}],
-    "popUpCellArray" : [
-    {"name":"*1","text":"*1", "widthInPopUpUnit" : 1},
-    {"name":"*2","text":"*2", "widthInPopUpUnit" : 1},
-    {"name":"*3","text":"*3", "widthInPopUpUnit" : 1},
-    {"name":"*4","text":"*4", "widthInPopUpUnit" : 1},
-    {"name":"*5","text":"*5", "widthInPopUpUnit" : 1}
-    ]
-    }
-    """
+    // Symbol Key has one main cell, or  another secondary cell.
+    let template_SymbolKey1 = """
+{
+"name" : "Key_S_#",
+"text" : "Symbol * and #",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}]
+}
+"""
     
-    func keyDef(_ char1:String, char2:String) -> String {
-        if String(char1)=="" { return " "}
-        if String(char2)=="" {
-            return template_keyDefChar1.replacingOccurrences(of: "*", with: char1)
-        } else {
-            return template_keyDefChar2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
-        }
+    let template_SymbolKey2 = """
+{
+"name" : "Key_S_#",
+"text" : "Symbol * and #",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}],
+"secondaryCellArray" : [{"name":"S_#","text":"#", "widthInPopUpUnit":1}],
+}
+"""
+    
+    func buildOneSymbolKey(_ char1:String ) -> String {
+        return template_SymbolKey1.replacingOccurrences(of: "*", with: char1)
     }
+    
+    func buildTwoSymbolKey(_ char1:String, char2:String) -> String {
+        return template_SymbolKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    }
+    //============================================
+    // Build Action Keys
+    let template_ActionKey1 = """
+{
+"name" : "Key_A_#",
+"text" : "Action * and #",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}]
+}
+"""
+    let template_ActionKey2 = """
+{
+"name" : "Key_A_#",
+"text" : "Action * and #",
+"widthInRowUnit" : 1,
+"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}],
+"secondaryCellArray" : [{"name":"A_#","text":"#", "widthInPopUpUnit":1}],
+}
+"""
+    
+    func buildOneActionKey(_ char1:String ) -> String {
+        return template_ActionKey1.replacingOccurrences(of: "*", with: char1)
+    }
+    
+    func buildTwoActionKey(_ char1:String, char2:String) -> String {
+        return template_ActionKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    }
+    //============================================
+    // Specific Action Keys
+    // Caps/Shift
+    // Space
+    // Enter
+    // Backspace
+    // SwitchPage
+    //
+    
     
     //============================================
-    // Row Level: Main Cell Only
-    let template_close = """
-    ]
-    }
-    """
-    let template_rowDef = """
-    {
-    "name" : "{NAME}",
-    "text" : "{TEXT}",
-    "keyArray" : [
-    """
-    
-    func rowDef(_ char1s:String, name: String, text: String) -> String {
-        var strKeys = ""
-        for c in char1s {
-            if strKeys.count>0 {
-                strKeys += ", \n"
-            }
-            strKeys += keyDef(String(c))
-        }
-        let temp1 = template_rowDef.replacingOccurrences(of: "{NAME}", with: name)
-        let temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
-        return temp2 + "\n" + strKeys + "\n" + template_close
-    }
-    
-    func rowDef(_ char1s:String,char2s:String, name: String, text: String) -> String {
-        var strKeys = ""
+    // Build multiple key definitions
+    func buildLetterKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
         for i in 0 ..< min(char1s.count, char2s.count) {
             let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
             let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
             let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
             let c2 = char2s[idx2]
-            if strKeys.count>0 {
-                strKeys += ", \n"
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
             }
-            strKeys += keyDef(String(c1),char2: String(c2))
+            def += buildLetterKey(String(c1),char2: String(c2))
         }
-        let temp1 = template_rowDef.replacingOccurrences(of: "{NAME}", with: name)
-        let temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
-        return temp2 + "\n" + strKeys + "\n" + template_close
+        return def
+    }
+    
+    func buildTwoSymbolKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
+        for i in 0 ..< min(char1s.count, char2s.count) {
+            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+            let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
+            let c2 = char2s[idx2]
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildTwoSymbolKey(String(c1),char2: String(c2))
+        }
+        return def
+    }
+    
+    func buildOneSymbolKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildOneSymbolKey(String(c))
+        }
+        return def
+    }
+    
+    func buildDigitKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildDigitKey(String(c))
+        }
+        return def
+    }
+    //============================================
+    // Row, Page and KBD level
+    
+    func separator() -> String {
+        return "\n,\n"
+    }
+    
+    let closeArrayAndObject = """
+    ]
+}
+"""
+    func endArrayAndObject() -> String {
+        return closeArrayAndObject
+    }
+    
+    let template_Row = """
+{
+"name" : "{name}",
+"text" : "{text}",
+"keyArray" : [
+"""
+    func startRow(_ name: String, text:String) -> String {
+        return template_Row.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
+    }
+    
+    let template_Page = """
+{
+"name" : "{name}",
+"text" : "{text}",
+"rowArray" : [
+"""
+    func startPage(_ name: String, text:String) -> String {
+        return template_Page.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
+    }
+    
+    let template_Keyboard = """
+{
+"name" : "{name}",
+"text" : "{text}",
+"pageArray" : [
+"""
+    func startKeyboard(_ name: String, text:String) -> String {
+        return template_Keyboard.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
     }
     
     //============================================
-    // Page Level
-    let template_pageDef = """
-    {
-    "name" : "{NAME}",
-    "text" : "{TEXT}",
-    "rowArray" : [
-    """
-    func pageDef(_ strRows:String, name: String, text: String) -> String {
-        let temp1 = template_pageDef.replacingOccurrences(of: "{NAME}", with: name)
-        let temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
-        return temp2 + "\n" + strRows + "\n" + template_close
-    }
     
     //============================================
-    // Keyboard Level
-    let template_keyboardDef = """
-    {
-    "name" : "{NAME}",
-    "text" : "{TEXT}",
-    "pageArray" : [
-    """
+    //
     
-    func keyboardDef(_ strPages:String, name: String, text: String) -> String {
-        let temp1 = template_keyboardDef.replacingOccurrences(of: "{NAME}", with: name)
-        let temp2 = temp1.replacingOccurrences(of: "{TEXT}", with: text)
-        return temp2 + "\n" + strPages + "\n" + template_close
-    }
-    
-    //============================================
-    // CAUTION: DOUBLE QUOTE Character can not be included in the strings.
-    let p1r1s = "qwertyuiop"
-    let p1r1m = "1234567890"
+    let p1r1m = "qwertyuiop"
+    let p1r1s = "1234567890"
     let p1r2m = "asdfghjkl"
-    let p1r2s = "\-(:)&#*\""
+    let p1r2s = "(:)&#*\""
     let p1r3m = "zxcvbnm"
     let p1r3s = "@/-'!?;"
     
     
     
     
-    let p2r1m = "QWERTYUIOP"
-    let p2r1s = "1234567890"
-    let p2r2m = "ASDFGHJKL"
-    let p2r2s = "-+*/':;?"
-    let p2r3m = "ZXCVBNM,."
-    let p2r3s = "()[]{}<>"
-    
-    let p3r1m = "1234567890"
-    let p3r2m = "-+*/':;?"
-    let p3r3m = "()[]{}<>"
-    
-    let p4r1m = "!@#$%^&*()"
-    let p4r2m = "-+*/':;?"
-    let p4r3m = "()[]{}<>"
-    
-    // how to change the width for the UILabel's width
     //============================================
     //
-    func buildDefaultKeyboardRow() -> String {
-        let p1r1 = rowDef(p1r1m,char2s: p1r1s, name: "p1r1", text: "Page 1 Row 1")
-        return p1r1
-    }
-    
-    func buildDefaultKeyboardPage() -> String {
-        let p1r1 = rowDef(p1r1m,char2s: p1r1s, name: "p1r1", text: "Page 1 Row 1")
-        let p1r2 = rowDef(p1r2m,char2s: p1r2s, name: "p1r2", text: "Page 1 Row 2")
-        let p1r3 = rowDef(p1r3m,char2s: p1r3s, name: "p1r3", text: "Page 1 Row 3")
-        //let p1r4 = rowDef(p1r4m,char2s: p1r4s, name: "p1r4", text: "Page 1 Row 4")
-        let p1 = pageDef(p1r1 + ",\n\n" + p1r2 + ",\n\n" + p1r3 + "\n\n" + "\n", name: "p1", text: "Page 1")
-        return p1
-    }
-    
-    func buildDefaultKeyboard() -> String {
-        let p1r1 = rowDef(p1r1m,char2s: p1r1s, name: "p1r1", text: "Page 1 Row 1")
-        let p1r2 = rowDef(p1r2m,char2s: p1r2s, name: "p1r2", text: "Page 1 Row 2")
-        let p1r3 = rowDef(p1r3m,char2s: p1r3s, name: "p1r3", text: "Page 1 Row 3")
-        //let p1r4 = rowDef(p1r4m,char2s: p1r4s, name: "p1r4", text: "Page 1 Row 4")
-        let p1 = pageDef(p1r1 + ",\n\n" + p1r2 + ",\n\n" + p1r3 + "\n\n" + "\n", name: "p1", text: "Page 1")
+    func buildDefaultKeyboard2() -> String {
         
-        let p2r1 = rowDef(p2r1m,char2s: p2r1s, name: "p2r1", text: "Page 2 Row 1")
-        let p2r2 = rowDef(p2r2m,char2s: p2r2s, name: "p2r2", text: "Page 2 Row 2")
-        let p2r3 = rowDef(p2r3m,char2s: p2r3s, name: "p2r3", text: "Page 2 Row 3")
-        //let p2r4 = rowDef(p2r4m,char2s: p2r4s, name: "p2r4", text: "Page 2 Row 4")
-        let p2 = pageDef(p2r1 + ",\n\n" + p2r2 + ",\n\n" + p2r3 + "\n\n" + "\n", name: "p2", text: "Page 2")
+        var kbd:String = ""
+        kbd += startKeyboard("default2", text: "Default Keyboard 2")
+        //----------------------------------------
+        // Page 1
+        kbd += startPage("page1", text: "Page 1")
+        //--------------------- Page 1 Row 1
+        kbd += startRow("row11", text: "Page 1 Row 1")
+        kbd += buildLetterKeys(p1r1m, char2s:p1r1s)
+        kbd += endArrayAndObject();
+        kbd += separator();
+        //--------------------- Page 1 Row 2
+        kbd += startRow("row12", text: "Page 1 Row 2")
+        kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
+        kbd += endArrayAndObject();
+        kbd += separator();
+        //--------------------- Page 1 Row 3
+        kbd += startRow("row13", text: "Page 1 Row 3")
+        kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
+        kbd += endArrayAndObject();
+        kbd += separator();
+        //--------------------- Page 1 Row 4
+        kbd += startRow("row14", text: "Page 1 Row 4")
         
-        let p3r1 = rowDef(p3r1m, name: "p3r1", text: "Page 3 Row 1")
-        let p3r2 = rowDef(p3r2m, name: "p3r2", text: "Page 3 Row 2")
-        let p3r3 = rowDef(p3r3m, name: "p3r3", text: "Page 3 Row 3")
-        //let p3r4 = rowDef(p3r4m, name: "p3r4", text: "Page 3 Row 4")
-        let p3 = pageDef(p3r1 + ",\n\n" + p3r2 + ",\n\n" + p3r3 + "\n\n" + "\n", name: "p3", text: "Page 3")
         
-        let p4r1 = rowDef(p4r1m, name: "p4r1", text: "Page 4 Row 1")
-        let p4r2 = rowDef(p4r2m, name: "p4r2", text: "Page 4 Row 2")
-        let p4r3 = rowDef(p4r3m, name: "p4r3", text: "Page 4 Row 3")
-        //let p4r4 = rowDef(p4r4m, name: "p4r4", text: "Page 4 Row 4")
-        let p4 = pageDef(p4r1 + ",\n\n" + p4r2 + ",\n\n" + p4r3 + "\n\n" + "\n", name: "p4", text: "Page 4")
+        kbd += endArrayAndObject();
+        //---------------------
+        kbd += endArrayAndObject();
+        kbd += separator();
+        //----------------------------------------
+        // Page 2
+        kbd += startKeyboard("page2", text: "Page 2")
+        //--------------------- Page 2 Row 1
+        kbd += startRow("row11", text: "Page 2 Row 1")
+        kbd += buildDigitKeys("123")
+        kbd += separator();
         
-        let kbd = keyboardDef(p1 + ",\n\n\n" + p2 + ",\n\n\n" + p3 + ",\n\n\n" + p4 + "\n\n", name: "kbd", text: "Keyboard")
+        kbd += endArrayAndObject();
+        kbd += separator();
         
+        
+        
+        kbd += endArrayAndObject();
+        //----------------------------------------
+        kbd += endArrayAndObject();
         return kbd
-        
         
     } //end of func
     //============================================
-    
+
     
 } // end of class
 /*

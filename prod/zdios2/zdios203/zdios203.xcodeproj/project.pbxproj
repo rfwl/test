@@ -27,6 +27,7 @@
 		C3D321571FA8A02800108C40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D321551FA8A02800108C40 /* Main.storyboard */; };
 		C3D321591FA8A02800108C40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D321581FA8A02800108C40 /* Assets.xcassets */; };
 		C3D3215C1FA8A02800108C40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D3215A1FA8A02800108C40 /* LaunchScreen.storyboard */; };
+		C3FD9CE11FD95ECF00936DBF /* KeyboardDefintionJsonBuilder4.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FD9CE01FD95ECF00936DBF /* KeyboardDefintionJsonBuilder4.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		C3D321581FA8A02800108C40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3D3215B1FA8A02800108C40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3D3215D1FA8A02800108C40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3FD9CE01FD95ECF00936DBF /* KeyboardDefintionJsonBuilder4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardDefintionJsonBuilder4.swift; path = SwiftSandBox/KeyboardDefintionJsonBuilder4.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		C3D321651FA8A07400108C40 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				C3FD9CE01FD95ECF00936DBF /* KeyboardDefintionJsonBuilder4.swift */,
 				C325AB191FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift */,
 				C34AD9BE1FD6BAC200D0C999 /* Keyboard2JsonBuilder.swift */,
 				C325AB1A1FC2E6AD00D354FC /* KeyboardPage.swift */,
@@ -211,6 +214,7 @@
 				C325AB1C1FC2E6AD00D354FC /* Keyboard1JsonBuilder.swift in Sources */,
 				C335A3571FA9EAC2001B18D6 /* Commander.swift in Sources */,
 				C335A3691FA9EAE5001B18D6 /* ImageLibrary.swift in Sources */,
+				C3FD9CE11FD95ECF00936DBF /* KeyboardDefintionJsonBuilder4.swift in Sources */,
 				C335A35B1FA9EAD1001B18D6 /* KeyboardKey.swift in Sources */,
 				C335A3681FA9EAE5001B18D6 /* KeyboardView.swift in Sources */,
 				C3CCAF2A1FB5ABCD001A4100 /* Settings.swift in Sources */,

@@ -1,6 +1,7 @@
 import Foundation
 //============================================
-class KeyCell : Codable {
+/*
+ class KeyCell : Codable {
     
     var name:String    
     var text:String?
@@ -39,7 +40,7 @@ class KeyboardDefinition : Codable {
     var pages:[KeyboardPage]
 
 }
-
+*/
 //============================================
 // Letter key has Upper, Lower and 2nd Character
 let template_LetterKey = """
@@ -52,7 +53,7 @@ let template_LetterKey = """
 }
 """
 
-func buildLetterKey(_ letter:String, char2:String){
+func buildLetterKey(_ letter:String, char2:String) -> String {
 	 return template_LetterKey.replacingOccurrences(of: "*", with: letter)
 	 .replacingOccurrences(of: "*", with: letter)
 	 .replacingOccurrences(of: "@", with: char2)		
@@ -93,7 +94,7 @@ let template_SymbolKey2 = """
 """
 
 func buildOneSymbolKey(_ char1:String ) -> String {
-    return template_SymbolKey1.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    return template_SymbolKey1.replacingOccurrences(of: "*", with: char1)
 }
 
 func buildTwoSymbolKey(_ char1:String, char2:String) -> String {
@@ -120,7 +121,7 @@ let template_ActionKey2 = """
 """
 
 func buildOneActionKey(_ char1:String ) -> String {
-    return template_ActionKey1.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    return template_ActionKey1.replacingOccurrences(of: "*", with: char1)
 }
 
 func buildTwoActionKey(_ char1:String, char2:String) -> String {
@@ -150,7 +151,7 @@ func buildLetterKeys(_ char1s:String, char2s:String) -> String {
 		if def.count>0 {
 			def += ", \n"
 		}
-        def += buildLetter(String(c1),char2: String(c2))
+        def += buildLetterKey(String(c1),char2: String(c2))
     }
     return def
 }
@@ -248,7 +249,7 @@ func startKeyboard(_ name: String, text:String) -> String {
     let p1r1m = "qwertyuiop"
     let p1r1s = "1234567890"
     let p1r2m = "asdfghjkl"
-    let p1r2s = "\-(:)&#*\""
+    let p1r2s = "(:)&#*\""
     let p1r3m = "zxcvbnm"
     let p1r3s = "@/-'!?;"
         
@@ -259,24 +260,24 @@ func startKeyboard(_ name: String, text:String) -> String {
 //
 func buildDefaultKeyboard2() -> String {
 
-	var kbd:String =""
+	var kbd:String = ""
 	kbd += startKeyboard("default2", text: "Default Keyboard 2") 
 	//----------------------------------------
 	// Page 1
 	kbd += startPage("page1", text: "Page 1") 
 	//--------------------- Page 1 Row 1
 	kbd += startRow("row11", text: "Page 1 Row 1")
-	kbd += buildLetterKeys(_ char1s:p1r1m, char2s:p1r1s) 
+	kbd += buildLetterKeys(p1r1m, char2s:p1r1s)
 	kbd += endArrayAndObject();
 	kbd += separator();
 	//--------------------- Page 1 Row 2
 	kbd += startRow("row12", text: "Page 1 Row 2")
-	kbd += buildLetterKeys(_ char1s:p1r2m, char2s:p1r2s)
+	kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
 	kbd += endArrayAndObject();
 	kbd += separator();
 	//--------------------- Page 1 Row 3
 	kbd += startRow("row13", text: "Page 1 Row 3")
-	kbd += buildLetterKeys(_ char1s:p1r2m, char2s:p1r2s)
+	kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
 	kbd += endArrayAndObject();
 	kbd += separator();
 	//--------------------- Page 1 Row 4
@@ -292,7 +293,7 @@ func buildDefaultKeyboard2() -> String {
 	kbd += startKeyboard("page2", text: "Page 2")
 	//--------------------- Page 2 Row 1
 	kbd += startRow("row11", text: "Page 2 Row 1")
-	kbd += buildDigitKeys(_ char1s:"123"), char2s:p1r1s) 
+	kbd += buildDigitKeys("123")
 	kbd += separator();
 	
 	kbd += endArrayAndObject();
