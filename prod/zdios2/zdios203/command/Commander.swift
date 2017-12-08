@@ -48,10 +48,11 @@ class Commander {
     	// Build a json string, write to a file
         let bldr = Keyboard2JsonBuilder()
         let strKBD = bldr.buildDefaultKeyboard2()
+        //print(strKBD)
         //---------------------------------------------
         // Write a json string to a file
         let res_url = Bundle.main.resourceURL
-        let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition1.json")
+        let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition2.json")
         try strKBD.write(to: localUrl!, atomically: true, encoding: String.Encoding.utf8)
 
         //---------------------------------------------

@@ -1,4 +1,3 @@
-//https://www.tutorialspoint.com/compile_swift_online.php = Excellent free Swift 4 Playground on web
 import Foundation
 
 class Keyboard2JsonBuilder {
@@ -99,25 +98,25 @@ class Keyboard2JsonBuilder {
     //
     
     func buildActionKey_Shift() -> String {
-    	return buildActionKey_TwoMainCells("Up",char2: "Low", width: 1)
+        return buildActionKey_TwoMainCells("Up",char2: "Low", width: 1)
     }
     
     func buildActionKey_SwitchPage() -> String {
-    	return buildActionKey_TwoMainCells("abc", char2: "12#",width: 2)
+        return buildActionKey_TwoMainCells("abc", char2: "12#",width: 2)
     }
     
     func buildActionKey_Backspace() -> String {
-    	return buildActionKey_OneMainCell("Bksp",width: 1)
+        return buildActionKey_OneMainCell("Bksp",width: 1)
     }
     
-    func buildActionKey_Space() -> String {    
-    	return buildActionKey_OneMainCell("Space",width: 4)
+    func buildActionKey_Space() -> String {
+        return buildActionKey_OneMainCell("Space",width: 4)
     }
     
-    func buildActionKey_Enter() -> String {    
+    func buildActionKey_Enter() -> String {
         return buildActionKey_OneMainCell("Enter",width: 4)
     }
-   
+    
     //============================================
     // Build multiple key definitions
     func buildLetterKeys(_ char1s:String, char2s:String) -> String {
@@ -233,29 +232,30 @@ class Keyboard2JsonBuilder {
     let p1r2m = "asdfghjkl"
     let p1r2s = "@#$%^&*()"
     
-    // buildTwoSymbolKey("<",",") 
+    // buildTwoSymbolKey("<",",")
     let p1r3m = "zxcvbnm"
     let p1r3s = "!:;\"'?-"
     // buildTwoSymbolKey(">",".")
-    // Bksp key 
-    // rwo 4: SwitchPage 2,space 4, Enter 4 
+    // Bksp key
+    // rwo 4: SwitchPage 2,space 4, Enter 4
     
-    // Page 2    
+    // Page 2
     //buildOneSymbolKey `  +  {  }  \  /  buildDigitKeys 789+
-    let p2r1 = "`+{}\\/"
-    //buildOneSymbolKey ~  =  [  ]  |  _  buildDigitKeys 456- 
+    let p2r1 = "`+{}x/"
+    //buildOneSymbolKey ~  =  [  ]  |  _  buildDigitKeys 456-
     let p2r2 = "~=[]|_"
     //buildOneSymbolKey x  x  x  x  x  x  buildDigitKeys 123*
-    let p2r3 = "xxxxxx" 
+    let p2r3 = "xxxxxx"
     //Switch 2 Space 4
     //buildDigitKeys 0.=/
-        
+    
     //============================================
     //
     func buildDefaultKeyboard2() -> String {
         
         var kbd:String = ""
         kbd += startKeyboard("default2", text: "Default Keyboard 2")
+        
         //----------------------------------------
         // Page 1
         kbd += startPage("page1", text: "Page 1")
@@ -281,60 +281,67 @@ class Keyboard2JsonBuilder {
         //--------------------- Page 1 Row 4
         kbd += startRow("row14", text: "Page 1 Row 4")
         kbd += buildActionKey_SwitchPage()
-        kbd += separator()        
+        kbd += separator()
         kbd += buildActionKey_Space()
         kbd += separator()
         kbd += buildActionKey_Enter()
+        kbd += endArrayAndObject()
         //---------------------
         kbd += endArrayAndObject()
+        
+        
         kbd += separator()
+        
         //----------------------------------------
         // Page 2
-        kbd += startKeyboard("page2", text: "Page 2")
+        kbd += startPage("page2", text: "Page 2")
         //--------------------- Page 2 Row 1
         kbd += startRow("row21", text: "Page 2 Row 1")
         kbd += buildOneSymbolKeys(p2r1)
         kbd += separator()
-        kbd += buildDigitKeys("789+")       
+        kbd += buildDigitKeys("789+")
         kbd += endArrayAndObject()
         kbd += separator()
         //--------------------- Page 2 Row 2
         kbd += startRow("row22", text: "Page 2 Row 2")
         kbd += buildOneSymbolKeys(p2r2)
         kbd += separator()
-        kbd += buildDigitKeys("456-")       
+        kbd += buildDigitKeys("456-")
         kbd += endArrayAndObject()
         kbd += separator()
         //--------------------- Page 2 Row 3
         kbd += startRow("row23", text: "Page 2 Row 3")
         kbd += buildOneSymbolKeys(p2r3)
         kbd += separator()
-        kbd += buildDigitKeys("123*")       
+        kbd += buildDigitKeys("123*")
         kbd += endArrayAndObject()
         kbd += separator()
         //--------------------- Page 2 Row 4
         kbd += startRow("row24", text: "Page 2 Row 4")
         kbd += buildActionKey_SwitchPage()
-        kbd += separator()        
+        kbd += separator()
         kbd += buildActionKey_Space()
         kbd += separator()
-        kbd += buildDigitKeys("0.=/")       
-        kbd += endArrayAndObject()      
+        kbd += buildDigitKeys("0.=/")
+        kbd += endArrayAndObject()
+        
+        
         //---------------------
         kbd += endArrayAndObject();
         //----------------------------------------
+        
         kbd += endArrayAndObject();
         return kbd
         
     } //end of func
     //============================================
-
+    
     
 } // end of class
-
+/*
 	let bldr = Keyboard2JsonBuilder()
 	let kbd = bldr.buildDefaultKeyboard2()
 	print(kbd)
-
+*/
 
 

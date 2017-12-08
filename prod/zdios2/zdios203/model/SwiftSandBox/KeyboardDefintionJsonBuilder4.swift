@@ -1,6 +1,6 @@
 import Foundation
 //============================================
-/*
+
  class KeyCell : Codable {
     
     var name:String    
@@ -23,27 +23,33 @@ class KeyboardKey : Codable {
 class KeyboardRow : Codable {
     var name:String    
     var text:String?
-    var keys:[KeyboardKey]
+    var keyArray:[KeyboardKey]
 
 }
 
 class KeyboardPage : Codable {
     var name:String    
     var text:String?
-    var rows:[KeyboardRow]
+    var rowArray:[KeyboardRow]
 
 }
 
 class KeyboardDefinition : Codable {
     var name:String    
     var text:String?
-    var pages:[KeyboardPage]
+    var pageArray:[KeyboardPage]
 
 }
-*/
+
 //============================================
-// Letter key has Upper, Lower and 2nd Character
-let template_LetterKey = """
+//https://www.tutorialspoint.com/compile_swift_online.php = Excellent free Swift 4 Playground on web
+import Foundation
+
+class Keyboard2JsonBuilder {
+    
+    //============================================
+    // Letter key has Upper, Lower and 2nd Character
+    let template_LetterKey = """
 {
 "name" : "Key_L_*",
 "text" : "Letter *",
@@ -52,15 +58,15 @@ let template_LetterKey = """
 "secondaryCellArray" : [{"name":"S_@","text":"@", "widthInPopUpUnit":1}],
 }
 """
-
-func buildLetterKey(_ letter:String, char2:String) -> String {
-	 return template_LetterKey.replacingOccurrences(of: "*", with: letter)
-	 .replacingOccurrences(of: "*", with: letter)
-	 .replacingOccurrences(of: "@", with: char2)		
-}
-//============================================
-// Digit key has one main cell only
-let template_DigitKey = """
+    
+    func buildLetterKey(_ letter:String, char2:String) -> String {
+        return template_LetterKey.replacingOccurrences(of: "*", with: letter)
+            .replacingOccurrences(of: "#", with: letter.uppercased())
+            .replacingOccurrences(of: "@", with: char2)
+    }
+    //============================================
+    // Digit key has one main cell only
+    let template_DigitKey = """
 {
 "name" : "Key_D_*",
 "text" : "Digit *",
@@ -68,245 +74,339 @@ let template_DigitKey = """
 "mainCellArray" : [{"name":"D_*","text":"*", "widthInPopUpUnit":1}]
 }
 """
-func buildDigitKey(_ digit:String) -> String {
-    return template_DigitKey.replacingOccurrences(of: "*", with: digit)
-}
-
-//============================================
-// Symbol Key has one main cell, or  another secondary cell.
-let template_SymbolKey1 = """
+    func buildDigitKey(_ digit:String) -> String {
+        return template_DigitKey.replacingOccurrences(of: "*", with: digit)
+    }
+    
+    //============================================
+    // Symbol Key has one main cell, or  another secondary cell.
+    let template_SymbolKey1 = """
 {
-"name" : "Key_S_#",
-"text" : "Symbol * and #",
+"name" : "Key_S_*",
+"text" : "Symbol *",
 "widthInRowUnit" : 1,
 "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}]
 }
 """
-
-let template_SymbolKey2 = """
+    
+    let template_SymbolKey2 = """
 {
-"name" : "Key_S_#",
+"name" : "Key_S_*_#",
 "text" : "Symbol * and #",
 "widthInRowUnit" : 1,
 "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}],
 "secondaryCellArray" : [{"name":"S_#","text":"#", "widthInPopUpUnit":1}],
 }
 """
-
-func buildOneSymbolKey(_ char1:String ) -> String {
-    return template_SymbolKey1.replacingOccurrences(of: "*", with: char1)
-}
-
-func buildTwoSymbolKey(_ char1:String, char2:String) -> String {
-    return template_SymbolKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
-}
-//============================================
-// Build Action Keys
-let template_ActionKey1 = """
+    
+    func buildOneSymbolKey(_ char1:String ) -> String {
+        return template_SymbolKey1.replacingOccurrences(of: "*", with: char1)
+    }
+    
+    func buildTwoSymbolKey(_ char1:String, char2:String) -> String {
+        return template_SymbolKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    }
+    //============================================
+    // Build Action Keys
+    let template_ActionKey_OneMainCell = """
 {
-"name" : "Key_A_#",
-"text" : "Action * and #",
-"widthInRowUnit" : 1,
+"name" : "Key_A_*",
+"text" : "Action * ",
+"widthInRowUnit" : {WIDTH},
 "mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}]
 }
 """
-let template_ActionKey2 = """
+    let template_ActionKey_TwoMainCells = """
 {
-"name" : "Key_A_#",
+"name" : "Key_A_*_#",
 "text" : "Action * and #",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}],
-"secondaryCellArray" : [{"name":"A_#","text":"#", "widthInPopUpUnit":1}],
+"widthInRowUnit" : {WIDTH},
+"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1},{"name":"A_#","text":"#", "widthInPopUpUnit":1}]
 }
 """
-
-func buildOneActionKey(_ char1:String ) -> String {
-    return template_ActionKey1.replacingOccurrences(of: "*", with: char1)
-}
-
-func buildTwoActionKey(_ char1:String, char2:String) -> String {
-    return template_ActionKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
-}
-//============================================
-// Specific Action Keys
-// Caps/Shift
-// Space
-// Enter
-// Backspace
-// SwitchPage
-//  
-
- 
-//============================================
-// Build multiple key definitions
-func buildLetterKeys(_ char1s:String, char2s:String) -> String {
-    var def = "" 
-    for i in 0 ..< min(char1s.count, char2s.count) {
-        let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
-        let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
-        let c1 = char1s[idx1]
-		if String(c1)==" " { continue}
-        let c2 = char2s[idx2]
-		if String(c2)==" " { continue}
-		if def.count>0 {
-			def += ", \n"
-		}
-        def += buildLetterKey(String(c1),char2: String(c2))
+    
+    func buildActionKey_OneMainCell(_ char1:String, width:Int=1 ) -> String {
+        return template_ActionKey_OneMainCell.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "{WIDTH}", with: String(width))
     }
-    return def
-}
-
-func buildTwoSymbolKeys(_ char1s:String, char2s:String) -> String {
-    var def = "" 
-    for i in 0 ..< min(char1s.count, char2s.count) {
-        let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
-        let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
-        let c1 = char1s[idx1]
-		if String(c1)==" " { continue}
-        let c2 = char2s[idx2]
-		if String(c2)==" " { continue}
-		if def.count>0 {
-			def += ", \n"
-		}
-        def += buildTwoSymbolKey(String(c1),char2: String(c2))
+    
+    func buildActionKey_TwoMainCells(_ char1:String, char2:String, width:Int=1 ) -> String {
+        return template_ActionKey_TwoMainCells.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2).replacingOccurrences(of: "{WIDTH}", with: String(width))
     }
-    return def
-}
-
-func buildOneSymbolKeys(_ char1s:String) -> String {
-
-    var def = ""
-    for c in char1s {
-		if def.count>0 {
-			def += ", \n"
-		}
-        def += buildOneSymbolKey(String(c)) 
+    
+    //============================================
+    // Specific Action Keys
+    // Caps/Shift
+    // Space
+    // Enter
+    // Backspace
+    // SwitchPage
+    //
+    
+    func buildActionKey_Shift() -> String {
+    	return buildActionKey_TwoMainCells("Up",char2: "Low", width: 1)
     }
-    return def
-}
-
-func buildDigitKeys(_ char1s:String) -> String {
-
-    var def = ""
-    for c in char1s {
-		if def.count>0 {
-			def += ", \n"
-		}
-        def += buildDigitKey(String(c)) 
+    
+    func buildActionKey_SwitchPage() -> String {
+    	return buildActionKey_TwoMainCells("abc", char2: "12#",width: 2)
     }
-    return def
-}
-//============================================
-// Row, Page and KBD level
-
-func separator() -> String {
-	return "\n,\n"
-}
-
-let closeArrayAndObject = """
-	]
+    
+    func buildActionKey_Backspace() -> String {
+    	return buildActionKey_OneMainCell("Bksp",width: 1)
+    }
+    
+    func buildActionKey_Space() -> String {    
+    	return buildActionKey_OneMainCell("Space",width: 4)
+    }
+    
+    func buildActionKey_Enter() -> String {    
+        return buildActionKey_OneMainCell("Enter",width: 4)
+    }
+   
+    //============================================
+    // Build multiple key definitions
+    func buildLetterKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
+        for i in 0 ..< min(char1s.count, char2s.count) {
+            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+            let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
+            let c2 = char2s[idx2]
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildLetterKey(String(c1),char2: String(c2))
+        }
+        return def
+    }
+    
+    func buildTwoSymbolKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
+        for i in 0 ..< min(char1s.count, char2s.count) {
+            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+            let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
+            let c2 = char2s[idx2]
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildTwoSymbolKey(String(c1),char2: String(c2))
+        }
+        return def
+    }
+    
+    func buildOneSymbolKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildOneSymbolKey(String(c))
+        }
+        return def
+    }
+    
+    func buildDigitKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildDigitKey(String(c))
+        }
+        return def
+    }
+    //============================================
+    // Row, Page and KBD level
+    
+    func separator() -> String {
+        return "\n,\n"
+    }
+    
+    let closeArrayAndObject = """
+    ]
 }
 """
-func endArrayAndObject() -> String {
-	return closeArrayAndObject
-}
-
-let template_Row = """
+    func endArrayAndObject() -> String {
+        return closeArrayAndObject
+    }
+    
+    let template_Row = """
 {
 "name" : "{name}",
 "text" : "{text}",
 "keyArray" : [
 """
-func startRow(_ name: String, text:String) -> String {
-	return template_Row.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
-}
-
-let template_Page = """
+    func startRow(_ name: String, text:String) -> String {
+        return template_Row.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
+    }
+    
+    let template_Page = """
 {
 "name" : "{name}",
 "text" : "{text}",
 "rowArray" : [
 """
-func startPage(_ name: String, text:String) -> String {
-	return template_Page.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
-}
-
-let template_Keyboard = """
+    func startPage(_ name: String, text:String) -> String {
+        return template_Page.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
+    }
+    
+    let template_Keyboard = """
 {
 "name" : "{name}",
 "text" : "{text}",
 "pageArray" : [
 """
-func startKeyboard(_ name: String, text:String) -> String {
-	return template_Keyboard.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
-}
-
-//============================================
-
-//============================================
-// 
-
+    func startKeyboard(_ name: String, text:String) -> String {
+        return template_Keyboard.replacingOccurrences(of: "{name}", with: name).replacingOccurrences(of: "{text}", with: text)
+    }
+    
+    //============================================
+    
+    //============================================
+    // Page 1
+    
     let p1r1m = "qwertyuiop"
     let p1r1s = "1234567890"
+    // Shift key
     let p1r2m = "asdfghjkl"
-    let p1r2s = "(:)&#*\""
+    let p1r2s = "@#$%^&*()"
+    
+    // buildTwoSymbolKey("<",",") 
     let p1r3m = "zxcvbnm"
-    let p1r3s = "@/-'!?;"
+    let p1r3s = "!:;\"'?-"
+    // buildTwoSymbolKey(">",".")
+    // Bksp key 
+    // rwo 4: SwitchPage 2,space 4, Enter 4 
+    
+    // Page 2    
+    //buildOneSymbolKey `  +  {  }  \  /  buildDigitKeys 789+
+    let p2r1 = "`+{}x/"
+    //buildOneSymbolKey ~  =  [  ]  |  _  buildDigitKeys 456- 
+    let p2r2 = "~=[]|_"
+    //buildOneSymbolKey x  x  x  x  x  x  buildDigitKeys 123*
+    let p2r3 = "xxxxxx" 
+    //Switch 2 Space 4
+    //buildDigitKeys 0.=/
         
-   
+    //============================================
+    //
+    func buildDefaultKeyboard2() -> String {
+        
+        var kbd:String = ""
+        kbd += startKeyboard("default2", text: "Default Keyboard 2")
+        
+        //----------------------------------------
+        // Page 1
+        kbd += startPage("page1", text: "Page 1")
+        //--------------------- Page 1 Row 1
+        kbd += startRow("row11", text: "Page 1 Row 1")
+        kbd += buildLetterKeys(p1r1m, char2s:p1r1s)
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 1 Row 2
+        kbd += startRow("row12", text: "Page 1 Row 2")
+        kbd += buildActionKey_Shift()
+        kbd += separator()
+        kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 1 Row 3
+        kbd += startRow("row13", text: "Page 1 Row 3")
+        kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
+        kbd += separator()
+        kbd += buildActionKey_Backspace()
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 1 Row 4
+        kbd += startRow("row14", text: "Page 1 Row 4")
+        kbd += buildActionKey_SwitchPage()
+        kbd += separator()        
+        kbd += buildActionKey_Space()
+        kbd += separator()
+        kbd += buildActionKey_Enter()
+        kbd += endArrayAndObject()
+        //---------------------
+        kbd += endArrayAndObject()
+        
+       
+        kbd += separator()
+        
+        //----------------------------------------
+        // Page 2
+        kbd += startPage("page2", text: "Page 2")
+        //--------------------- Page 2 Row 1
+        kbd += startRow("row21", text: "Page 2 Row 1")
+        kbd += buildOneSymbolKeys(p2r1)
+        kbd += separator()
+        kbd += buildDigitKeys("789+")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 2
+        kbd += startRow("row22", text: "Page 2 Row 2")
+        kbd += buildOneSymbolKeys(p2r2)
+        kbd += separator()
+        kbd += buildDigitKeys("456-")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 3
+        kbd += startRow("row23", text: "Page 2 Row 3")
+        kbd += buildOneSymbolKeys(p2r3)
+        kbd += separator()
+        kbd += buildDigitKeys("123*")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 4
+        kbd += startRow("row24", text: "Page 2 Row 4")
+        kbd += buildActionKey_SwitchPage()
+        kbd += separator()        
+        kbd += buildActionKey_Space()
+        kbd += separator()
+        kbd += buildDigitKeys("0.=/")       
+        kbd += endArrayAndObject()    
+        
+        
+        //---------------------
+        kbd += endArrayAndObject();
+        //----------------------------------------
+        
+        kbd += endArrayAndObject();
+        return kbd
+        
+    } //end of func
+    //============================================
 
- 
-//============================================
-//
-func buildDefaultKeyboard2() -> String {
+    
+} // end of class
 
-	var kbd:String = ""
-	kbd += startKeyboard("default2", text: "Default Keyboard 2") 
-	//----------------------------------------
-	// Page 1
-	kbd += startPage("page1", text: "Page 1") 
-	//--------------------- Page 1 Row 1
-	kbd += startRow("row11", text: "Page 1 Row 1")
-	kbd += buildLetterKeys(p1r1m, char2s:p1r1s)
-	kbd += endArrayAndObject();
-	kbd += separator();
-	//--------------------- Page 1 Row 2
-	kbd += startRow("row12", text: "Page 1 Row 2")
-	kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
-	kbd += endArrayAndObject();
-	kbd += separator();
-	//--------------------- Page 1 Row 3
-	kbd += startRow("row13", text: "Page 1 Row 3")
-	kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
-	kbd += endArrayAndObject();
-	kbd += separator();
-	//--------------------- Page 1 Row 4
-	kbd += startRow("row14", text: "Page 1 Row 4")
-	
-	
-	kbd += endArrayAndObject();
-	//---------------------
-	kbd += endArrayAndObject();
-	kbd += separator(); 
-	//----------------------------------------
-	// Page 2
-	kbd += startKeyboard("page2", text: "Page 2")
-	//--------------------- Page 2 Row 1
-	kbd += startRow("row11", text: "Page 2 Row 1")
-	kbd += buildDigitKeys("123")
-	kbd += separator();
-	
-	kbd += endArrayAndObject();
-	kbd += separator();
-	
-	
-	
-	kbd += endArrayAndObject();
-	//----------------------------------------
-	kbd += endArrayAndObject();
-	return kbd
+	let bldr = Keyboard2JsonBuilder()
+	let kbd = bldr.buildDefaultKeyboard2()
+	//print(kbd)
+    let json1 = kbd.data(using: .utf8)!
 
-} //end of func
+    let rowObj1 = try JSONDecoder().decode(KeyboardDefinition.self, from: json1) 
+    //dump(rowObj1)
+    print("Decoded OK" + "\n\n")
+    
+    let jsonEncoder = JSONEncoder()
+    do {
+        let jsonData = try jsonEncoder.encode(rowObj1)
+        let jsonString = String(data: jsonData, encoding: .utf8) 
+        print("JSON String : " + jsonString! + "\n\n")
+        print("Encoded OK")
+    }
+    catch {
+    }
+
+    
+    
+
+
 //============================================
 
 
