@@ -1,12 +1,4 @@
-//
-//  File.swift
-//  zdios203
-//
-//  Created by Wanlou Feng on 5/12/17.
-//  Copyright © 2017 Wanlou Feng. All rights reserved.
-//
-
-import Foundation
+//https://www.tutorialspoint.com/compile_swift_online.php = Excellent free Swift 4 Playground on web
 import Foundation
 
 class Keyboard2JsonBuilder {
@@ -25,7 +17,7 @@ class Keyboard2JsonBuilder {
     
     func buildLetterKey(_ letter:String, char2:String) -> String {
         return template_LetterKey.replacingOccurrences(of: "*", with: letter)
-            .replacingOccurrences(of: "*", with: letter)
+            .replacingOccurrences(of: "#", with: letter.uppercased())
             .replacingOccurrences(of: "@", with: char2)
     }
     //============================================
@@ -46,8 +38,8 @@ class Keyboard2JsonBuilder {
     // Symbol Key has one main cell, or  another secondary cell.
     let template_SymbolKey1 = """
 {
-"name" : "Key_S_#",
-"text" : "Symbol * and #",
+"name" : "Key_S_*",
+"text" : "Symbol *",
 "widthInRowUnit" : 1,
 "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}]
 }
@@ -55,7 +47,7 @@ class Keyboard2JsonBuilder {
     
     let template_SymbolKey2 = """
 {
-"name" : "Key_S_#",
+"name" : "Key_S_*_#",
 "text" : "Symbol * and #",
 "widthInRowUnit" : 1,
 "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}],
@@ -72,31 +64,31 @@ class Keyboard2JsonBuilder {
     }
     //============================================
     // Build Action Keys
-    let template_ActionKey1 = """
+    let template_ActionKey_OneMainCell = """
 {
-"name" : "Key_A_#",
-"text" : "Action * and #",
-"widthInRowUnit" : 1,
+"name" : "Key_A_*",
+"text" : "Action * ",
+"widthInRowUnit" : {WIDTH},
 "mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}]
 }
 """
-    let template_ActionKey2 = """
+    let template_ActionKey_TwoMainCells = """
 {
-"name" : "Key_A_#",
+"name" : "Key_A_*_#",
 "text" : "Action * and #",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}],
-"secondaryCellArray" : [{"name":"A_#","text":"#", "widthInPopUpUnit":1}],
+"widthInRowUnit" : {WIDTH},
+"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1},{"name":"A_#","text":"#", "widthInPopUpUnit":1}]
 }
 """
     
-    func buildOneActionKey(_ char1:String ) -> String {
-        return template_ActionKey1.replacingOccurrences(of: "*", with: char1)
+    func buildActionKey_OneMainCell(_ char1:String, width:Int=1 ) -> String {
+        return template_ActionKey_OneMainCell.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "{WIDTH}", with: String(width))
     }
     
-    func buildTwoActionKey(_ char1:String, char2:String) -> String {
-        return template_ActionKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    func buildActionKey_TwoMainCells(_ char1:String, char2:String, width:Int=1 ) -> String {
+        return template_ActionKey_TwoMainCells.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2).replacingOccurrences(of: "{WIDTH}", with: String(width))
     }
+    
     //============================================
     // Specific Action Keys
     // Caps/Shift
@@ -106,7 +98,26 @@ class Keyboard2JsonBuilder {
     // SwitchPage
     //
     
+    func buildActionKey_Shift() -> String {
+    	return buildActionKey_TwoMainCells("Up",char2: "Low", width: 1)
+    }
     
+    func buildActionKey_SwitchPage() -> String {
+    	return buildActionKey_TwoMainCells("abc", char2: "12#",width: 2)
+    }
+    
+    func buildActionKey_Backspace() -> String {
+    	return buildActionKey_OneMainCell("Bksp",width: 1)
+    }
+    
+    func buildActionKey_Space() -> String {    
+    	return buildActionKey_OneMainCell("Space",width: 4)
+    }
+    
+    func buildActionKey_Enter() -> String {    
+        return buildActionKey_OneMainCell("Enter",width: 4)
+    }
+   
     //============================================
     // Build multiple key definitions
     func buildLetterKeys(_ char1s:String, char2s:String) -> String {
@@ -214,18 +225,31 @@ class Keyboard2JsonBuilder {
     //============================================
     
     //============================================
-    //
+    // Page 1
     
     let p1r1m = "qwertyuiop"
     let p1r1s = "1234567890"
+    // Shift key
     let p1r2m = "asdfghjkl"
-    let p1r2s = "(:)&#*\""
+    let p1r2s = "@#$%^&*()"
+    
+    // buildTwoSymbolKey("<",",") 
     let p1r3m = "zxcvbnm"
-    let p1r3s = "@/-'!?;"
+    let p1r3s = "!:;\"'?-"
+    // buildTwoSymbolKey(">",".")
+    // Bksp key 
+    // rwo 4: SwitchPage 2,space 4, Enter 4 
     
-    
-    
-    
+    // Page 2    
+    //buildOneSymbolKey `  +  {  }  \  /  buildDigitKeys 789+
+    let p2r1 = "`+{}\\/"
+    //buildOneSymbolKey ~  =  [  ]  |  _  buildDigitKeys 456- 
+    let p2r2 = "~=[]|_"
+    //buildOneSymbolKey x  x  x  x  x  x  buildDigitKeys 123*
+    let p2r3 = "xxxxxx" 
+    //Switch 2 Space 4
+    //buildDigitKeys 0.=/
+        
     //============================================
     //
     func buildDefaultKeyboard2() -> String {
@@ -238,39 +262,65 @@ class Keyboard2JsonBuilder {
         //--------------------- Page 1 Row 1
         kbd += startRow("row11", text: "Page 1 Row 1")
         kbd += buildLetterKeys(p1r1m, char2s:p1r1s)
-        kbd += endArrayAndObject();
-        kbd += separator();
+        kbd += endArrayAndObject()
+        kbd += separator()
         //--------------------- Page 1 Row 2
         kbd += startRow("row12", text: "Page 1 Row 2")
+        kbd += buildActionKey_Shift()
+        kbd += separator()
         kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
-        kbd += endArrayAndObject();
-        kbd += separator();
+        kbd += endArrayAndObject()
+        kbd += separator()
         //--------------------- Page 1 Row 3
         kbd += startRow("row13", text: "Page 1 Row 3")
         kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
-        kbd += endArrayAndObject();
-        kbd += separator();
+        kbd += separator()
+        kbd += buildActionKey_Backspace()
+        kbd += endArrayAndObject()
+        kbd += separator()
         //--------------------- Page 1 Row 4
         kbd += startRow("row14", text: "Page 1 Row 4")
-        
-        
-        kbd += endArrayAndObject();
+        kbd += buildActionKey_SwitchPage()
+        kbd += separator()        
+        kbd += buildActionKey_Space()
+        kbd += separator()
+        kbd += buildActionKey_Enter()
         //---------------------
-        kbd += endArrayAndObject();
-        kbd += separator();
+        kbd += endArrayAndObject()
+        kbd += separator()
         //----------------------------------------
         // Page 2
         kbd += startKeyboard("page2", text: "Page 2")
         //--------------------- Page 2 Row 1
-        kbd += startRow("row11", text: "Page 2 Row 1")
-        kbd += buildDigitKeys("123")
-        kbd += separator();
-        
-        kbd += endArrayAndObject();
-        kbd += separator();
-        
-        
-        
+        kbd += startRow("row21", text: "Page 2 Row 1")
+        kbd += buildOneSymbolKeys(p2r1)
+        kbd += separator()
+        kbd += buildDigitKeys("789+")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 2
+        kbd += startRow("row22", text: "Page 2 Row 2")
+        kbd += buildOneSymbolKeys(p2r2)
+        kbd += separator()
+        kbd += buildDigitKeys("456-")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 3
+        kbd += startRow("row23", text: "Page 2 Row 3")
+        kbd += buildOneSymbolKeys(p2r3)
+        kbd += separator()
+        kbd += buildDigitKeys("123*")       
+        kbd += endArrayAndObject()
+        kbd += separator()
+        //--------------------- Page 2 Row 4
+        kbd += startRow("row24", text: "Page 2 Row 4")
+        kbd += buildActionKey_SwitchPage()
+        kbd += separator()        
+        kbd += buildActionKey_Space()
+        kbd += separator()
+        kbd += buildDigitKeys("0.=/")       
+        kbd += endArrayAndObject()      
+        //---------------------
         kbd += endArrayAndObject();
         //----------------------------------------
         kbd += endArrayAndObject();
@@ -281,32 +331,10 @@ class Keyboard2JsonBuilder {
 
     
 } // end of class
-/*
- let bldr = KeyboardDefinitionJsonBuilder()
- 
- //let strRow = bldr.buildDefaultKeyboardRow()
- //print(strRow)
- //let obj = try JSONDecoder().decode(KeyboardRow.self, from: strRow.data(using: .utf8)! )
- // Test Passed
- 
- //let strPage = bldr.buildDefaultKeyboardPage()
- //print(strPage)
- //let obj = try JSONDecoder().decode(KeyboardPage.self, from: strPage.data(using: .utf8)! )
- // Test Passed
- let strKBD = bldr.buildDefaultKeyboard()
- print(strKBD)
- 
- let obj = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
- 
- let jsonEncoder = JSONEncoder()
- do {
- let jsonData = try jsonEncoder.encode(obj)
- let jsonString = String(data: jsonData, encoding: .utf8)
- print("JSON String : " + jsonString! + "\n\n")
- }
- catch {
- }
- 
- */
+
+	let bldr = Keyboard2JsonBuilder()
+	let kbd = bldr.buildDefaultKeyboard2()
+	print(kbd)
+
 
 
