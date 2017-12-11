@@ -66,12 +66,13 @@ class KeyCell : Codable {
     
     private func buildTextView() -> UILabel? {
         // FWL: Removed the nex two line to Ensure there is a view anyway
-        //guard let txt = self.text else {return nil}
-        //guard txt.count > 0 else {return nil}
-        var txt = ""
-        if let txt1 = self.text {
-            txt = txt1
-        }
+        guard let txt = self.text else {return nil}
+        guard txt.count > 0 else {return nil}
+        //var txt = ""
+        //if let txt1 = self.text {
+        //    txt = txt1
+        //}
+         
         let lbl:UILabel = UILabel()
         lbl.textAlignment = NSTextAlignment.center
         lbl.baselineAdjustment = UIBaselineAdjustment.alignCenters
@@ -80,7 +81,7 @@ class KeyCell : Codable {
         lbl.minimumScaleFactor = CGFloat(0.1)
         lbl.isUserInteractionEnabled = false
         lbl.numberOfLines = 1
-        lbl.text = txt
+        lbl.text = jsonUnescapeCharacter(txt)
         lbl.backgroundColor = UIColor.brown
         return lbl
     }
