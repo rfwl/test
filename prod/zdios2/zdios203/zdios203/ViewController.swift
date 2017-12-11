@@ -54,9 +54,7 @@ class ViewController: UIViewController {
         let frm1 = CGRect(x: frm.minX, y: frm.minY - PopUpSettings.heightAboveKeyboardView, width: frm.width, height: frm.height)
         Commander.popUpContainerView = PopUpContainerView(frame:frm1)
         viewMainArea.addSubview(Commander.popUpContainerView!)
-        
-        
-        
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {

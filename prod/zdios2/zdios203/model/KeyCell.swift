@@ -82,7 +82,7 @@ class KeyCell : Codable {
         lbl.isUserInteractionEnabled = false
         lbl.numberOfLines = 1
         lbl.text = jsonUnescapeCharacter(txt)
-        lbl.backgroundColor = UIColor.brown
+        lbl.backgroundColor = Settings.Key_Background_Color
         return lbl
     }
     private func buildImageView() -> UIImageView? {
@@ -90,7 +90,7 @@ class KeyCell : Codable {
         guard let img = ImageLibrary.buildUIImage(imgName) else { return nil }
         let iv:UIImageView = UIImageView(image: img) //UIImageView is said to be fast
         iv.contentMode = UIViewContentMode.scaleAspectFit
-        iv.backgroundColor = UIColor.brown
+        iv.backgroundColor = Settings.Key_Background_Color
         return iv
     }
    

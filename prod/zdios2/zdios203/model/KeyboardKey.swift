@@ -324,12 +324,14 @@ class KeyboardKey : Codable {
         }
         if self.hasSecondaryCells {
             for cl in self.secondaryCellArray!{
+                cl.fontSize = Settings.Secondary_Cell_Font_Size
                 cl.buildCellViews()
                 cl.cellView.frame = self.secondaryCellFrame
             }
         }
         if self.hasPopUpCells {
             for cl in self.popUpCellArray!{
+                cl.fontSize = Settings.PopUp_Cell_Font_Size
                 cl.buildCellViews()
                 // Based on touch down location, the cells here will get slightly different locations inside popUpCell_PopUp Frame.
                 // So we cannot determine frame for popUp cell here.

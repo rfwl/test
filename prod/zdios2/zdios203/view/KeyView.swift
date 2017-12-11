@@ -6,14 +6,6 @@
 //  Copyright © 2017 Wanlou Feng. All rights reserved.
 //
 
-//
-//  AKeyView.swift
-//  zdios201
-//
-//  Created by Wanlou Feng on 25/9/17.
-//  Copyright © 2017 Wanlou Feng. All rights reserved.
-//
-
 import UIKit
 
 class KeyView: UIControl {
@@ -22,11 +14,12 @@ class KeyView: UIControl {
         super.init(frame: frame)
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 3
-        self.layer.borderColor = UIColor.cyan.cgColor
+        self.layer.borderColor = Settings.Key_Border_Color.cgColor
+        self.layer.masksToBounds = true
         self.isOpaque = false
-        self.backgroundColor = UIColor.brown
+        self.backgroundColor = Settings.Key_Background_Color
         self.isUserInteractionEnabled = false
-        self.clipsToBounds = false
+        self.clipsToBounds = true
         
     }
     

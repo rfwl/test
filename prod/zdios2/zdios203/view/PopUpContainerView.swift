@@ -55,10 +55,12 @@ class PopUpContainerView: UIView {
             key.mainCell_PopUpBorderPath_Upper?.fill()
             key.mainCell_PopUpBorderPath_Upper?.stroke()
             key.mainCell_PopUpBorderPath_Lower?.stroke()
+            key.mainCell_PopUpBorderPath_Lower?.fill()
         } else {
             key.popUpCells_PopUpBorderPath_Upper?.fill()
             key.popUpCells_PopUpBorderPath_Upper?.stroke()
             key.mainCell_PopUpBorderPath_Lower?.stroke()
+            key.mainCell_PopUpBorderPath_Lower?.fill()
         }
     }
     //=====================================================================
