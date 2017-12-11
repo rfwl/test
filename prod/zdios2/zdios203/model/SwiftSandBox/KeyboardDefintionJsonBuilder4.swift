@@ -45,85 +45,185 @@ class KeyboardDefinition : Codable {
 //https://www.tutorialspoint.com/compile_swift_online.php = Excellent free Swift 4 Playground on web
 import Foundation
 
+
+    
+    func jsonEscapeCharacter(_ char:Character) -> String {
+        if char == "\"" { return "SC_DOUBLEQUOTE"}
+        else if char == "\\" { return "SC_BACKSLASH"}
+        else { return String(char) } 
+    }
+
+ 	func jsonUnescape(_ str:String) -> String{
+        if str == "SC_DOUBLEQUOTE" { return "\""}
+        else if str == "SC_BACKSLASH" { return "\\"}
+        else { return String(str) } 
+    }
+
 class Keyboard2JsonBuilder {
     
     //============================================
-    // Letter key has Upper, Lower and 2nd Character
+    // Letter key has Upper, Lower and a secondary cell
     let template_LetterKey = """
-{
-"name" : "Key_L_*",
-"text" : "Letter *",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"L_*","text":"*", "widthInPopUpUnit":1},{"name":"#","text":"#", "widthInPopUpUnit":1}],
-"secondaryCellArray" : [{"name":"S_@","text":"@", "widthInPopUpUnit":1}],
-}
-"""
+    {
+    "name" : "Key_L_*",
+    "text" : "Letter *",
+    "widthInRowUnit" : 1,
+    "mainCellArray" : [{"name":"L_*","text":"*", "widthInPopUpUnit":1},{"name":"#","text":"#", "widthInPopUpUnit":1}],
+    "secondaryCellArray" : [{"name":"S_@","text":"@", "widthInPopUpUnit":1}],
+    }
+    """
     
-    func buildLetterKey(_ letter:String, char2:String) -> String {
+    func buildLetterKey(_ letter:String, char2:Character) -> String {
         return template_LetterKey.replacingOccurrences(of: "*", with: letter)
             .replacingOccurrences(of: "#", with: letter.uppercased())
-            .replacingOccurrences(of: "@", with: char2)
+            .replacingOccurrences(of: "@", with: jsonEscapeCharacter(char2))
     }
     //============================================
     // Digit key has one main cell only
     let template_DigitKey = """
-{
-"name" : "Key_D_*",
-"text" : "Digit *",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"D_*","text":"*", "widthInPopUpUnit":1}]
-}
-"""
+    {
+    "name" : "Key_D_*",
+    "text" : "Digit *",
+    "widthInRowUnit" : 1,
+    "mainCellArray" : [{"name":"D_*","text":"*", "widthInPopUpUnit":1}]
+    }
+    """
     func buildDigitKey(_ digit:String) -> String {
         return template_DigitKey.replacingOccurrences(of: "*", with: digit)
     }
     
     //============================================
-    // Symbol Key has one main cell, or  another secondary cell.
+    // Symbol Key has one main cell, or another secondary cell.
     let template_SymbolKey1 = """
-{
-"name" : "Key_S_*",
-"text" : "Symbol *",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}]
-}
-"""
+    {
+    "name" : "Key_S_*",
+    "text" : "Symbol *",
+    "widthInRowUnit" : 1,
+    "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}]
+    }
+    """
     
     let template_SymbolKey2 = """
-{
-"name" : "Key_S_*_#",
-"text" : "Symbol * and #",
-"widthInRowUnit" : 1,
-"mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}],
-"secondaryCellArray" : [{"name":"S_#","text":"#", "widthInPopUpUnit":1}],
-}
-"""
+    {
+    "name" : "Key_S_*_#",
+    "text" : "Symbol * and #",
+    "widthInRowUnit" : 1,
+    "mainCellArray" : [{"name":"S_*","text":"*", "widthInPopUpUnit":1}],
+    "secondaryCellArray" : [{"name":"S_#","text":"#", "widthInPopUpUnit":1}],
+    }
+    """
     
-    func buildOneSymbolKey(_ char1:String ) -> String {
-        return template_SymbolKey1.replacingOccurrences(of: "*", with: char1)
+    func buildOneSymbolKey(_ char1:Character ) -> String {
+        return template_SymbolKey1.replacingOccurrences(of: "*", with: jsonEscapeCharacter(char1))
     }
     
-    func buildTwoSymbolKey(_ char1:String, char2:String) -> String {
-        return template_SymbolKey2.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "#", with: char2)
+    func buildTwoSymbolKey(_ char1:Character, char2:Character) -> String {
+        return template_SymbolKey2.replacingOccurrences(of: "*", with: jsonEscapeCharacter(char1)).replacingOccurrences(of: "#", with: jsonEscapeCharacter(char2))
+    }
+
+    
+    /*
+    Quotation mark (")    \"
+    Backslash (\)    \\
+    Slash (/)    \/
+    Backspace    \b
+    Form feed    \f
+    New line    \n
+    Carriage return    \r
+    Horizontal tab    \t
+    
+    
+      let syms = "@#$%&*\"\\"
+    func jsonEscape(_ char:Character) -> String {
+        if char == "\"" { return "SC_DOUBLEQUOTE"}
+        else if char == "\\" { return "SC_BACKSLASH"}
+        else { return String(char) } 
+    }
+    for i in 0 ..< syms.count {
+        let idx = syms.index(syms.startIndex, offsetBy: i)
+        let c = syms[idx]
+        print(jsonEscape(c))
+    }
+    
+    
+*/
+    //============================================
+    // Build multiple key definitions from Strings
+    func buildLetterKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
+        for i in 0 ..< min(char1s.count, char2s.count) {
+            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+            let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
+            let c2 = char2s[idx2]
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildLetterKey(String(c1),char2: c2)
+        }
+        return def
+    }
+    
+    func buildTwoSymbolKeys(_ char1s:String, char2s:String) -> String {
+        var def = ""
+        for i in 0 ..< min(char1s.count, char2s.count) {
+            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
+            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
+            let c1 = char1s[idx1]
+            if String(c1)==" " { continue}
+            let c2 = char2s[idx2]
+            if String(c2)==" " { continue}
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildTwoSymbolKey(c1,char2: c2)
+        }
+        return def
+    }
+    
+    func buildOneSymbolKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildOneSymbolKey(c)
+        }
+        return def
+    }
+    
+    func buildDigitKeys(_ char1s:String) -> String {
+        
+        var def = ""
+        for c in char1s {
+            if def.count>0 {
+                def += ", \n"
+            }
+            def += buildDigitKey(String(c))
+        }
+        return def
     }
     //============================================
     // Build Action Keys
     let template_ActionKey_OneMainCell = """
-{
-"name" : "Key_A_*",
-"text" : "Action * ",
-"widthInRowUnit" : {WIDTH},
-"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}]
-}
-"""
+    {
+    "name" : "Key_A_*",
+    "text" : "Action * ",
+    "widthInRowUnit" : {WIDTH},
+    "mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1}]
+    }
+    """
     let template_ActionKey_TwoMainCells = """
-{
-"name" : "Key_A_*_#",
-"text" : "Action * and #",
-"widthInRowUnit" : {WIDTH},
-"mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1},{"name":"A_#","text":"#", "widthInPopUpUnit":1}]
-}
-"""
+    {
+    "name" : "Key_A_*_#",
+    "text" : "Action * and #",
+    "widthInRowUnit" : {WIDTH},
+    "mainCellArray" : [{"name":"A_*","text":"*", "widthInPopUpUnit":1},{"name":"A_#","text":"#", "widthInPopUpUnit":1}]
+    }
+    """
     
     func buildActionKey_OneMainCell(_ char1:String, width:Int=1 ) -> String {
         return template_ActionKey_OneMainCell.replacingOccurrences(of: "*", with: char1).replacingOccurrences(of: "{WIDTH}", with: String(width))
@@ -141,7 +241,6 @@ class Keyboard2JsonBuilder {
     // Backspace
     // SwitchPage
     //
-    
     func buildActionKey_Shift() -> String {
     	return buildActionKey_TwoMainCells("Up",char2: "Low", width: 1)
     }
@@ -162,65 +261,7 @@ class Keyboard2JsonBuilder {
         return buildActionKey_OneMainCell("Enter",width: 4)
     }
    
-    //============================================
-    // Build multiple key definitions
-    func buildLetterKeys(_ char1s:String, char2s:String) -> String {
-        var def = ""
-        for i in 0 ..< min(char1s.count, char2s.count) {
-            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
-            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
-            let c1 = char1s[idx1]
-            if String(c1)==" " { continue}
-            let c2 = char2s[idx2]
-            if String(c2)==" " { continue}
-            if def.count>0 {
-                def += ", \n"
-            }
-            def += buildLetterKey(String(c1),char2: String(c2))
-        }
-        return def
-    }
-    
-    func buildTwoSymbolKeys(_ char1s:String, char2s:String) -> String {
-        var def = ""
-        for i in 0 ..< min(char1s.count, char2s.count) {
-            let idx1 = char1s.index(char1s.startIndex, offsetBy: i)
-            let idx2 = char2s.index(char2s.startIndex, offsetBy: i)
-            let c1 = char1s[idx1]
-            if String(c1)==" " { continue}
-            let c2 = char2s[idx2]
-            if String(c2)==" " { continue}
-            if def.count>0 {
-                def += ", \n"
-            }
-            def += buildTwoSymbolKey(String(c1),char2: String(c2))
-        }
-        return def
-    }
-    
-    func buildOneSymbolKeys(_ char1s:String) -> String {
-        
-        var def = ""
-        for c in char1s {
-            if def.count>0 {
-                def += ", \n"
-            }
-            def += buildOneSymbolKey(String(c))
-        }
-        return def
-    }
-    
-    func buildDigitKeys(_ char1s:String) -> String {
-        
-        var def = ""
-        for c in char1s {
-            if def.count>0 {
-                def += ", \n"
-            }
-            def += buildDigitKey(String(c))
-        }
-        return def
-    }
+ 
     //============================================
     // Row, Page and KBD level
     
@@ -279,14 +320,14 @@ class Keyboard2JsonBuilder {
     
     // buildTwoSymbolKey("<",",") 
     let p1r3m = "zxcvbnm"
-    let p1r3s = "!:;\"'?-"
+    let p1r3s = "!:;\"'?-" 
     // buildTwoSymbolKey(">",".")
     // Bksp key 
     // rwo 4: SwitchPage 2,space 4, Enter 4 
     
     // Page 2    
     //buildOneSymbolKey `  +  {  }  \  /  buildDigitKeys 789+
-    let p2r1 = "`+{}x/"
+    let p2r1 = "`+{}\\/"
     //buildOneSymbolKey ~  =  [  ]  |  _  buildDigitKeys 456- 
     let p2r2 = "~=[]|_"
     //buildOneSymbolKey x  x  x  x  x  x  buildDigitKeys 123*
@@ -318,7 +359,7 @@ class Keyboard2JsonBuilder {
         kbd += separator()
         //--------------------- Page 1 Row 3
         kbd += startRow("row13", text: "Page 1 Row 3")
-        kbd += buildLetterKeys(p1r2m, char2s:p1r2s)
+        kbd += buildLetterKeys(p1r3m, char2s:p1r3s)
         kbd += separator()
         kbd += buildActionKey_Backspace()
         kbd += endArrayAndObject()
@@ -386,7 +427,7 @@ class Keyboard2JsonBuilder {
 
 	let bldr = Keyboard2JsonBuilder()
 	let kbd = bldr.buildDefaultKeyboard2()
-	//print(kbd)
+	print(kbd)
     let json1 = kbd.data(using: .utf8)!
 
     let rowObj1 = try JSONDecoder().decode(KeyboardDefinition.self, from: json1) 
