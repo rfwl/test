@@ -214,6 +214,7 @@ class KeyboardView: UIView {
                     //----------------------------------- A Down Up found - Tap
                     currentTouchStatus = EnumTouchStatus.DownUp
                     Commander.reportTouchStatus(currentTouchStatus,kv:reallyTouched, downLoc: downTouchLoc!, curLoc: endTouchLoc! )
+                    checkContinuousTap(keyView : kv, downLoc: downTouchLoc!, downTime: downTouchTime, upLoc: endTouchLoc!, upTime: Date())     
                 } else  if currentTouchStatus == EnumTouchStatus.DownHold {
                     //----------------------------------- A Down Hold Up found - Long Press
                     currentTouchStatus = EnumTouchStatus.DownHoldUp
@@ -232,7 +233,8 @@ class KeyboardView: UIView {
         }
     } // end of func
     
-    
+    //=============================================================================
+    //    
     func findTouchedKeyView(_ pt:CGPoint ){
         touchedKeyView = nil
         if let page = self.drawnKeyboardPage {
@@ -252,6 +254,50 @@ class KeyboardView: UIView {
             touchedKeyView = nil
     }
    
+    //=============================================================================
+    // Manual Tap Detection
+    let ContinuousTap_SpeedLimit_Second : Double = 0.5
+    let ContinuousTap_XMovementLimit : Double = 10
+    let ContinuousTap_YMovementLimit : Double = 10
+        
+    var continuousTapCount : Int = 0 
+	var lastDowLoc:CGPoint
+	var lastDownTime:Date = Date()
+	var lastUpLoc:CGPoint
+	var lastUpTime:Date = Date()
+    var lastKeyView : KeyView
+
+    checkContinuousTap(keyView : KeyView , downLoc: CGPoint, downTime: Date, upLoc: CGPoint, upTime: Date) {
+    	// In the reportTouches(), a tap found if a up was following a down immediately, no move status in the between.
+    	// Three points for judging a continuous tap: the same Key, quickly follow the previous tap, the same tap location.
+        var toAcceptNewTap = true
+        if continuousTapCount > 0 {  
+        	if lastKeyView !== keyView { toAcceptnewTap = false }
+        	else if abs(lastUpLoc.x - downLoc.x) > ContinuousTap_XMovementLimit  { toAcceptnewTap = false }  
+        	else if abs(lastUpLoc.y - downLoc.y) > ContinuousTap_YMovementLimit  { toAcceptnewTap = false }
+        	else if downTime.timeIntervalSince(lastUpTime) > ContinuousTap_SpeedLimit_Second  { toAcceptnewTap = false }
+        }
+        if toAcceptNewTap {
+        	continuousTapCount++
+        	print("Continuous Tap Found with Count: \(continuousTapCount)")
+        	if continuousTapCount == 1 { Commander.reportSingleTap(keyView : KeyView) }
+        	else if continuousTapCount == 2 { Commander.reportDoubleTap(keyView : KeyView) }
+        	else if continuousTapCount == 3 { Commander.reportTripleTap(keyView : KeyView) }
+        	 
+        	lastDownLoc = downLoc
+        	lastDownTime = downTime
+        	lastUpLoc = upLoc
+        	lastUpTime = upTime
+        	lastKeyView = keyView        	
+        } else {
+        	continuousTapCount = 0
+        }            	
+   
+    } // end of func
+    
+    
+    
+    
     //=============================================================================
     //
  } //end of class

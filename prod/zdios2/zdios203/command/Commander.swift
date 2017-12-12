@@ -179,8 +179,18 @@ class Commander {
         }
     }
     //===================================================
-    //
+    // Continuous Tap 
+    static func reportSingleTap(keyView : KeyView) {
+    	
+    }
+    static func reportDoubleTap(keyView : KeyView) {
     
+    }
+    static func reportTripleTap(keyView : KeyView) {
+    
+    }
+    //===================================================
+    //
     
     
 } // end of class
