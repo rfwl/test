@@ -59,8 +59,8 @@ class Commander {
     static func startUp() throws{
         //---------------------------------------------
     	// Build a json string, write to a file
-        let bldr = Keyboard2JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard2()
+        let bldr = Keyboard1JsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard()
         //print(strKBD)
         //---------------------------------------------
         // Write a json string to a file
@@ -117,7 +117,15 @@ class Commander {
         switch touchStatus {
         case .Down: onTouch_Down(kv,downLoc:downLoc)
         case .DownHold: onTouch_DownHold(kv,downLoc:downLoc)
-        case .DownHoldMove: onTouch_DownHoldMove(kv, moveX: curLoc.x, downX: downLoc.x)
+        case .DownHoldMove:
+            if abs(downLoc.y - curLoc.y)<Settings.Y_Offset_Limit_Dragging {
+                onTouch_DownHoldMove(kv, moveX: curLoc.x, downX: downLoc.x)
+            } else {
+                if let pucvw = popUpContainerView {
+                    pucvw.hidePopUp()
+                    pucvw.clearSubviews()
+                }
+            }
         case .DownHoldMoveUp: onTouch_DownHoldMoveUp(kv)
         case .DownUp: onTouch_DownUp(kv)
         case .DownHoldUp: onTouch_DownHoldUp(kv)

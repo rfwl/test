@@ -14,10 +14,11 @@ class Settings {
     static let Main_Cell_Font_Size:CGFloat = CGFloat(22)
     static let Secondary_Cell_Font_Size:CGFloat = CGFloat(10)
     static let PopUp_Cell_Font_Size:CGFloat = CGFloat(16)
-    static var Key_Border_Color:UIColor = UIColor.gray
-    static var Key_Background_Color:UIColor = UIColor.lightGray
+    static let Key_Border_Color:UIColor = UIColor.gray
+    static let Key_Background_Color:UIColor = UIColor.lightGray
     //======================================================
-    
+    static let Y_Offset_Limit_Dragging:CGFloat = CGFloat(20)
+    // When dragging, if y offset is bigger than the limit, dragging operation is cancelled.
         
     //======================================================
     

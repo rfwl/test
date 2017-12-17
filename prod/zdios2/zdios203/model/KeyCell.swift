@@ -83,6 +83,14 @@ class KeyCell : Codable {
         lbl.numberOfLines = 1
         lbl.text = jsonUnescapeCharacter(txt)
         lbl.backgroundColor = Settings.Key_Background_Color
+        lbl.layer.cornerRadius = 5
+        //lbl.layer.borderWidth = 3
+        //self.layer.borderColor = Settings.Key_Border_Color.cgColor
+        //self.layer.masksToBounds = true
+        //self.isOpaque = false
+        //self.backgroundColor = Settings.Key_Background_Color
+        lbl.isUserInteractionEnabled = false
+        lbl.clipsToBounds = true
         return lbl
     }
     private func buildImageView() -> UIImageView? {

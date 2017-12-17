@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C30653FC1FE6465800021CB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30653FB1FE6465800021CB4 /* AppDelegate.swift */; };
+		C30653FE1FE6465800021CB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30653FD1FE6465800021CB4 /* ViewController.swift */; };
+		C30654011FE6465800021CB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30653FF1FE6465800021CB4 /* Main.storyboard */; };
+		C30654031FE6465800021CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30654021FE6465800021CB4 /* Assets.xcassets */; };
+		C30654061FE6465800021CB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30654041FE6465800021CB4 /* LaunchScreen.storyboard */; };
+		C30654141FE6473100021CB4 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30654131FE6473100021CB4 /* KeyboardViewController.swift */; };
+		C30654181FE6473100021CB4 /* ZiDianKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C30654111FE6473100021CB4 /* ZiDianKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C30654161FE6473100021CB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C30653F01FE6465700021CB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C30654101FE6473100021CB4;
+			remoteInfo = ZiDianKeyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C306541C1FE6473100021CB4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C30654181FE6473100021CB4 /* ZiDianKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C30653F81FE6465800021CB4 /* zdios204.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zdios204.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30653FB1FE6465800021CB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C30653FD1FE6465800021CB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C30654001FE6465800021CB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C30654021FE6465800021CB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C30654051FE6465800021CB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C30654071FE6465800021CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C30654111FE6473100021CB4 /* ZiDianKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ZiDianKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30654131FE6473100021CB4 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		C30654151FE6473100021CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C30653F51FE6465700021CB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C306540E1FE6473100021CB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C30653EF1FE6465700021CB4 = {
+			isa = PBXGroup;
+			children = (
+				C30653FA1FE6465800021CB4 /* zdios204 */,
+				C30654121FE6473100021CB4 /* ZiDianKeyboard */,
+				C30653F91FE6465800021CB4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C30653F91FE6465800021CB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C30653F81FE6465800021CB4 /* zdios204.app */,
+				C30654111FE6473100021CB4 /* ZiDianKeyboard.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C30653FA1FE6465800021CB4 /* zdios204 */ = {
+			isa = PBXGroup;
+			children = (
+				C30653FB1FE6465800021CB4 /* AppDelegate.swift */,
+				C30653FD1FE6465800021CB4 /* ViewController.swift */,
+				C30653FF1FE6465800021CB4 /* Main.storyboard */,
+				C30654021FE6465800021CB4 /* Assets.xcassets */,
+				C30654041FE6465800021CB4 /* LaunchScreen.storyboard */,
+				C30654071FE6465800021CB4 /* Info.plist */,
+			);
+			path = zdios204;
+			sourceTree = "<group>";
+		};
+		C30654121FE6473100021CB4 /* ZiDianKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C30654131FE6473100021CB4 /* KeyboardViewController.swift */,
+				C30654151FE6473100021CB4 /* Info.plist */,
+			);
+			path = ZiDianKeyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C30653F71FE6465700021CB4 /* zdios204 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C306540A1FE6465800021CB4 /* Build configuration list for PBXNativeTarget "zdios204" */;
+			buildPhases = (
+				C30653F41FE6465700021CB4 /* Sources */,
+				C30653F51FE6465700021CB4 /* Frameworks */,
+				C30653F61FE6465700021CB4 /* Resources */,
+				C306541C1FE6473100021CB4 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C30654171FE6473100021CB4 /* PBXTargetDependency */,
+			);
+			name = zdios204;
+			productName = zdios204;
+			productReference = C30653F81FE6465800021CB4 /* zdios204.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C30654101FE6473100021CB4 /* ZiDianKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C30654191FE6473100021CB4 /* Build configuration list for PBXNativeTarget "ZiDianKeyboard" */;
+			buildPhases = (
+				C306540D1FE6473100021CB4 /* Sources */,
+				C306540E1FE6473100021CB4 /* Frameworks */,
+				C306540F1FE6473100021CB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZiDianKeyboard;
+			productName = ZiDianKeyboard;
+			productReference = C30654111FE6473100021CB4 /* ZiDianKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C30653F01FE6465700021CB4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Wanlou Feng";
+				TargetAttributes = {
+					C30653F71FE6465700021CB4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					C30654101FE6473100021CB4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C30653F31FE6465700021CB4 /* Build configuration list for PBXProject "zdios204" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C30653EF1FE6465700021CB4;
+			productRefGroup = C30653F91FE6465800021CB4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C30653F71FE6465700021CB4 /* zdios204 */,
+				C30654101FE6473100021CB4 /* ZiDianKeyboard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C30653F61FE6465700021CB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30654061FE6465800021CB4 /* LaunchScreen.storyboard in Resources */,
+				C30654031FE6465800021CB4 /* Assets.xcassets in Resources */,
+				C30654011FE6465800021CB4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C306540F1FE6473100021CB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C30653F41FE6465700021CB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30653FE1FE6465800021CB4 /* ViewController.swift in Sources */,
+				C30653FC1FE6465800021CB4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C306540D1FE6473100021CB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30654141FE6473100021CB4 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C30654171FE6473100021CB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C30654101FE6473100021CB4 /* ZiDianKeyboard */;
+			targetProxy = C30654161FE6473100021CB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C30653FF1FE6465800021CB4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30654001FE6465800021CB4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C30654041FE6465800021CB4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30654051FE6465800021CB4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C30654081FE6465800021CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C30654091FE6465800021CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C306540B1FE6465800021CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KVYFNGBDK;
+				INFOPLIST_FILE = zdios204/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.caringsoftware.zidian.ios.zdios204;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C306540C1FE6465800021CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KVYFNGBDK;
+				INFOPLIST_FILE = zdios204/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.caringsoftware.zidian.ios.zdios204;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C306541A1FE6473100021CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KVYFNGBDK;
+				INFOPLIST_FILE = ZiDianKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.caringsoftware.zidian.ios.zdios204.ZiDianKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C306541B1FE6473100021CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KVYFNGBDK;
+				INFOPLIST_FILE = ZiDianKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.caringsoftware.zidian.ios.zdios204.ZiDianKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C30653F31FE6465700021CB4 /* Build configuration list for PBXProject "zdios204" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C30654081FE6465800021CB4 /* Debug */,
+				C30654091FE6465800021CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C306540A1FE6465800021CB4 /* Build configuration list for PBXNativeTarget "zdios204" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C306540B1FE6465800021CB4 /* Debug */,
+				C306540C1FE6465800021CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C30654191FE6473100021CB4 /* Build configuration list for PBXNativeTarget "ZiDianKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C306541A1FE6473100021CB4 /* Debug */,
+				C306541B1FE6473100021CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C30653F01FE6465700021CB4 /* Project object */;
+}
