@@ -1,0 +1,259 @@
+=================================
+
+
+
+
+=================================
+
+There are two changes to the UIPasteboard iOS 10 API for the Universal Clipboard:
+# Methods to help understand what is in the clipboard.
+// Setup, let's put some stuff in the UIPasteboard
+let pasteboard = UIPasteboard.general()
+pasteboard.string = "andy"
+pasteboard.url = URL(string: "http://cleanswifter.com")
+pasteboard.image = UIImage()
+pasteboard.color = UIColor.red()
+
+// Understanding the UIPasteboard contents
+
+if pasteboard.hasStrings {
+    print("The pasteboard has Strings!")
+}
+if pasteboard.hasURLs {
+    print("The pasteboard has URLs!")
+}
+if pasteboard.hasImages {
+    print("The pasteboard has images!")
+}
+if pasteboard.hasColors {
+    print("The pasteboard has colors!")
+}
+
+# Methods to designate the lifetime of the clipboard item.
+## Here’s an example of flagging a pasteboard item as “local only”:
+// Add a string
+let aLocalOnlyStringKey = "Local only string key"
+let aLocalOnlyStringValue = "Local only string value"
+// Set the string in the LOCAL pasteboard
+pasteboard.setItems([[aLocalOnlyStringKey: aLocalOnlyStringValue]], options: [UIPasteboardOption.localOnly : true])
+
+## Here’s an example of adding something to the pasteboard with an expiration date:
+let aExpiringStringKey = "Local only string key"
+let aExpiringStringValue = "Local only string value"
+// Create a date 24 hours from now
+let expirationDateOfTomorrow = Date().addingTimeInterval(60*60*24)
+// Add the string and mark it to expire 24 hours from now
+pasteboard.setItems([[aExpiringStringKey: aExpiringStringValue]], options: [UIPasteboardOption.expirationDate: expirationDateOfTomorrow])
+
+=================================
+UIPasteBoard Example:
+
+In UIPasteboard Example, I have explained how to read data from UIPasteboard and write data to UIPasteboard and share data between apps.
+Pasteboard can be used to store Plain Text, Rich-Text, Image, Email,…etc.
+
+Topics covered in this tutorial:
+1).UIPasteboard APIs
+2).Writing Data to General Pasteboard
+3).Reading Data to General Pasteboard
+4).Writing Data to App Pasteboard
+5).Reading Data from App Pasteboard
+6).Remove a Pasteboard
+
+UIPasteboard Example Download
+
+1.UIPASTEBOARD APIS
+1.1 APIs for creating a Pasteboard.
+
+1
+2
+3
++ (UIPasteboard *)generalPasteboard;
++ (UIPasteboard *)pasteboardWithName:(NSString *)pasteboardName create:(BOOL)create;
++ (UIPasteboard *)pasteboardWithUniqueName;
+generalPasteboard : method returns system board which supports general copy-paste operations.
+pasteboardWithUniqueName : method is used to create a app pasteboard which is identified by a unique system generated name.
+pasteboardWithName: method returns a a pasteboard identified by name. if create flag is TRUE, then pasteboard is created.
+
+Note: Data can be shared between apps using app pasteboard.
+
+ 
+
+1.2 APIs for writing data to Pasteboard.
+
+1
+2
+3
+4
+5
+//setValue method is used to store objects. 
+- (void)setValue:(id)value forPasteboardType:(NSString *)pasteboardType;
+ 
+//setData method is used to store raw data
+- (void)setData:(NSData *)data forPasteboardType:(NSString *)pasteboardType;
+pasteboardType : is Uniform Type Identifier  Ex: kUTTypePlainText, kUTTypeText, kUTTypeJPEG, kUTTypePNG.
+To get the list of system declared Uniform Type Identifiers: Click Here
+
+ 
+
+1.3 APIs for reading data from Pasteboard.
+
+1
+2
+3
+4
+5
+//returns data 
+- (NSData *)dataForPasteboardType:(NSString *)pasteboardType;
+ 
+//returns value
+- (id)valueForPasteboardType:(NSString *)pasteboardType;
+2.WRITING DATA TO GENERATE PASTEBOARD
+2.1 Copy Text to General Pasteboard
+
+Text can be copied to Pasteboard using setString / setData.
+
+1
+2
+3
+4
+5
+6
+7
+8
+//Method 1
+NSString * text=@"Ravi";
+UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
+[pasteboard setString:text];
+ 
+//Method 2
+NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
+[pasteboard setData:data forPasteboardType:(NSString *)kUTTypeText];
+2.2 Copy Image to General Pasteboard
+
+Image can be copied to Pasteboard using setImage / setData.
+
+1
+2
+3
+4
+5
+6
+7
+8
+//Method 1
+UIImage * image=[UIImage imageWithContentsOfFile:@"FILE_PATH"];
+UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
+[pasteboard setImage:image];
+ 
+//Method 2
+NSData *imageData = UIImagePNGRepresentation(image);
+[pasteboard setData:imageData forPasteboardType:(NSString *)kUTTypePNG];
+3). READING DATA TO GENERAL PASTEBOARD
+Text can be read using string attribute/dataForPasteboardType.
+
+1
+2
+3
+4
+5
+6
+7
+8
+UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
+//Method 1
+NSLog(@"Text =%@",[pasteboard string]);
+ 
+//Method 2
+NSData * data = [pasteboard dataForPasteboardType:(NSString*)kUTTypeText];
+NSString * text =[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+NSLog(@"Text =%@",text);
+4). WRITING DATA TO APP PASTEBOARD
+You can use below method, to write a dictionary to App pasteboard.
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+#define PASTE_BOARD_NAME @"mypasteboard"
+#define PASTE_BOARD_TYPE @"mydata" 
+ 
+-(void) writeToPasteBoard:(NSDictionary*) dict
+{
+    UIPasteboard * pb = [UIPasteboard pasteboardWithName:PASTE_BOARD_NAME create:YES];
+    [pb setPersistent:TRUE];
+ 
+    [pb setData:[NSKeyedArchiver archivedDataWithRootObject:dict] forPasteboardType:PASTE_BOARD_TYPE];
+}
+By default, Pasteboard created with pasteboardWithName or pasteboardWithUniqueName are not persistent. To make them persistent, set the persistent to TRUE.
+
+NSKeyedArchiver is used to encode NSDictionary as NSData.
+
+5). READING DATA FROM APP PASTEBOARD
+You can use below method, to read data from Pasteboard.
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+-(NSDictionary*) readFromPasteboard
+{
+ 
+    UIPasteboard * pb=[UIPasteboard pasteboardWithName:PASTE_BOARD_NAME create:NO];
+    NSData * data=[pb valueForPasteboardType:PASTE_BOARD_TYPE];
+    NSDictionary * dict;
+ 
+    if (!data) {
+        return nil;
+    }
+    @try {
+        dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    @catch (NSException* exception)
+    {
+        NSLog(@"Exception: %@",exception);
+        return nil;
+    }
+    return dict;
+}
+NSKeyedUnarchiver is used to decode NSData as NSDictionary.
+
+6).REMOVE PASTEBOARD
+Pasteboard data can be removed using method removePasteboardWithName.
+
+1
+[UIPasteboard removePasteboardWithName:PASTE_BOARD_NAME];
+
+=================================
+
+
+---------------------------------
+https://stackoverflow.com/questions/28465153/uitextdocumentproxy-adjusttextpositionbycharacteroffset-issue
+UITextDocumentProxy adjustTextPositionByCharacterOffset Issue
+
+
+
+
+=================================
+
