@@ -9,6 +9,8 @@
 //
 import UIKit
 
+
+
 class KeyboardViewController: UIInputViewController {
     
     //========================================================================
@@ -32,7 +34,7 @@ class KeyboardViewController: UIInputViewController {
     
      override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-          updateContentViewHeight()
+        updateContentViewHeight()
         Commander.reportViewTransition()
        
     }
@@ -43,9 +45,10 @@ class KeyboardViewController: UIInputViewController {
         try! Commander.startUp()        
     }
     
-    override func updateViewConstraints() {
+    override func updateViewConstraints() { 
+    	//From generated custom keyboard project template
         super.updateViewConstraints()
-        // Add custom view sizing constraints here
+        // Add custom view sizing constraints here 
     }
     
     //========================================================================
@@ -100,8 +103,39 @@ class KeyboardViewController: UIInputViewController {
     // 3> building popUpCell: toolbar + keyboard + popUpContainer + popUpCell builder
     // 4> editing popUpCell:  toolbar + keyboard + popUpContainer + popUpCell editor
     
-    func loadSubviews(){
+    enum EnumViewState {
+    	case Default
+    	case SelectingPopUpCell
+    	case BuildingPopUpCell
+    	case EditingPopUpCell   
+	} //end of enum
     
+    func loadSubviews(viewState: EnumViewState?){
+    	self.clearSubviews()
+    	switch viewState {
+        case 
+        case .SelectingPopUpCell: {
+        	self.view.addSubview(toolbarView)
+    		self.view.addSubview(predictionContainerView)
+        } 
+        case .BuildingPopUpCell: {
+        	self.view.addSubview(toolbarView)
+    		self.view.addSubview(popUpCellBuilderView)
+        } 
+        case .EditingPopUpCell:{
+        	self.view.addSubview(toolbarView)    		
+    		self.view.addSubview(popUpCellEditorView)
+        }  
+        case .Default: loadDefaultSubviews()
+        case nil: loadDefaultSubviews() 
+        default: loadDefaultSubviews()
+ 		}   
+    } //end of func
+      
+    func loadDefaultSubviews(){
+    	self.view.addSubview(toolbarView)
+    	self.view.addSubview(keyboardView)
+    	self.view.addSubview(popUpContainerView)
     }
     //========================================================================
     // Other operations: will be called from commander

@@ -11,14 +11,27 @@ import UIKit
 
 
 class ToolbarView: UIView {
-    
+ 
+ 	let viewName = "ToolbarView"
     //=====================================================================
     // Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.isUserInteractionEnabled = false
         self.isOpaque = true
+        
+        let screenSize = UIScreen.main.bounds
+    	var bannerView:UIlabel = UILabel(frame: CGRect.zero)
+    	
+    	bannerView.text = viewName
+    	
+    	bannerView.backgroundColor = UIColor.gray
+    	bannerView.autoSetDimension(.width, toSize: 124.0)
+        bannerView.autoSetDimension(.height, toSize: screenSize.width / 3) 	
+         
+    	self.addSubview(bannerView)
     }
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
