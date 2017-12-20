@@ -23,7 +23,7 @@ struct ArcAngles {
     static let right = CGFloat(0.0)
 }
 
-class PopUpContainerView: UIView {
+class PopUpContainerView : UIView {
     
     //=====================================================================
     // Init

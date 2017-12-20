@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PopUpCellEditorView: UIView {
+class PopUpCellEditorView : UIView {
     
     let viewName = "PopUpCellEditorView"
     //=====================================================================
@@ -20,21 +20,34 @@ class PopUpCellEditorView: UIView {
         self.isUserInteractionEnabled = false
         self.isOpaque = true
         
-        let screenSize = UIScreen.main.bounds
-    	var bannerView:UIlabel = UILabel(frame: CGRect.zero)
-    	
-    	bannerView.text = viewName
-    	
-    	bannerView.backgroundColor = UIColor.gray
-    	bannerView.autoSetDimension(.width, toSize: 124.0)
-        bannerView.autoSetDimension(.height, toSize: screenSize.width / 3) 	
-         
-    	self.addSubview(bannerView)
     }
     
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     //=====================================================================
     // Overrides
-    
+    override func layoutSubviews() {
+        
+        //let screenSize = UIScreen.main.bounds
+        let bannerView:UILabel = UILabel(frame: self.bounds)
+        
+        bannerView.text = viewName
+        
+        bannerView.backgroundColor = UIColor.gray
+        
+        bannerView.baselineAdjustment = UIBaselineAdjustment.alignCenters
+        bannerView.font = bannerView.font.withSize(20)
+        bannerView.adjustsFontSizeToFitWidth = true
+        bannerView.minimumScaleFactor = CGFloat(0.1)
+        bannerView.isUserInteractionEnabled = false
+        bannerView.numberOfLines = 1
+        bannerView.clipsToBounds = true
+        //bannerView.autoSetDimension(.width, toSize: 124.0)
+        //bannerView.autoSetDimension(.height, toSize: screenSize.width / 3)
+        
+        self.addSubview(bannerView)
+    }
     //=====================================================================
     // Transient data area
     

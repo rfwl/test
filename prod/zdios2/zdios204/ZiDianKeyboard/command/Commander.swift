@@ -40,8 +40,8 @@ class Commander {
     //===================================================
     // Start-up
     static func startUp1(){
-        let bldr = Keyboard1JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard()
+        let bldr = Keyboard2JsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard2()
         
         do {
             let kbdDef = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
@@ -59,8 +59,8 @@ class Commander {
     static func startUp() throws{
         //---------------------------------------------
     	// Build a json string, write to a file
-        let bldr = Keyboard1JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard()
+        let bldr = Keyboard2JsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard2()
         //print(strKBD)
         //---------------------------------------------
         // Write a json string to a file

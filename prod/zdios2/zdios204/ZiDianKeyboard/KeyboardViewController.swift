@@ -7,92 +7,109 @@
 //
 ///https://stackoverflow.com/questions/26180822/swift-adding-constraints-programmatically
 //
+import Foundation
 import UIKit
-
-
 
 class KeyboardViewController: UIInputViewController {
     
     //========================================================================
     // Data Members
-    let toolbarView : ToolbarView = ToolbarView()
-    let predictionContainerView: PredictionContainerView = PredictionContainerView()
-    let keyboardView: KeyLevelView = KeyBoardView()
-    let popUpCellBuilderView: PopUpCellBuilderView = PopUpCellBuilderView()
-    let popUpCellEditorView: PopUpCellEditorView = PopUpCellEditorView()
-    let popUpContainerView: PopUpContainerView = PopUpContainerView()
+    let toolbarView:ToolbarView =  ToolbarView()
+    let predictionContainerView:PredictionContainerView  = PredictionContainerView()
+    let keyboardView:KeyboardView = KeyboardView()
+    let popUpCellBuilderView:PopUpCellBuilderView  = PopUpCellBuilderView()
+    let popUpCellEditorView:PopUpCellEditorView  = PopUpCellEditorView()
+    let popUpContainerView:PopUpContainerView  = PopUpContainerView()
+    
     //========================================================================
     // Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        Commander.contentView = contentView
-        Commander.textDocumentProxy = self.textDocumentProxy
-        Commander.keyboardViewController = self
-        Configuration.compute()
-        loadSubviews()
+        //Commander.textDocumentProxy = self.textDocumentProxy
+        //Commander.keyboardViewController = self
+        //Configuration.compute()
+        //layoutSubviews()
+        self.view.addSubview(toolbarView)
+        toolbarView.backgroundColor = UIColor.yellow
+        layoutTopAreaSubviews(toolbarView)
+        
     }
     
      override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateContentViewHeight()
-        Commander.reportViewTransition()
+        //updateContentViewHeight()
+        //Commander.reportViewTransition()
        
     }
+   
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //self.view.layoutIfNeeded()
+        //try! Commander.startUp()
+        //loadSubviews(viewState:EnumViewState.Default)
+        //let safeInsets = self.view.safeAreaInsets
+        let rectTotalArea = self.view.bounds
+        //toolbarView = ToolbarView(frame : rectTotalArea)
+       
         self.view.layoutIfNeeded()
-        try! Commander.startUp()        
+        print(self.toolbarView.frame)
+        print(rectTotalArea)
     }
     
     override func updateViewConstraints() { 
     	//From generated custom keyboard project template
         super.updateViewConstraints()
-        // Add custom view sizing constraints here 
+        // Add custom view sizing constraints here
+       
     }
     
     //========================================================================
     // Layout subviews
+    func layoutTopAreaSubviews(_ vw:UIView){
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        vw.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        vw.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        vw.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        vw.heightAnchor.constraint(equalToConstant: Settings.Top_Area_Height).isActive = true
+    }
+    /*
     func layoutSubviews(){
-    	layoutPopUpContainerView()
+    	//layoutPopUpContainerView()
     	layoutTopAreaSubviews(self.toolbarView)
-    	layoutTopAreaSubviews(self.predictionContainerView)
-    	layoutContentAreaSubviews(self.keyboardView)
-    	layoutContentAreaSubviews(self.popUpCellBuilderView)
-    	layoutContentAreaSubviews(self.popUpCellEditorView)
+    	//layoutTopAreaSubviews(self.predictionContainerView)
+    	//layoutContentAreaSubviews(self.keyboardView)
+    	//layoutContentAreaSubviews(self.popUpCellBuilderView)
+    	//layoutContentAreaSubviews(self.popUpCellEditorView)
     	
     }
+    
+   
     
     func layoutPopUpContainerView(){
     	self.popUpContainerView.translatesAutoresizingMaskIntoConstraints = false      
         self.popUpContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.popUpContainerView.constraint(equalTo: self.view.widthAnchor).isActive = true
+        self.popUpContainerView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         self.popUpContainerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     	self.popUpContainerView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true   
     }
     
-    func layoutTopAreaSubviews(vw:UIView){
-        vw.translatesAutoresizingMaskIntoConstraints = false       
-        vw.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        vw.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        vw.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        vw.heightAnchor.constraint(equalToConstant: Configuration.Toolbar_Height).isActive = true
-    }    
     
-    func layoutContentAreaSubviews(vw:UIView){        
+    
+    func layoutContentAreaSubviews(_ vw:UIView){
         vw.translatesAutoresizingMaskIntoConstraints = false      
         vw.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         vw.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         vw.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        let dif:CGFloat = self.view.frame.height.subtracting(Configuration.Toolbar_Height)
+        let dif:CGFloat = self.view.frame.height - Settings.Top_Area_Height
         contentAreaViewHeightConstraint = vw.heightAnchor.constraint(equalToConstant: dif )
     }
     
     var contentAreaViewHeightConstraint : NSLayoutConstraint?     
     func updateSubviewHeight(){
-        let dif:CGFloat = self.view.frame.height.subtracting(Configuration.Toolbar_Height)
-        contentViewHeightConstraint?.constant = dif
-        contentViewHeightConstraint!.isActive = true
+        //let dif:CGFloat = self.view.frame.height - Settings.Top_Area_Height
+        //contentViewHeightConstraint?.constant = dif
+        //contentViewHeightConstraint!.isActive = true
         self.view.layoutIfNeeded()
     }
     //========================================================================
@@ -110,25 +127,21 @@ class KeyboardViewController: UIInputViewController {
     	case EditingPopUpCell   
 	} //end of enum
     
-    func loadSubviews(viewState: EnumViewState?){
-    	self.clearSubviews()
+    func loadSubviews(viewState: EnumViewState){
+    	self.view.clearSubviews()
     	switch viewState {
-        case 
-        case .SelectingPopUpCell: {
-        	self.view.addSubview(toolbarView)
-    		self.view.addSubview(predictionContainerView)
-        } 
-        case .BuildingPopUpCell: {
-        	self.view.addSubview(toolbarView)
-    		self.view.addSubview(popUpCellBuilderView)
-        } 
-        case .EditingPopUpCell:{
-        	self.view.addSubview(toolbarView)    		
-    		self.view.addSubview(popUpCellEditorView)
-        }  
-        case .Default: loadDefaultSubviews()
-        case nil: loadDefaultSubviews() 
-        default: loadDefaultSubviews()
+            case .SelectingPopUpCell:
+                self.view.addSubview(self.toolbarView)
+                self.view.addSubview(predictionContainerView)
+            case .BuildingPopUpCell:
+                self.view.addSubview(toolbarView)
+                self.view.addSubview(popUpCellBuilderView)
+            case .EditingPopUpCell:
+                self.view.addSubview(toolbarView)
+                self.view.addSubview(popUpCellEditorView)
+            case .Default: loadDefaultSubviews()
+            //case nil: loadDefaultSubviews()
+            //default: loadDefaultSubviews()
  		}   
     } //end of func
       
@@ -137,6 +150,7 @@ class KeyboardViewController: UIInputViewController {
     	self.view.addSubview(keyboardView)
     	self.view.addSubview(popUpContainerView)
     }
+ */
     //========================================================================
     // Other operations: will be called from commander
     
