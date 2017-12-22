@@ -67,7 +67,7 @@ class KeyboardView: UIView {
     var drawnKeyboardPage : KeyboardPage?
     
     func drawPageAt(_ index:Int){
-        guard index>=0 || index<keyboardDefinition.pageArray.count else { return }
+        guard index>=0 && index<keyboardDefinition.pageArray.count else { return }
         let pg = keyboardDefinition.pageArray[index]
         drawPage(pg)
     }
@@ -282,7 +282,7 @@ class KeyboardView: UIView {
         } else {
             self.continuousTapCount = 1
         }
-        print("Continuous Tap Found with Count: \(self.continuousTapCount) Key: \(keyView.keyDefinition!.name)")
+        //print("Continuous Tap Found with Count: \(self.continuousTapCount) Key: \(keyView.keyDefinition!.name)")
         if continuousTapCount == 1 { Commander.reportSingleTap(keyView : keyView) }
         else if continuousTapCount == 2 { Commander.reportDoubleTap(keyView : keyView) }
         else if continuousTapCount == 3 { Commander.reportTripleTap(keyView : keyView) }

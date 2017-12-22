@@ -93,7 +93,7 @@ class Commander {
                     let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
                     // Load the keyboard definition onto the keyboard view.
                     keyboardView?.keyboardDefinition = kbdDef
-                     keyboardView?.drawPageAt(0)
+                    keyboardView?.drawPageAt(0)
                 } catch let jsonErr {
                     print("Error serializing json", jsonErr)
                 }
@@ -113,7 +113,7 @@ class Commander {
     // Report KeyView Touches
     
     static func reportTouchStatus(_ touchStatus:EnumTouchStatus, kv:KeyView,  downLoc:CGPoint=CGPoint.zero, curLoc: CGPoint=CGPoint.zero ) {
-        print( touchStatus.toString() )
+        //print( touchStatus.toString() )
         switch touchStatus {
         case .Down: onTouch_Down(kv,downLoc:downLoc)
         case .DownHold: onTouch_DownHold(kv,downLoc:downLoc)

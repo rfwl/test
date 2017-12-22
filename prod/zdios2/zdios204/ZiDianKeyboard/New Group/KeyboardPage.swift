@@ -31,7 +31,7 @@ class KeyboardPage : Codable {
         if(self.frame.height==0) { return }        
         var totalSpecifiedHeight : CGFloat = 0
         for row in self.rowArray {
-            totalSpecifiedHeight += row.paddingTop + row.height + row.paddingBottom
+            totalSpecifiedHeight += row.height //row.paddingTop + row.height + row.paddingBottom
         }
         let heightScale = self.frame.height / totalSpecifiedHeight
         if(heightScale==0) {return}
@@ -40,7 +40,7 @@ class KeyboardPage : Codable {
         for row in self.rowArray {
             row.frame.origin.x = 0
             row.frame.size.width = self.frame.width
-            row.frame.origin.y = yOffset + row.paddingTop * heightScale
+            row.frame.origin.y = yOffset //+ row.paddingTop * heightScale
             row.frame.size.height = row.height * heightScale
             row.heightScale = heightScale
             yOffset += row.frame.height

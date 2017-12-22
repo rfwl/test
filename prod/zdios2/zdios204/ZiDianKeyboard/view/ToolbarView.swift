@@ -34,7 +34,7 @@ class ToolbarView : UIView {
         
         bannerView.text = viewName
         
-        bannerView.backgroundColor = UIColor.gray
+        //bannerView.backgroundColor = UIColor.gray
         
         bannerView.baselineAdjustment = UIBaselineAdjustment.alignCenters
         bannerView.font = bannerView.font.withSize(20)

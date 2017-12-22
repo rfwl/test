@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZiDianKeyboard/view/ToolbarView.swift"
-            timestampString = "535465328.897902"
+            timestampString = "535638721.333431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
@@ -25,13 +25,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZiDianKeyboard/KeyboardViewController.swift"
-            timestampString = "535465328.898395"
+            filePath = "ZiDianKeyboard/command/Commander.swift"
+            timestampString = "535638721.333482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "startUp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZiDianKeyboard/view/KeyboardView.swift"
+            timestampString = "535638721.333523"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "drawPage(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

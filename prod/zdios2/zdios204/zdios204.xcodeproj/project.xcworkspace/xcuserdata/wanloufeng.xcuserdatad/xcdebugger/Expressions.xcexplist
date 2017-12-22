@@ -3,6 +3,25 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ToolbarView.init(frame:):ToolbarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KeyboardView.drawPageAt(_:):KeyboardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "keyboardDefinition">
+            </PersistentString>
+            <PersistentString
+               value = "keyboardDefinition.pageArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "KeyboardViewController.viewDidAppear(_:):KeyboardViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,8 +30,11 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ToolbarView.init(frame:):ToolbarView.swift">
+         contextName = "KeyboardView.drawPage(_:):KeyboardView.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
             <PersistentString
                value = "self.bounds">
             </PersistentString>
