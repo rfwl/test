@@ -35,13 +35,20 @@ class KeyboardViewController: UIInputViewController {
         //toolbarView.isHidden = true
         
     }
-    
+    var constraintsAdded:Bool = false
      override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print("viewDidLayoutSubviews")
         //updateContentViewHeight()
         //Commander.reportViewTransition()
-        loadSubviews(EnumViewState.Default)
+        if constraintsAdded {
+            addSubviews(EnumViewState.Default)
+            self.view.setNeedsLayout()
+            self.view.updateConstraints()
+        } else {
+            constraintsAdded = true
+            loadSubviews(EnumViewState.Default)
+        }
         Commander.keyboardView = self.keyboardView
         Commander.popUpContainerView = self.popUpContainerView
     }
@@ -51,7 +58,7 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidAppear(animated)
         //self.view.layoutIfNeeded()
         //try! Commander.startUp()
-        //loadSubviews(viewState:EnumViewState.Default)
+        //loadSubviews(EnumViewState.Default)
         //let safeInsets = self.view.safeAreaInsets
         //let rectTotalArea = self.view.bounds
         //toolbarView = ToolbarView(frame : rectTotalArea)
@@ -59,7 +66,7 @@ class KeyboardViewController: UIInputViewController {
         //self.view.layoutIfNeeded()
         //print(self.toolbarView.frame)
         //print(rectTotalArea)
-        
+        //loadSubviews(EnumViewState.Default)
         try? Commander.startUp()
     }
     
@@ -135,6 +142,23 @@ class KeyboardViewController: UIInputViewController {
                 addSubview_ContentArea(popUpCellEditorView)
             case .Default: break
  		}   
+    } //end of func
+    
+    func addSubviews(_ viewState: EnumViewState){
+        self.view.clearSubviews()
+        self.view.addSubview(toolbarView)
+        self.view.addSubview(keyboardView)
+        self.view.addSubview(popUpContainerView)
+        
+        switch viewState {
+        case .SelectingPopUpCell:
+            self.view.addSubview(predictionContainerView)
+        case .BuildingPopUpCell:
+            self.view.addSubview(popUpCellBuilderView)
+        case .EditingPopUpCell:
+            self.view.addSubview(popUpCellEditorView)
+        case .Default: break
+        }
     } //end of func
     
     //========================================================================

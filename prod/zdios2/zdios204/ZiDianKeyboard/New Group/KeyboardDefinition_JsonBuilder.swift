@@ -1,6 +1,6 @@
 import Foundation
 
-class Keyboard2JsonBuilder {
+class KeyboardDefinition_JsonBuilder {
     
         
         //============================================
@@ -279,7 +279,7 @@ class Keyboard2JsonBuilder {
         
         //============================================
         //
-        func buildDefaultKeyboard2() -> String {
+        func buildDefaultKeyboard_2Pages() -> String {
             
             var kbd:String = ""
             kbd += startKeyboard("default2", text: "Default Keyboard 2")

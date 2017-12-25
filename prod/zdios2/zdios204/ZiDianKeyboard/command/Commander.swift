@@ -10,27 +10,6 @@ import Foundation
 import AVFoundation
 import UIKit
 
-extension UIView {
-    func clearSubviews() {
-        for vw in self.subviews {
-            vw.removeFromSuperview()
-        }
-    }
-}
-
-
-func jsonEscapeCharacter(_ char:Character) -> String {
-    if char == "\"" { return "SC_DOUBLEQUOTE"}
-    else if char == "\\" { return "SC_BACKSLASH"}
-    else { return String(char) }
-}
-
-func jsonUnescapeCharacter(_ str:String) -> String{
-    if str == "SC_DOUBLEQUOTE" { return "\""}
-    else if str == "SC_BACKSLASH" { return "\\"}
-    else { return String(str) }
-}
-
 class Commander {
     //===================================================
     // Workers    
@@ -39,63 +18,56 @@ class Commander {
     
     //===================================================
     // Start-up
-    static func startUp1(){
-        let bldr = Keyboard2JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard2()
-        
-        do {
-            let kbdDef = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
-            // Load the keyboard definition onto the keyboard view.
-            keyboardView?.keyboardDefinition = kbdDef
-            
-            keyboardView?.drawPageAt(0)
-            
-        } catch let jsonErr {
-            print("Error serializing json", jsonErr)
-        }
-        
-    } //end of func
     
     static func startUp() throws{
+        do {
+            try buildDefaultKeyboardDefinitionFile()
+            try buildDefaultKeyboardDefinitionObject()
+            guard let kbdDef = self.keyboardDefinitionObject else { return } //throw(Error("Null keyboard definition object returned from resource")}
+            keyboardView?.keyboardDefinition = kbdDef
+            keyboardView?.drawPageAt(0)
+        } catch let jsonErr {
+            print("Commander failed to start up.", jsonErr)
+        }
+        
+        
+    }
+    //===================================================
+    // Keyboard Definition
+    static var keyboardDefinitionFilePath : String = "DefaultKeyboardDefinition_2Pages.json"
+    static var keyboardDefinitionURL : URL?
+    static var keyboardDefinitionObject : KeyboardDefinition?
+    
+    static func buildDefaultKeyboardDefinitionFile() throws{
         //---------------------------------------------
     	// Build a json string, write to a file
-        let bldr = Keyboard2JsonBuilder()
-        let strKBD = bldr.buildDefaultKeyboard2()
+        let bldr = KeyboardDefinition_JsonBuilder()
+        let strKBD = bldr.buildDefaultKeyboard_2Pages()
         //print(strKBD)
         //---------------------------------------------
         // Write a json string to a file
         let res_url = Bundle.main.resourceURL
-        let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition2.json")
-        try strKBD.write(to: localUrl!, atomically: true, encoding: String.Encoding.utf8)
+        keyboardDefinitionURL = res_url?.appendingPathComponent(keyboardDefinitionFilePath)
+        try strKBD.write(to: keyboardDefinitionURL!, atomically: true, encoding: String.Encoding.utf8)
 
-        //---------------------------------------------
-        // Retrieve the directories
-   	    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        print(documentDirectory!)
-        
-        let resPath = Bundle.main.resourcePath
-        print(resPath!)
-        
-        let resUrl = Bundle.main.resourceURL
-        if let resUrl = resUrl { print(resUrl) }
-        
+      
+    }
+    
+    static func buildDefaultKeyboardDefinitionObject() throws{
         //---------------------------------------------
         // Read in the keyboard definition file into string
-        //let res_url = Bundle.main.resourceURL
-        //let localUrl = res_url?.appendingPathComponent("DefaultKeyboardDefinition1.json")
-		if FileManager.default.fileExists(atPath: localUrl!.path){
-            if let fileContents = NSData(contentsOfFile: localUrl!.path) {
-                //guard
-                let data = fileContents as Data //else {return}
-                do {
-                
-                    // Decode into Keyboard Definition object.
-                    let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
-                    // Load the keyboard definition onto the keyboard view.
-                    keyboardView?.keyboardDefinition = kbdDef
-                    keyboardView?.drawPageAt(0)
-                } catch let jsonErr {
-                    print("Error serializing json", jsonErr)
+		if FileManager.default.fileExists(atPath: self.keyboardDefinitionURL!.path){
+            if let fileContents = NSData(contentsOfFile: self.keyboardDefinitionURL!.path) {
+                let optFC = fileContents as Data?
+                if let data = optFC {
+                    do {
+                        // Decode into Keyboard Definition object.
+                        let kbdDef =  try JSONDecoder().decode(KeyboardDefinition.self, from: data)
+                        // Load the keyboard definition onto the keyboard view.
+                        keyboardDefinitionObject = kbdDef
+                    } catch let jsonErr {
+                        print("Error serializing json", jsonErr)
+                    }
                 }
             }
         }
@@ -103,7 +75,7 @@ class Commander {
     
     
     //===================================================
-    //
+    // 
     static func drawPageAt(_ index:Int){
        keyboardView?.drawPageAt(index)
     }
@@ -203,6 +175,25 @@ class Commander {
     
 } // end of class
 
+/*
+ static func startUp1(){
+ let bldr = Keyboard2JsonBuilder()
+ let strKBD = bldr.buildDefaultKeyboard2()
+ 
+ do {
+ let kbdDef = try JSONDecoder().decode(KeyboardDefinition.self, from: strKBD.data(using: .utf8)! )
+ // Load the keyboard definition onto the keyboard view.
+ keyboardView?.keyboardDefinition = kbdDef
+ 
+ keyboardView?.drawPageAt(0)
+ 
+ } catch let jsonErr {
+ print("Error serializing json", jsonErr)
+ }
+ 
+ } //end of func
+ 
+ */
 /* File operation codes
  var fileManager = NSFileManager()
  var tmpDir = NSTemporaryDirectory()
